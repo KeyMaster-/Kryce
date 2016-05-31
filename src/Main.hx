@@ -10,7 +10,9 @@ import phoenix.geometry.Geometry;
 import phoenix.geometry.Vertex;
 import phoenix.Batcher.PrimitiveType;
 import InputMap;
-import shapes.*;
+import shapes.LineShape;
+import luxe.collision.shapes.*;
+import luxe.collision.Collision;
 
 class Main extends luxe.Game {
 
@@ -30,10 +32,13 @@ class Main extends luxe.Game {
     var rotation_radius:Float = 200;
     var dots_radius:Float = 20;
 
-    var shapes:Array<SingleGeomShape>;
-    var cur_shape:Int;
+    var line:LineShape;
 
-    var printed_shapes:Array<SingleGeomShape>;
+    var ball:Circle;
+    var ball_geom:Geometry;
+    var ball_vel:Vector;
+
+    var colliders:Array<Shape>;
 
     override function config(config:GameConfig) {
 
@@ -52,12 +57,11 @@ class Main extends luxe.Game {
         input.bind_gamepad_range('left_stick', 1, -1, 1, true, false, false);
         input.bind_gamepad_range('right_stick', 2, -1, 1, true, false, false);
         input.bind_gamepad_range('right_stick', 3, -1, 1, true, false, false);
-        input.bind_gamepad_button('left_bumper', 9);
-        input.bind_gamepad_button('right_bumper', 10);
-        input.bind_gamepad_button('clear_screen', 4);
+        // input.bind_gamepad_button('left_bumper', 9);
+        // input.bind_gamepad_button('right_bumper', 10);
+        // input.bind_gamepad_button('clear_screen', 4);
 
         input.on(InteractType.change, onchange);
-        input.on(InteractType.down, ondown);
 
         left_stick_base = new Vector(Luxe.screen.w / 2, Luxe.screen.h * 0.5);
         right_stick_base = new Vector(Luxe.screen.w / 2, Luxe.screen.h * 0.5);
@@ -87,7 +91,9 @@ class Main extends luxe.Game {
         left_stick_pos = new Vector();
         right_stick_pos = new Vector();
 
-        init_shapes();
+        line = new LineShape({
+            depth:1
+        });
 
         var circumference = make_circle_geom(rotation_radius, 5, Maths.radians(10), Maths.radians(10), {
             depth: 0,
@@ -95,25 +101,23 @@ class Main extends luxe.Game {
         });
         circumference.transform.pos.copy_from(Luxe.screen.mid);
 
-        printed_shapes = [];
-    } //ready
+        ball = new Circle(Luxe.screen.mid.x, Luxe.screen.mid.y - 40, 20);
+        ball_geom = Luxe.draw.circle({
+            x:0,
+            y:0,
+            r:30
+        });
+        ball_geom.transform.pos.copy_from(ball.position);
+        ball_vel = new Vector(600, 0);
 
-    function init_shapes() {
-        shapes = [];
-        shapes.push(new LineShape({
-            depth:1
-        }));
-        shapes.push(new SquareShape({
-            depth:1
-        }));
-        shapes.push(new InfiniteLineShape({
-            depth:1
-        }));
-        for(shape in shapes) shape.hide();
-        cur_shape = 0;
-        shapes[cur_shape].reposition(left_stick_circle.pos, right_stick_circle.pos);
-        shapes[cur_shape].show();
-    }
+        colliders = [];
+
+        colliders.push(Polygon.rectangle(-10, 0, 10, Luxe.screen.h, false));
+        colliders.push(Polygon.rectangle(Luxe.screen.w, 0, 10, Luxe.screen.h, false));
+        colliders.push(Polygon.rectangle(0, -10, Luxe.screen.w, 10, false));
+        colliders.push(Polygon.rectangle(0, Luxe.screen.h, Luxe.screen.w, 10, false));
+        colliders.push(line.collider);
+    } //ready
 
     override function onkeyup( e:KeyEvent ) {
 
@@ -123,23 +127,22 @@ class Main extends luxe.Game {
 
     } //onkeyup
 
-    function print_shape() {
-        var geom = shapes[cur_shape].duplicate();
-        geom.color.a = 0.5;
-        printed_shapes.push(geom);
-    }
-
     override function update(dt:Float) {
-        bumper_timer += dt;
-        if(bumper_pressed_id != -1 && bumper_timer > bumper_timeframe) {
-            if(bumper_pressed_id == 0) {
-                rotate_shape(-1);
-            }
-            else {
-                rotate_shape(1);
-            }
-            bumper_pressed_id = -1;
+        ball.position.add_xyz(ball_vel.x * dt, ball_vel.y * dt);
+
+        var results = Collision.shapeWithShapes(ball, colliders);
+        for(result in results) {
+            ball.position.add(result.separation);
+
+            var dot_product = ball_vel.dot(result.unitVector);
+
+            if(dot_product < 0) ball_vel.subtract(result.unitVector.multiplyScalar(dot_product * 2));
+
+            // ball_vel.subtract(result.unitVector.multiplyScalar(ball_vel.dot(result.unitVector) * 2));
         }
+
+        ball_geom.transform.pos.copy_from(ball.position);
+
     } //update
 
     function onchange(_e:InputEvent) {
@@ -168,53 +171,7 @@ class Main extends luxe.Game {
         stick_visual.pos.copy_from(stick_pos);
         stick_visual.pos.add(stick_base);
 
-        shapes[cur_shape].reposition(left_stick_circle.pos, right_stick_circle.pos);
-    }
-
-    var bumper_timer:Float = 0.0;
-    var bumper_timeframe:Float = 0.1;
-    var bumper_pressed_id:Int = -1;
-
-    inline function reset_bumper_timer(id:Int) {
-        bumper_pressed_id = id;
-        bumper_timer = 0.0;
-    }
-
-    function ondown(_e:InputEvent) {
-        switch(_e.name) {
-            case 'left_bumper':
-                if(bumper_timer < bumper_timeframe) {
-                    print_shape();
-                    bumper_pressed_id = -1;
-                }
-                else {
-                    reset_bumper_timer(0);
-                }
-                
-            case 'right_bumper':
-                if(bumper_timer < bumper_timeframe) {
-                    print_shape();
-                    bumper_pressed_id = -1;
-                }
-                else {
-                    reset_bumper_timer(1);
-                }
-
-            case 'clear_screen':
-                for(geom in printed_shapes) {
-                    geom.drop();
-                }
-                printed_shapes = [];
-        }
-    }
-
-    function rotate_shape(_amount:Int) {
-        shapes[cur_shape].hide();
-        cur_shape += _amount;
-        while(cur_shape < 0) cur_shape += shapes.length;
-        while(cur_shape >= shapes.length) cur_shape -= shapes.length;
-        shapes[cur_shape].reposition(left_stick_circle.pos, right_stick_circle.pos);
-        shapes[cur_shape].show();
+        line.reposition(left_stick_circle.pos, right_stick_circle.pos);
     }
 
     inline function trunc_abs(_v:Float, _epsilon:Float):Float {
