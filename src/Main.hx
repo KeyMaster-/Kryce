@@ -13,6 +13,7 @@ import InputMap;
 import shapes.LineShape;
 import luxe.collision.shapes.*;
 import luxe.collision.Collision;
+import luxe.collision.data.ShapeCollision;
 
 class Main extends luxe.Game {
 
@@ -39,6 +40,8 @@ class Main extends luxe.Game {
     var ball_vel:Vector;
 
     var colliders:Array<Shape>;
+
+    var blocks:Array<Shape>;
 
     override function config(config:GameConfig) {
 
@@ -108,7 +111,7 @@ class Main extends luxe.Game {
             r:30
         });
         ball_geom.transform.pos.copy_from(ball.position);
-        ball_vel = new Vector(600, 0);
+        ball_vel = new Vector(0, 0);
 
         colliders = [];
 
@@ -117,12 +120,48 @@ class Main extends luxe.Game {
         colliders.push(Polygon.rectangle(0, -10, Luxe.screen.w, 10, false));
         colliders.push(Polygon.rectangle(0, Luxe.screen.h, Luxe.screen.w, 10, false));
         colliders.push(line.collider);
+
+        blocks = [];
+
+        var angle_width:Float = Maths.radians(360/12);
+        var angle = 0.0;
+
+        var radius:Float = 500;
+
+        var side_length:Float = 2 * radius * Math.sin(angle_width / 2);
+        var depth:Float = 40;
+        while(2 * Math.PI - angle > 0.0001) {
+            var shape:Polygon = Polygon.rectangle(Math.cos(angle) * radius + Luxe.screen.mid.x, Math.sin(angle) * radius + Luxe.screen.mid.y, side_length, depth, false);
+            
+            shape.position.add_xyz(Math.cos(angle + angle_width / 2) * depth, Math.sin(angle + angle_width / 2) * depth);
+
+            var shape_angle = angle + Math.PI / 2 + angle_width / 2;
+            shape.rotation = Maths.degrees(shape_angle);
+
+            var geom = Luxe.draw.box({
+                x:shape.position.x,
+                y:shape.position.y,
+                w:side_length,
+                h:depth
+            });
+
+            geom.transform.rotation.setFromEuler(new Vector(0, 0, shape_angle));
+            shape.data = geom;
+
+            blocks.push(shape);
+
+            angle += angle_width;
+        }
+
     } //ready
 
     override function onkeyup( e:KeyEvent ) {
 
         if(e.keycode == Key.escape) {
             Luxe.shutdown();
+        }
+        else if(e.keycode == Key.space) {
+            ball_vel.set_xy(50, -600);
         }
 
     } //onkeyup
@@ -132,18 +171,28 @@ class Main extends luxe.Game {
 
         var results = Collision.shapeWithShapes(ball, colliders);
         for(result in results) {
-            ball.position.add(result.separation);
+            process_result(result);
+        }
 
-            var dot_product = ball_vel.dot(result.unitVector);
-
-            if(dot_product < 0) ball_vel.subtract(result.unitVector.multiplyScalar(dot_product * 2));
-
-            // ball_vel.subtract(result.unitVector.multiplyScalar(ball_vel.dot(result.unitVector) * 2));
+        results = Collision.shapeWithShapes(ball, blocks);
+        for(result in results) {
+            process_result(result);
+            var geom:Geometry = cast(result.shape2.data, Geometry);
+            geom.drop();
+            blocks.remove(result.shape2);
         }
 
         ball_geom.transform.pos.copy_from(ball.position);
 
     } //update
+
+    function process_result(result:ShapeCollision) {
+        ball.position.add(result.separation);
+
+        var dot_product = ball_vel.dot(result.unitVector);
+
+        if(dot_product < 0) ball_vel.subtract(result.unitVector.multiplyScalar(dot_product * 2));
+    }
 
     function onchange(_e:InputEvent) {
         var stick_visual:Visual = null;
