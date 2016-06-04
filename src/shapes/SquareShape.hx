@@ -21,6 +21,8 @@ class SquareShape extends SingleGeomShape {
     override public function reposition(left_pos:Vector, right_pos:Vector):Void {
         transform.pos.copy_from(left_pos);
         var diff = Vector.Subtract(right_pos, left_pos);
+        // transform.rotation.setFromEuler(new Vector(0, 0, diff.angle2D));
+        // transform.scale.set_xy(diff.length, diff.length);
         transform.rotation.setFromEuler(new Vector(0, 0, diff.angle2D - Math.PI / 4)); // Correct by 45° since we're connecting the diagonal points
         var scale = diff.length / sqrt_2; //Diagonal of a unit square is sqrt2, so divide by that to get actual scale value
         transform.scale.set_xy(scale, scale);

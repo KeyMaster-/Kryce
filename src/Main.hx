@@ -109,6 +109,9 @@ class Main extends luxe.Game {
         shapes.push(new InfiniteLineShape({
             depth:1
         }));
+        shapes.push(new CircleShape({
+            depth:1
+        }));
         for(shape in shapes) shape.hide();
         cur_shape = 0;
         shapes[cur_shape].reposition(left_stick_circle.pos, right_stick_circle.pos);
