@@ -28,9 +28,17 @@
     },
 
     files : {
-      assets : 'assets/'
+      assets : 'assets/',
+      config: 'config.json'
     }
 
-  }
+  },
 
+  if: {
+    "mac || windows || linux" : {
+      build : {
+        defines : ['project_assets']  
+      }
+    }
+  }
 }

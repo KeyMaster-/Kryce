@@ -1,0 +1,1637 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Coll",
+				"CollisionPhysics"
+			],
+			[
+				"co",
+				"p· collision	package"
+			],
+			[
+				"shape",
+				"Shape"
+			],
+			[
+				"col",
+				"p· collision	package"
+			],
+			[
+				"ree",
+				"p· resources	luxe.Resources"
+			],
+			[
+				"pre",
+				"p· preload	Null<{ ?textures : Null<Array<luxe.TextureInfo>>, ?texts : Null<Array<luxe.TextInfo>>, ?sounds : Null<Array<luxe.SoundInfo>>, ?shaders : Null<Array<luxe.ShaderInfo>>, ?jsons : Null<Array<luxe.JSONInfo>>, ?fonts : Null<Array<luxe.BitmapFontInfo>>, ?bytes : Null<Array<luxe.BytesInfo>> }>"
+			],
+			[
+				"setx",
+				"m· set_xy	 "
+			],
+			[
+				"trian",
+				"p· triangle_fan	Unknown<4>"
+			],
+			[
+				"set",
+				"m· set_xyz	 "
+			],
+			[
+				"leftS",
+				"left_stick_pos"
+			],
+			[
+				"from",
+				"m· setFromEuler	phoenix.Quaternion"
+			],
+			[
+				"frmo",
+				"m· setFromEuler	phoenix.Quaternion"
+			],
+			[
+				"multiply",
+				"m· multiplyScalar	 "
+			],
+			[
+				"add",
+				"m· add_xyz	 "
+			],
+			[
+				"bumper",
+				"bumper_timeframe"
+			],
+			[
+				"bump",
+				"bumper_pressed_id"
+			],
+			[
+				"dupl",
+				"duplicate_options"
+			],
+			[
+				"Geometr",
+				"GeometryOptions"
+			],
+			[
+				"Geom",
+				"Geometry"
+			],
+			[
+				"axis",
+				"axis_value"
+			],
+			[
+				"Geomet",
+				"GeometryOptions"
+			],
+			[
+				"leftsit",
+				"left_stick_circle"
+			],
+			[
+				"gampe",
+				"p· gamepaddown	Unknown<4>"
+			],
+			[
+				"inner",
+				"inner_start"
+			],
+			[
+				"multi",
+				"m· multiplyScalar	 "
+			],
+			[
+				"mul",
+				"m· multiplyScalar	 "
+			],
+			[
+				"tran",
+				"p· triangles	Unknown<6>"
+			],
+			[
+				"tra",
+				"p· transform	phoenix.Transform"
+			],
+			[
+				"ro",
+				"p· rotation_z	Float"
+			],
+			[
+				"leftsi",
+				"left_stick_pos"
+			],
+			[
+				"right",
+				"right_stick_circle"
+			],
+			[
+				"left_sti",
+				"left_stick_circle"
+			],
+			[
+				"triangle",
+				"p· triangle_strip	Unknown<5>"
+			],
+			[
+				"stick",
+				"stick_deadzone"
+			],
+			[
+				"left_Sti",
+				"left_stick_base_pos"
+			],
+			[
+				"subtr",
+				"m· subtract_xyz	 "
+			],
+			[
+				"divid",
+				"m· divide_xyz	 "
+			],
+			[
+				"divi",
+				"m· divide_xyz	 "
+			],
+			[
+				"rec",
+				"p· Rectangle	Rectangle"
+			],
+			[
+				"generaleve",
+				"general_events_flags"
+			],
+			[
+				"gamepadbuttondin",
+				"gamepad_button_binding_compare"
+			],
+			[
+				"gamepadbuttonbidn",
+				"gamepad_button_bindings"
+			],
+			[
+				"gamepadbuttond",
+				"gamepad_button_binding_compare"
+			],
+			[
+				"inpu",
+				"m· inputpressed	Bool"
+			],
+			[
+				"check_rang",
+				"check_in_range"
+			],
+			[
+				"gampeadaxis",
+				"gamepad_axis_values"
+			],
+			[
+				"gamepad_axis",
+				"gamepad_axis_values"
+			],
+			[
+				"gamepad_axi",
+				"gamepad_axis_values"
+			],
+			[
+				"leave",
+				"_leave_emit"
+			],
+			[
+				"game",
+				"p· gamepaddown	Unknown<4>"
+			],
+			[
+				"bind",
+				"m· bind_gamepad_button	 "
+			],
+			[
+				"gamepa",
+				"gamepad_id"
+			],
+			[
+				"gampeadbuttonbind",
+				"gamepad_button_bindings"
+			],
+			[
+				"gamepadbuttonbind",
+				"gamepad_button_bindings"
+			],
+			[
+				"gampad",
+				"gamepad_button_bindings"
+			],
+			[
+				"bindmouse",
+				"m· bind_mouse_wheel	 "
+			],
+			[
+				"check_named_mous",
+				"check_named_mouse_wheel"
+			],
+			[
+				"mousewhel",
+				"mouse_wheel_bindings"
+			],
+			[
+				"range",
+				"range_edge_to_interact"
+			],
+			[
+				"rangemeit",
+				"range_emit_to_interact"
+			],
+			[
+				"e",
+				"p· enter_emit	RangeEmitType"
+			],
+			[
+				"rangeEm",
+				"range_emit_to_interact"
+			],
+			[
+				"y",
+				"y_normalized"
+			],
+			[
+				"mousemove",
+				"mouse_move_bindings"
+			],
+			[
+				"InputEve",
+				"InputEventType"
+			],
+			[
+				"bind_",
+				"m· bind_key	 "
+			],
+			[
+				"normalwin",
+				"normalWindowSize"
+			],
+			[
+				"normal",
+				"normalWindowSize"
+			],
+			[
+				"getWindow",
+				"m· getWindowSize	sdl.SDLSize"
+			],
+			[
+				"window",
+				"m· getWindowSize	sdl.SDLSize"
+			],
+			[
+				"view",
+				"p· viewport	luxe.Rectangle"
+			],
+			[
+				"on",
+				"m· onwindowresized	 "
+			],
+			[
+				"sanit",
+				"sanitizeRange"
+			],
+			[
+				"sani",
+				"sanitizeRange"
+			],
+			[
+				"instru",
+				"instructionTextString"
+			],
+			[
+				"instu",
+				"instructionTextString"
+			],
+			[
+				"instructionTe",
+				"instructionTextString"
+			],
+			[
+				"app",
+				"p· app_main	String"
+			],
+			[
+				"screenpo",
+				"m· screen_point_to_world	phoenix.Vector"
+			],
+			[
+				"di",
+				"m· divideScalar	phoenix.Vector"
+			],
+			[
+				"subt",
+				"m· subtract_xyz	 "
+			],
+			[
+				"sub",
+				"m· subtract_xyz	 "
+			],
+			[
+				"screen",
+				"m· screen_point_to_world	phoenix.Vector"
+			],
+			[
+				"scree",
+				"m· screen_point_to_world	phoenix.Vector"
+			],
+			[
+				"savele",
+				"m· saveCurrentLevel	 "
+			],
+			[
+				"runtime",
+				"runtimeConfig"
+			],
+			[
+				"rotation",
+				"rotationQuad1"
+			],
+			[
+				"display",
+				"displayTex"
+			],
+			[
+				"rotat",
+				"rotationQuad1"
+			],
+			[
+				"create",
+				"create_batcher"
+			],
+			[
+				"rightbord",
+				"p· rightBorderIndicatorDuplicate	phoenix.geometry.Geometry"
+			],
+			[
+				"leftBorderIndi",
+				"leftBorderIndicatorDuplicate"
+			],
+			[
+				"re",
+				"rendering"
+			],
+			[
+				"converte",
+				"convertedRight"
+			],
+			[
+				"onSecot",
+				"onSectorDeactivate"
+			],
+			[
+				"immut",
+				"immutableFields"
+			],
+			[
+				"clear",
+				"clear_color	phoenix.Color"
+			],
+			[
+				"text",
+				"sceneFinishedText"
+			],
+			[
+				"lao",
+				"loadNewLevel	function"
+			],
+			[
+				"load",
+				"loadNewLevel	function"
+			],
+			[
+				"nonshift",
+				"nonShiftRectColor"
+			],
+			[
+				"staticBo",
+				"staticBodies"
+			],
+			[
+				"stati",
+				"staticBodies"
+			],
+			[
+				"edito",
+				"EditorGuide"
+			],
+			[
+				"touched",
+				"touchedTypes	Map<String, wrapping.CollisionSide>"
+			],
+			[
+				"internalCa",
+				"internal_callback"
+			],
+			[
+				"save",
+				"save_callback"
+			],
+			[
+				"hro",
+				"horizSapDist"
+			],
+			[
+				"wrapop",
+				"wrapPointInRange	function"
+			],
+			[
+				"wrapoint",
+				"wrapPointInRange	function"
+			],
+			[
+				"grabco",
+				"grabbedComponent"
+			],
+			[
+				"hori",
+				"horizontal"
+			],
+			[
+				"vert",
+				"vertSnapDist"
+			],
+			[
+				"hor",
+				"horizSnapDist"
+			],
+			[
+				"horiz",
+				"horizGrabDist"
+			],
+			[
+				"Ed",
+				"EditorGuide"
+			],
+			[
+				"show",
+				"showInstructions"
+			],
+			[
+				"destroy",
+				"destroyIndicators"
+			],
+			[
+				"shiftTopVerts",
+				"shiftTopVertsOnHorizontal"
+			],
+			[
+				"destro",
+				"destroyIndicators"
+			],
+			[
+				"rebuildLeve",
+				"rebuildLevelOnActivate"
+			],
+			[
+				"update",
+				"updateWrappedIndicator"
+			],
+			[
+				"instruc",
+				"instructionText2"
+			],
+			[
+				"l",
+				"lshift	Int"
+			],
+			[
+				"sceneca",
+				"resetSceneCamera"
+			],
+			[
+				"left",
+				"leftBorderIndicator	phoenix.geometry.Geometry"
+			],
+			[
+				"onm",
+				"onMouseUp	function"
+			],
+			[
+				"static",
+				"staticColor	luxe.Color"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "ShapePhysics.hx",
+			"settings":
+			{
+				"buffer_size": 1370,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "shapes/SquareShape.hx",
+			"settings":
+			{
+				"buffer_size": 1287,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "BallDynamic.hx",
+			"settings":
+			{
+				"buffer_size": 906,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Main.hx",
+			"settings":
+			{
+				"buffer_size": 8385,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Ball.hx",
+			"settings":
+			{
+				"buffer_size": 145,
+				"line_ending": "Unix",
+				"name": "Ball.hx"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/sublime_flow_/flow.sublime-build",
+					""
+				],
+				[
+					"Packages/sublime_flow/flow.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/sublime_flow_/flow.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"pacakge control remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"package control instal",
+				"Package Control: Install Package"
+			],
+			[
+				"review",
+				"ReviewMyself: Current File"
+			],
+			[
+				"revi",
+				"ReviewMyself: Current File"
+			],
+			[
+				"package control insta",
+				"Package Control: Install Package"
+			],
+			[
+				"todo",
+				"Package Control: Discover Packages"
+			],
+			[
+				"reset",
+				"Haxe Completion: reset"
+			],
+			[
+				"rese",
+				"Haxe Completion: reset"
+			],
+			[
+				"haxe",
+				"Haxe Completion: reset"
+			],
+			[
+				"haxe rese",
+				"Haxe Completion: reset"
+			],
+			[
+				"haxe re",
+				"Haxe Completion: reset"
+			],
+			[
+				"haxe res",
+				"Haxe Completion: reset"
+			],
+			[
+				"package",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"upgrad",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"upgrade",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"open",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"resour",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"packageres",
+				"PackageResourceViewer: Extract Package"
+			],
+			[
+				"reset ",
+				"Haxe Completion: reset"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"remove pac",
+				"Package Control: Remove Package"
+			],
+			[
+				"install pac",
+				"Package Control: Install Package"
+			],
+			[
+				"package control ",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"comp",
+				"Haxe Completion: reset"
+			],
+			[
+				"package control",
+				"Package Control: List Packages"
+			],
+			[
+				"package control list",
+				"Package Control: List Packages"
+			],
+			[
+				"packag",
+				"Package Control: Enable Package"
+			],
+			[
+				"todo ",
+				"TodoReview: Open Files"
+			],
+			[
+				"pacage control inst",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: List Packages"
+			],
+			[
+				"line ending",
+				"Line Ending to all views: Unix"
+			],
+			[
+				"package install",
+				"Package Control: Install Package"
+			],
+			[
+				"package ",
+				"Package Control: Add Repository"
+			]
+		],
+		"width": 485.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"subprocess.Popen('ls').communicate()",
+			"subprocess.Popen('ls').communicate()[0].readAll()",
+			"subprocess.Popen('ls').communicate()[0]",
+			"subprocess.Popen('ls')",
+			"import subprocess",
+			"import os",
+			"os",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/tschmidt/dev/code/haxe/simple",
+		"/Users/tschmidt/dev/code/haxe/simple/src",
+		"/Users/tschmidt/dev/code/haxe/luxe",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/collision",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/collision/data",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/collision/sat",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/collision/shapes",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/resource",
+		"/Users/tschmidt/dev/code/haxe/snow",
+		"/Users/tschmidt/dev/code/haxe/snow/snow",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/systems",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/systems/assets",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/types"
+	],
+	"file_history":
+	[
+		"/Users/tschmidt/dev/code/haxe/simple/src/BallDynamic.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/project.flow",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/components/PhysBodyComp.hx",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/Snow.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/config.json",
+		"/Users/tschmidt/dev/code/haxe/simple/src/ShapePhysics.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/ShapeComponent.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/wrapping/WrapRectPhysics.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/resource/Resource.hx",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/systems/assets/Assets.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/shapes/LineShape.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/Engine.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/config.json",
+		"/Users/tschmidt/dev/code/haxe/simple/src/shapes/CircleShape.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/AimLine.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/phoenix/Vector.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/shapes/SingleGeomShape.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/shapes/InfiniteLineShape.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/Log.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/shapes/SquareShape.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/shapes/TwoPointForm.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/options/RenderProperties.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/shapes/RectShape.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/shapes/RectShape",
+		"/Users/tschmidt/dev/code/haxe/simple/src/shapes/LineGeom.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/shapes/SquareGeom.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/TwoPointForm.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/SquareGeom.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/LineGeom.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/SingleGeomShape.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/options/VisualOptions.hx",
+		"/Users/tschmidt/dev/code/haxe/simple/src/LineVisual.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/tests/wip/input_context/src/InputMap.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/Vector.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/Input.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/Entity.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/Emitter.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/tests/wip/input_context/project.flow",
+		"/Users/tschmidt/dev/code/haxe/luxe/tests/wip/input_context/src/InputContext.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/haxe_def.txt",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/editor/overlay/LevelEditorOverlay.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/Rendering.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/entities/Recorder.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/Shifting.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/components/SectorToggler.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/scenes/MainGame.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/Game.hx",
+		"/Users/tschmidt/.luxe/modules/luxe/0.0.1/lib/moduler.wren",
+		"/Users/tschmidt/.luxe/modules/luxe/0.0.1/lib/game.wren",
+		"/Users/tschmidt/Downloads/fake-0.6/game.wren",
+		"/Users/tschmidt/dev/code/haxe/luxedev/phoenix/geometry/Geometry.hx",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/api/buffers/ArrayBuffer.hx",
+		"/Users/tschmidt/dev/code/haxe/linc_opengl/opengl/WebGL.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/bin/mac64.build/cpp/src/phoenix/geometry/Geometry.cpp",
+		"/Users/tschmidt/dev/haxelib/hxcpp/3,2,205/src/Array.cpp",
+		"/Users/tschmidt/dev/haxelib/hxcpp/3,2,205/include/Array.h",
+		"/usr/local/lib/haxe/std/Array.hx",
+		"/usr/local/lib/haxe/std/haxe/io/BytesData.hx",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/api/buffers/ArrayBufferView.hx",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/modules/opengl/GL.hx",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/api/buffers/Float32Array.hx",
+		"/Users/tschmidt/dev/code/haxe/moments/moments/Recorder.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/project.flow",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/Rendering.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/samples/basic/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/Camera.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/phoenix/Batcher.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/bin/mac64.build/cpp/src/phoenix/Batcher.cpp",
+		"/Users/tschmidt/dev/code/haxe/linc_opengl/lib/glew/src/glew.c",
+		"/Users/tschmidt/dev/code/haxe/linc_opengl/linc/linc_opengl.h",
+		"/Users/tschmidt/dev/code/haxe/linc_opengl/lib/glew/include/GL/glew.h",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/Scene.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/assets/levels/level4.plvl",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/project.flow",
+		"/Users/tschmidt/dev/code/haxe/moments/.git/config",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/bin/mac64.build/cpp/include/phoenix/Camera.h",
+		"/Users/tschmidt/dev/code/haxe/moments/.git/description",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/components/ExitIndicator.hx",
+		"/Users/tschmidt/Desktop/polar_platformer.app/Contents/Info.plist",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/bin/mac64/polar_platformer.app/Contents/Info.plist",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/GameWorld.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/todo.txt",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/components/SectorToggler.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/wrapping/WrapMath.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/editor/objects/Sector.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/LevelMgr.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/phoenix/Rectangle.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/utils/FloatMath.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/Rectangle.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/assets/levels/level2.plvl",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/scenes/LevelEditor.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/bin/mac64/.DS_Store",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/Reg.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/Core.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/Game.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/samples/config/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/samples/config/project.flow",
+		"/Users/tschmidt/dev/code/haxe/luxedev/samples/alphas/1_0_parrott/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/samples/config/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/scenes/MainGame.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/types/TypeNames.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/types/TypeCreate.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/types/Types.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/editor/objects/Exit.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/Core.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/config.json",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/assets/shaders/warp.frag",
+		"/Users/tschmidt/dev/code/haxe/rotationTest/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/tests/features/sprite/project.flow",
+		"/Users/tschmidt/dev/code/haxe/rotationTest/project.flow",
+		"/Users/tschmidt/dev/code/haxe/luxedev/tests/features/sprite/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/tests/features/transforms/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/BezierValuesCalculator/project.flow",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/BezierValuesCalculator/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/.gitignore",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/components/PlatformerController.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/components/PhysBodyComp.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/BezierValuesCalculator/build.hxml",
+		"/Users/tschmidt/dev/code/uni/theory/haxe/first_order_logic/build.hxml",
+		"/Users/tschmidt/dev/code/uni/theory/haxe/ticketNumbers/build.hxml",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/Component.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/wrapping/WrapRectPhysics.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/assets/levels/level0.plvl",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/json/format/JsonPrinter.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/json/format/JsonParser.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/json/Json.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/systems/input/Input.hx"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src",
+			"/Users/tschmidt/dev/code/haxe/polarplatformer/src"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"20",
+			"vel_start",
+			"result",
+			"_colliders",
+			"CollisionPhysics",
+			"ball_vel",
+			"process_result",
+			"colliders",
+			"stick_pos",
+			"walls",
+			"dot",
+			"Geom",
+			"gap_theta",
+			"line_theta",
+			"line_width",
+			"radius",
+			"connection_line",
+			"radians",
+			"rotation_z",
+			"30",
+			"angle2D",
+			"100",
+			"stick_visual",
+			"left_stick",
+			"left_stick_circle",
+			"left_stick_base_pos",
+			"mouse_area_bindings",
+			"in_range",
+			"prev_in_range",
+			"subtract",
+			"substract_xyz",
+			"mosue_area_bindings",
+			"keys",
+			");\n",
+			"gamepad_range_bindings",
+			"mouse_range_bindings",
+			"jump",
+			"_named_input_released",
+			"touch_move_bindings",
+			"gamepad_axis_bindings",
+			"mouse_move_bindings",
+			"x",
+			"move_emit",
+			"RangeEdgeType",
+			"RangeChangeType",
+			"_key",
+			"key_bindings",
+			"mouse_move_bindings",
+			"MouseAxis",
+			"Axis",
+			"name",
+			"binding",
+			"on",
+			"_name",
+			"key_bindings",
+			"GamepadButtonBinding",
+			"MouseButton",
+			"gamepad",
+			"keys",
+			"{\n",
+			"_named",
+			"\\w+_named_\\w+",
+			"range_emit_to_interact",
+			"RangeEmitType",
+			"_event",
+			"_name",
+			"_binding",
+			"_",
+			"key",
+			"check_named_mouse",
+			"mouse_bindings",
+			"Axis",
+			"on",
+			"onkeydown",
+			"InteractState",
+			"_state",
+			"InteractState",
+			"keys",
+			"InputEventType",
+			"InputType",
+			"InputEvent",
+			"down",
+			"_event",
+			"_type",
+			"key_event",
+			"_type:InputEventType,",
+			"InputType",
+			"input",
+			"_key_event",
+			":",
+			"@:optional ",
+			"InputType",
+			".*\\[.*\\]",
+			".**\\[.*\\]",
+			"\\w*\\[.*\\]",
+			"\\[\\d:\\d\\d\\]",
+			"\\[\\d:\\d\\d\\] \\n",
+			"\\[\\d:\\d\\d\\]\n",
+			"\\[\\d:\\d\\d\\]",
+			"\\[\\d:\\d\\d\\]\\n",
+			"\\[\\d:\\d\\d\\]",
+			"\\[.*\\]",
+			"\\[",
+			"[",
+			"\\[1:11 PM\\]",
+			"e",
+			"event",
+			"onkeydown",
+			"keydown",
+			"onkeydown",
+			"Core",
+			"AppConfig",
+			"batch(",
+			"batch",
+			"batch(",
+			"batch",
+			"locked",
+			"windowresized",
+			"right",
+			"sector.right",
+			"app",
+			"package",
+			"sceneBatcher",
+			"sceneCamera",
+			"UserConfig",
+			"\"",
+			"sampleOffset",
+			"sizeOverRadius"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			" rendering.screenPointToPolar",
+			"sectorCamera",
+			"rendering.renderData.batcher",
+			"rendering.renderData.camera",
+			"levelDataMgr",
+			"LevelDataMgr",
+			"grabDepth",
+			"getGrabDepth",
+			"collisionTypes",
+			"PolarUtil.screenPointToPolar",
+			"PolarUtil.sc",
+			"PolarUtil.screenPointToPolar",
+			"vertSnapDist",
+			"horizSnapDist",
+			"vertSnapDist_",
+			"vertGrabDist",
+			"horizGrabDist",
+			"vertGrabDist_",
+			"haxe.io.Output",
+			"out",
+			"writePixels",
+			"altersingle",
+			"contest",
+			"alterneigh",
+			"unbiasnet",
+			"process",
+			"map",
+			"learn",
+			"inxbuild",
+			"colorMap",
+			"output",
+			"nextPixel",
+			"maxCode",
+			"flush",
+			"encode",
+			"compress",
+			"resetCodeTable",
+			"clearTable",
+			"add",
+			"finish",
+			"start_File",
+			"start_output",
+			"addFrame",
+			"setFramerate",
+			"setDelay",
+			"data",
+			"sampleInterval",
+			"isSizeSet",
+			"isFirstFrame",
+			"shouldCloseStream",
+			"disposalCode",
+			"paletteSize",
+			"usedEntry",
+			"colorTab",
+			"colorDepth",
+			"indexedPixels",
+			"flippedY",
+			"pixels",
+			"currentFrame",
+			"fileStream",
+			"hasStarted",
+			"frameDelay",
+			"repeat",
+			"height",
+			"width"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "ShapePhysics.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1370,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								951,
+								951
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/sublime_haxe/Haxe.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "shapes/SquareShape.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1287,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								656,
+								656
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/sublime_haxe/Haxe.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "BallDynamic.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 906,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								463,
+								463
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/sublime_haxe/Haxe.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "Main.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8385,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3872,
+								3872
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/sublime_haxe/Haxe.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 2.0,
+						"translation.y": 2062.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Ball.hx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 145,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								134,
+								134
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Ball.hx",
+							"incomplete_sync": null,
+							"syntax": "Packages/sublime_haxe/Haxe.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 165.0
+	},
+	"output.find_results":
+	{
+		"height": 100.0
+	},
+	"output.haskell_sublime_load":
+	{
+		"height": 100.0
+	},
+	"output.sftp":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 100.0
+	},
+	"pinned_build_system": "",
+	"project": "simple.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"vector.hx",
+				"luxe/phoenix/Vector.hx"
+			],
+			[
+				"vectr",
+				"luxe/phoenix/Vector.hx"
+			],
+			[
+				"maingame",
+				"src/scenes/MainGame.hx"
+			],
+			[
+				"gameworld",
+				"src/GameWorld.hx"
+			],
+			[
+				"todo",
+				"todo.txt"
+			],
+			[
+				"t",
+				"todo.txt"
+			],
+			[
+				"warp.frag",
+				"assets/shaders/warp.frag"
+			],
+			[
+				"main",
+				"src/Main.hx"
+			],
+			[
+				"rectgra",
+				"src/RectGraphics.hx"
+			],
+			[
+				"camera",
+				"src/components/CameraFollow.hx"
+			],
+			[
+				"config",
+				"config.json"
+			],
+			[
+				"exitin",
+				"src/components/ExitIndicator.hx"
+			],
+			[
+				"rectrgra",
+				"src/editor/objects/GrabRect.hx"
+			],
+			[
+				"rectgraph",
+				"src/RectGraphics.hx"
+			],
+			[
+				"rectrag",
+				"bin/mac64.build/cpp/src/phoenix/geometry/RectangleGeometry.cpp"
+			],
+			[
+				"leveleditor",
+				"src/scenes/LevelEditor.hx"
+			],
+			[
+				"levelmgr",
+				"src/LevelMgr.hx"
+			],
+			[
+				"leveleit",
+				"src/scenes/LevelEditor.hx"
+			],
+			[
+				"proje",
+				"project.flow"
+			],
+			[
+				"floatma",
+				"src/utils/FloatMath.hx"
+			],
+			[
+				"wrapmath",
+				"src/wrapping/WrapMath.hx"
+			],
+			[
+				"mainame",
+				"src/scenes/MainGame.hx"
+			],
+			[
+				"camerafo",
+				"src/components/CameraFollow.hx"
+			],
+			[
+				"color",
+				"src/ColorMgr.hx"
+			],
+			[
+				"tod",
+				"todo.txt"
+			],
+			[
+				"wrap.frag",
+				"assets/shaders/warp.frag"
+			],
+			[
+				"colorm",
+				"src/ColorMgr.hx"
+			],
+			[
+				"leveledito",
+				"src/scenes/LevelEditor.hx"
+			],
+			[
+				"maingam",
+				"src/scenes/MainGame.hx"
+			],
+			[
+				"edit",
+				"src/editor/objects/Editable.hx"
+			],
+			[
+				"leveledit",
+				"src/scenes/LevelEditor.hx"
+			],
+			[
+				"coltype",
+				"src/wrapping/ColTypeRect.hx"
+			],
+			[
+				"rect.hx",
+				"src/editor/objects/Rect.hx"
+			],
+			[
+				"levelde",
+				"src/scenes/LevelEditor.hx"
+			],
+			[
+				"heightguid",
+				"src/editor/objects/HeightGuide.hx"
+			],
+			[
+				"sector",
+				"src/editor/objects/Sector.hx"
+			],
+			[
+				"platfro",
+				"src/components/PlatformerController.hx"
+			],
+			[
+				"wraprectp",
+				"src/wrapping/WrapRectPhysics.hx"
+			],
+			[
+				"wraprectph",
+				"src/wrapping/WrapRectPhysics.hx"
+			],
+			[
+				"rectgrph",
+				"src/RectGraphics.hx"
+			],
+			[
+				"wraprectphy",
+				"src/wrapping/WrapRectPhysics.hx"
+			],
+			[
+				"wrapphy",
+				"src/wrapping/WrapRectPhysics.hx"
+			],
+			[
+				"main.h",
+				"src/Main.hx"
+			],
+			[
+				"pa",
+				"package utils;"
+			],
+			[
+				"reg",
+				"src/Reg.hx"
+			],
+			[
+				"platforer",
+				"src/components/PlatformerController.hx"
+			],
+			[
+				"components",
+				"src/components/AnimationController.hx"
+			],
+			[
+				"platfor",
+				"src/components/PlatformerController.hx"
+			],
+			[
+				"to",
+				"todo.txt"
+			],
+			[
+				"exit",
+				"src/editor/objects/Exit.hx"
+			],
+			[
+				"spawnpoin",
+				"src/editor/objects/SpawnPoint.hx"
+			],
+			[
+				"rect",
+				"src/editor/objects/Rect.hx"
+			],
+			[
+				"heig",
+				"src/editor/objects/HeightGuide.hx"
+			],
+			[
+				"wrpamath",
+				"src/wrapping/WrapMath.hx"
+			],
+			[
+				"levemgr",
+				"src/LevelMgr.hx"
+			],
+			[
+				"wrapmwah",
+				"src/wrapping/WrapMath.hx"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 206.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

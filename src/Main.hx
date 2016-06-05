@@ -14,6 +14,8 @@ import shapes.LineShape;
 import luxe.collision.shapes.*;
 import luxe.collision.Collision;
 import luxe.collision.data.ShapeCollision;
+import luxe.resource.Resource.JSONResource;
+import ShapePhysics;
 
 class Main extends luxe.Game {
 
@@ -32,16 +34,13 @@ class Main extends luxe.Game {
 
     var rotation_radius:Float = 200;
     var dots_radius:Float = 20;
+    var circle_radius:Float = 20;
 
     var line:LineShape;
 
-    var ball:Circle;
-    var ball_geom:Geometry;
-    var ball_vel:Vector;
+    var phys_engine:ShapePhysics;
 
-    var colliders:Array<Shape>;
-
-    var blocks:Array<Shape>;
+    var user_config:JSONResource;
 
     override function config(config:GameConfig) {
 
@@ -50,11 +49,18 @@ class Main extends luxe.Game {
         config.window.height = 640;
         config.window.fullscreen = false;
 
+        var config_path = 'config.json';
+        #if project_assets config_path = '../../../../../' + config_path; #end
+        config.preload.jsons.push({id:config_path});
+
         return config;
 
     } //config
 
     override function ready() {
+
+        user_config = Luxe.resources.json(#if project_assets '../../../../../' + #end 'config.json');
+
         input = new InputMap();
         input.bind_gamepad_range('left_stick', 0, -1, 1, true, false, false);
         input.bind_gamepad_range('left_stick', 1, -1, 1, true, false, false);
@@ -62,12 +68,15 @@ class Main extends luxe.Game {
         input.bind_gamepad_range('right_stick', 3, -1, 1, true, false, false);
         // input.bind_gamepad_button('left_bumper', 9);
         // input.bind_gamepad_button('right_bumper', 10);
-        // input.bind_gamepad_button('clear_screen', 4);
+        input.bind_gamepad_button('reset', 4); //back
+        input.bind_gamepad_button('start', 6); //start
+        input.bind_gamepad_button('reload_config', 11); //dpad up
 
         input.on(InteractType.change, onchange);
+        input.on(InteractType.down, ondown);
 
-        left_stick_base = new Vector(Luxe.screen.w / 2, Luxe.screen.h * 0.5);
-        right_stick_base = new Vector(Luxe.screen.w / 2, Luxe.screen.h * 0.5);
+        left_stick_base = new Vector(Luxe.screen.w / 2, Luxe.screen.h / 2);
+        right_stick_base = new Vector(Luxe.screen.w / 2, Luxe.screen.h / 2);
 
         left_stick_circle = new Visual({
             pos:left_stick_base.clone(),
@@ -104,95 +113,48 @@ class Main extends luxe.Game {
         });
         circumference.transform.pos.copy_from(Luxe.screen.mid);
 
-        ball = new Circle(Luxe.screen.mid.x, Luxe.screen.mid.y - 40, 20);
-        ball_geom = Luxe.draw.circle({
-            x:0,
-            y:0,
-            r:30
-        });
-        ball_geom.transform.pos.copy_from(ball.position);
-        ball_vel = new Vector(0, 0);
+        phys_engine = Luxe.physics.add_engine(ShapePhysics);
 
-        colliders = [];
+        add_ball();
 
-        colliders.push(Polygon.rectangle(-10, 0, 10, Luxe.screen.h, false));
-        colliders.push(Polygon.rectangle(Luxe.screen.w, 0, 10, Luxe.screen.h, false));
-        colliders.push(Polygon.rectangle(0, -10, Luxe.screen.w, 10, false));
-        colliders.push(Polygon.rectangle(0, Luxe.screen.h, Luxe.screen.w, 10, false));
-        colliders.push(line.collider);
+        add_walls();
 
-        blocks = [];
-
-        var angle_width:Float = Maths.radians(360/12);
-        var angle = 0.0;
-
-        var radius:Float = 500;
-
-        var side_length:Float = 2 * radius * Math.sin(angle_width / 2);
-        var depth:Float = 40;
-        while(2 * Math.PI - angle > 0.0001) {
-            var shape:Polygon = Polygon.rectangle(Math.cos(angle) * radius + Luxe.screen.mid.x, Math.sin(angle) * radius + Luxe.screen.mid.y, side_length, depth, false);
-            
-            shape.position.add_xyz(Math.cos(angle + angle_width / 2) * depth, Math.sin(angle + angle_width / 2) * depth);
-
-            var shape_angle = angle + Math.PI / 2 + angle_width / 2;
-            shape.rotation = Maths.degrees(shape_angle);
-
-            var geom = Luxe.draw.box({
-                x:shape.position.x,
-                y:shape.position.y,
-                w:side_length,
-                h:depth
-            });
-
-            geom.transform.rotation.setFromEuler(new Vector(0, 0, shape_angle));
-            shape.data = geom;
-
-            blocks.push(shape);
-
-            angle += angle_width;
-        }
-
+        phys_engine.statics.push(line.collider);
+        // Luxe.on(luxe.Ev.gamepaddown, function(_e:GamepadEvent){trace(_ e.button);});
     } //ready
+
+    function add_walls() {
+        var shape:Shape = Polygon.rectangle(-10 - circle_radius, 0, 10, Luxe.screen.h + 2 * circle_radius, false);
+        shape.tags.set('wall', '');
+        phys_engine.statics.push(shape);
+        shape = Polygon.rectangle(Luxe.screen.w + circle_radius, 0, 10, Luxe.screen.h + 2 * circle_radius, false);
+        shape.tags.set('wall', '');
+        phys_engine.statics.push(shape);
+        shape = Polygon.rectangle(0, -10 - circle_radius, Luxe.screen.w + 2 * circle_radius, 10, false);
+        shape.tags.set('wall', '');
+        phys_engine.statics.push(shape);
+        shape = Polygon.rectangle(0, Luxe.screen.h + circle_radius, Luxe.screen.w + 2 * circle_radius, 10, false);
+        shape.tags.set('wall', '');
+        phys_engine.statics.push(shape);
+    }
+
+    function add_ball() {
+        var ball_config = user_config.asset.json.ball;
+
+        new Ball(ball_config.start_pos.x, ball_config.start_pos.y, circle_radius, ball_config.start_vel.x, ball_config.start_vel.y, phys_engine);
+    }
 
     override function onkeyup( e:KeyEvent ) {
 
         if(e.keycode == Key.escape) {
             Luxe.shutdown();
         }
-        else if(e.keycode == Key.space) {
-            ball_vel.set_xy(50, -600);
-        }
 
     } //onkeyup
 
     override function update(dt:Float) {
-        ball.position.add_xyz(ball_vel.x * dt, ball_vel.y * dt);
-
-        var results = Collision.shapeWithShapes(ball, colliders);
-        for(result in results) {
-            process_result(result);
-        }
-
-        results = Collision.shapeWithShapes(ball, blocks);
-        for(result in results) {
-            process_result(result);
-            var geom:Geometry = cast(result.shape2.data, Geometry);
-            geom.drop();
-            blocks.remove(result.shape2);
-        }
-
-        ball_geom.transform.pos.copy_from(ball.position);
 
     } //update
-
-    function process_result(result:ShapeCollision) {
-        ball.position.add(result.separation);
-
-        var dot_product = ball_vel.dot(result.unitVector);
-
-        if(dot_product < 0) ball_vel.subtract(result.unitVector.multiplyScalar(dot_product * 2));
-    }
 
     function onchange(_e:InputEvent) {
         var stick_visual:Visual = null;
@@ -221,6 +183,15 @@ class Main extends luxe.Game {
         stick_visual.pos.add(stick_base);
 
         line.reposition(left_stick_circle.pos, right_stick_circle.pos);
+    }
+
+    function ondown(_e:InputEvent) {
+        switch(_e.name) {
+            case 'start':
+                add_ball();
+            case 'reload_config':
+                user_config.reload().then(function(res:JSONResource) {trace(res.asset.json); user_config = res;});
+        }
     }
 
     inline function trunc_abs(_v:Float, _epsilon:Float):Float {
