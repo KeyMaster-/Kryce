@@ -57,7 +57,7 @@ class BallSpawner extends Visual {
             ball.dyn_shape.vel.set_xy(Math.cos(spawn_angle + Math.PI) * spawn_vel, Math.sin(spawn_angle + Math.PI) * spawn_vel);
         });
 
-        var block = new GoalBlock(spawn_angle + Math.PI + Math.random() * Math.PI / 2, Math.PI / 8, goal_radius, phys_engine);
+        var block = new GoalBlock(spawn_angle + (Math.random() - 0.5) * Math.PI, Math.PI / 8, goal_radius, phys_engine);
 
         ball.dyn_shape.shape.data = {
             goal:block
