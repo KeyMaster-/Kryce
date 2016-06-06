@@ -6,11 +6,11 @@ import luxe.collision.data.ShapeCollision;
 import ShapePhysics;
 
 class Ball extends Visual {
-    var dyn_shape:DynamicShape;
+    public var dyn_shape:DynamicShape;
 
     public function new(_x:Float, _y:Float, _r:Float, _vx:Float, _vy:Float, _engine:ShapePhysics) {
         super({
-            name:'ball',
+            name:'Ball',
             name_unique:true,
             geometry:Luxe.draw.circle({
                 x:0,
@@ -22,11 +22,17 @@ class Ball extends Visual {
         dyn_shape = new DynamicShape(new Circle(_x, _y, _r), new Vector(_vx, _vy), onshapecollision);
         add(new ShapeComponent(dyn_shape));
 
+        transform.pos.set_xy(_x, _y);
+
         _engine.dynamics.push(dyn_shape);
     }
 
     function onshapecollision(_coll:ShapeCollision):Void {
-        if(_coll.shape2.tags.exists('wall')) {
+        if(_coll.shape2.tags.exists('goal')) {
+            trace('Goal hit!');
+        }
+
+        if(_coll.shape2.tags.exists('destroy_ball')) {
             destroy();
             return;
         }
@@ -40,6 +46,7 @@ class Ball extends Visual {
 
     override public function destroy(?_from_parent:Bool) {
         super.destroy();
+        dyn_shape.shape.data.goal.destroy();
         dyn_shape.destroy();
     }
 }

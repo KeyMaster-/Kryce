@@ -42,6 +42,8 @@ class Main extends luxe.Game {
 
     var user_config:JSONResource;
 
+    var ball_spawner:BallSpawner;
+
     override function config(config:GameConfig) {
 
         config.window.title = 'luxe game';
@@ -120,28 +122,30 @@ class Main extends luxe.Game {
         add_walls();
 
         phys_engine.statics.push(line.collider);
+
+        ball_spawner = new BallSpawner(phys_engine);
         // Luxe.on(luxe.Ev.gamepaddown, function(_e:GamepadEvent){trace(_ e.button);});
     } //ready
 
     function add_walls() {
-        var shape:Shape = Polygon.rectangle(-10 - circle_radius, 0, 10, Luxe.screen.h + 2 * circle_radius, false);
-        shape.tags.set('wall', '');
+        var shape:Shape = Polygon.rectangle(-10 - 2 * circle_radius, 0, 10, Luxe.screen.h + 4 * circle_radius, false);
+        shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
-        shape = Polygon.rectangle(Luxe.screen.w + circle_radius, 0, 10, Luxe.screen.h + 2 * circle_radius, false);
-        shape.tags.set('wall', '');
+        shape = Polygon.rectangle(Luxe.screen.w + 2 * circle_radius, 0, 10, Luxe.screen.h + 4 * circle_radius, false);
+        shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
-        shape = Polygon.rectangle(0, -10 - circle_radius, Luxe.screen.w + 2 * circle_radius, 10, false);
-        shape.tags.set('wall', '');
+        shape = Polygon.rectangle(0, -10 - 2 * circle_radius, Luxe.screen.w + 4 * circle_radius, 10, false);
+        shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
-        shape = Polygon.rectangle(0, Luxe.screen.h + circle_radius, Luxe.screen.w + 2 * circle_radius, 10, false);
-        shape.tags.set('wall', '');
+        shape = Polygon.rectangle(0, Luxe.screen.h + 2 * circle_radius, Luxe.screen.w + 4 * circle_radius, 10, false);
+        shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
     }
 
     function add_ball() {
-        var ball_config = user_config.asset.json.ball;
+        // var ball_config = user_config.asset.json.ball;
 
-        new Ball(ball_config.start_pos.x, ball_config.start_pos.y, circle_radius, ball_config.start_vel.x, ball_config.start_vel.y, phys_engine);
+        // new Ball(ball_config.start_pos.x, ball_config.start_pos.y, circle_radius, ball_config.start_vel.x, ball_config.start_vel.y, phys_engine);
     }
 
     override function onkeyup( e:KeyEvent ) {
