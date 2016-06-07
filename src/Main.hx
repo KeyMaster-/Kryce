@@ -21,23 +21,15 @@ class Main extends luxe.Game {
 
     var input:InputMap;
 
-    var left_stick_circle:Visual;
-    var right_stick_circle:Visual;
-
-    var left_stick_pos:Vector;
-    var right_stick_pos:Vector;
-
-    var left_stick_base:Vector;
-    var right_stick_base:Vector;
-
     var stick_deadzone:Float = 30.0;
 
     var rotation_radius:Float = 200;
     var dots_radius:Float = 20;
-    var circle_radius:Float = 20;
+    var ball_radius:Float = 20;
+
+    var weakspot:Weakspot;
 
     var phys_engine:ShapePhysics;
-
     var user_config:JSONResource;
 
     var ball_spawner:BallSpawner;
@@ -75,33 +67,40 @@ class Main extends luxe.Game {
         input.on(InteractType.change, onchange);
         input.on(InteractType.down, ondown);
 
-        left_stick_base = new Vector(Luxe.screen.w / 2, Luxe.screen.h / 2);
-        right_stick_base = new Vector(Luxe.screen.w / 2, Luxe.screen.h / 2);
+        phys_engine = Luxe.physics.add_engine(ShapePhysics);
 
-        left_stick_circle = new Visual({
-            pos:left_stick_base.clone(),
-            geometry:Luxe.draw.circle({
-                r:dots_radius,
-                x:0,
-                y:0
-            }),
-            color:new ColorHSV(5, 0.93, 0.88, 1),
-            depth:2
+        add_walls();
+
+        weakspot = new Weakspot(Luxe.screen.mid.x, Luxe.screen.mid.y, 20, 200, 0.15, phys_engine, {
+            depth:2,
+            color:new ColorHSV(5, 0.93, 0.88, 1)
         });
 
-        right_stick_circle = new Visual({
-            pos:right_stick_base.clone(),
-            geometry:Luxe.draw.circle({
-                r:dots_radius,
-                x:0,
-                y:0
-            }),
-            color:new ColorHSV(207, 0.64, 0.95, 1),
-            depth:3
+        ball_spawner = new BallSpawner(2.0, 400, 600, ball_radius, phys_engine, {
+            color: new ColorHSV(5, 0.83, 0.93, 1.0)
         });
 
-        left_stick_pos = new Vector();
-        right_stick_pos = new Vector();
+        // left_stick_circle = new Visual({
+        //     pos:left_stick_base.clone(),
+        //     geometry:Luxe.draw.circle({
+        //         r:dots_radius,
+        //         x:0,
+        //         y:0
+        //     }),
+        //     color:new ColorHSV(5, 0.93, 0.88, 1),
+        //     depth:2
+        // });
+
+        // right_stick_circle = new Visual({
+        //     pos:right_stick_base.clone(),
+        //     geometry:Luxe.draw.circle({
+        //         r:dots_radius,
+        //         x:0,
+        //         y:0
+        //     }),
+        //     color:new ColorHSV(207, 0.64, 0.95, 1),
+        //     depth:3
+        // });
 
         var circumference = make_circle_geom(rotation_radius, 5, Maths.radians(10), Maths.radians(10), {
             depth: 0,
@@ -109,25 +108,20 @@ class Main extends luxe.Game {
         });
         circumference.transform.pos.copy_from(Luxe.screen.mid);
 
-        phys_engine = Luxe.physics.add_engine(ShapePhysics);
-
-        add_walls();
-
-        ball_spawner = new BallSpawner(phys_engine);
         // Luxe.on(luxe.Ev.gamepaddown, function(_e:GamepadEvent){trace(_ e.button);});
     } //ready
 
     function add_walls() {
-        var shape:Shape = Polygon.rectangle(-10 - 2 * circle_radius, 0, 10, Luxe.screen.h + 4 * circle_radius, false);
+        var shape:Shape = Polygon.rectangle(-10 - 2 * ball_radius, 0, 10, Luxe.screen.h + 4 * ball_radius, false);
         shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
-        shape = Polygon.rectangle(Luxe.screen.w + 2 * circle_radius, 0, 10, Luxe.screen.h + 4 * circle_radius, false);
+        shape = Polygon.rectangle(Luxe.screen.w + 2 * ball_radius, 0, 10, Luxe.screen.h + 4 * ball_radius, false);
         shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
-        shape = Polygon.rectangle(0, -10 - 2 * circle_radius, Luxe.screen.w + 4 * circle_radius, 10, false);
+        shape = Polygon.rectangle(0, -10 - 2 * ball_radius, Luxe.screen.w + 4 * ball_radius, 10, false);
         shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
-        shape = Polygon.rectangle(0, Luxe.screen.h + 2 * circle_radius, Luxe.screen.w + 4 * circle_radius, 10, false);
+        shape = Polygon.rectangle(0, Luxe.screen.h + 2 * ball_radius, Luxe.screen.w + 4 * ball_radius, 10, false);
         shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
     }
@@ -145,30 +139,9 @@ class Main extends luxe.Game {
     } //update
 
     function onchange(_e:InputEvent) {
-        var stick_visual:Visual = null;
-        var stick_pos:Vector = null;
-        var stick_base:Vector = null;
-
         if(_e.name == 'left_stick') {
-            stick_pos = left_stick_pos;
-            stick_visual = left_stick_circle;
-            stick_base = left_stick_base;
+            weakspot.axis_change(_e.gamepad_event.axis, _e.gamepad_event.value);
         }
-        if(_e.name == 'right_stick') {
-            stick_pos = right_stick_pos;
-            stick_visual = right_stick_circle;
-            stick_base = right_stick_base;
-        }
-        if(_e.gamepad_event.axis % 2 == 0) {
-            stick_pos.x = _e.gamepad_event.value * rotation_radius;
-        }
-        else {
-            stick_pos.y = _e.gamepad_event.value * rotation_radius;
-        }
-
-        stick_pos.length = trunc_abs(Maths.clamp(stick_pos.length, -rotation_radius, rotation_radius), stick_deadzone);
-        stick_visual.pos.copy_from(stick_pos);
-        stick_visual.pos.add(stick_base);
     }
 
     function ondown(_e:InputEvent) {
@@ -176,10 +149,6 @@ class Main extends luxe.Game {
             case 'reload_config':
                 user_config.reload().then(function(res:JSONResource) {trace(res.asset.json); user_config = res;});
         }
-    }
-
-    inline function trunc_abs(_v:Float, _epsilon:Float):Float {
-        return Math.abs(_v) < _epsilon ? 0 : _v;
     }
 
         //_radius: radius around 0,0; _line_width: total width of segments, half inside radius, half outside
