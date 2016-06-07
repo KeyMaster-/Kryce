@@ -5,6 +5,7 @@ import luxe.Visual;
 import luxe.options.VisualOptions;
 import luxe.utils.Maths;
 import luxe.collision.shapes.Circle;
+import luxe.collision.data.ShapeCollision;
 
 class Weakspot extends Visual {
     var base_pos:Vector;
@@ -37,6 +38,11 @@ class Weakspot extends Visual {
         shape = new Circle(_x, _y, _r);
         shape.tags.set('destroy_ball', '');
         _phys_engine.statics.push(shape);
+        _phys_engine.callbacks.set(shape, oncollision);
+    }
+
+    function oncollision(coll:ShapeCollision) {
+        Luxe.events.fire('Game.over');
     }
 
     public function axis_change(_axis:Int, _value:Float) {

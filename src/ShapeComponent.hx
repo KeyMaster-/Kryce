@@ -1,6 +1,7 @@
 package ;
-import luxe.Component;
 import ShapePhysics.DynamicShape;
+import luxe.Component;
+import luxe.options.ComponentOptions;
 
 class ShapeComponent extends Component {
     public var dyn_shape:DynamicShape;
