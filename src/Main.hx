@@ -73,34 +73,15 @@ class Main extends luxe.Game {
 
         weakspot = new Weakspot(Luxe.screen.mid.x, Luxe.screen.mid.y, 20, 200, 0.15, phys_engine, {
             depth:2,
-            color:new ColorHSV(5, 0.93, 0.88, 1)
+            color:new ColorHSV(207, 0.64, 0.95, 1)
         });
 
-        ball_spawner = new BallSpawner(2.0, 400, 600, ball_radius, phys_engine, {
+        ball_spawner = new BallSpawner(1.0, 0.2, 400, 600, ball_radius, phys_engine, {
             color: new ColorHSV(5, 0.83, 0.93, 1.0)
         });
 
-        // left_stick_circle = new Visual({
-        //     pos:left_stick_base.clone(),
-        //     geometry:Luxe.draw.circle({
-        //         r:dots_radius,
-        //         x:0,
-        //         y:0
-        //     }),
-        //     color:new ColorHSV(5, 0.93, 0.88, 1),
-        //     depth:2
-        // });
-
-        // right_stick_circle = new Visual({
-        //     pos:right_stick_base.clone(),
-        //     geometry:Luxe.draw.circle({
-        //         r:dots_radius,
-        //         x:0,
-        //         y:0
-        //     }),
-        //     color:new ColorHSV(207, 0.64, 0.95, 1),
-        //     depth:3
-        // });
+        //red color: ColorHSV(5, 0.93, 0.88, 1)
+        //blue color: ColorHSV(207, 0.64, 0.95, 1)
 
         var circumference = make_circle_geom(rotation_radius, 5, Maths.radians(10), Maths.radians(10), {
             depth: 0,
