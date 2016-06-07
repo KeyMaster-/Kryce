@@ -28,10 +28,6 @@ class Ball extends Visual {
     }
 
     function onshapecollision(_coll:ShapeCollision):Void {
-        if(_coll.shape2.tags.exists('goal')) {
-            trace('Goal hit!');
-        }
-
         if(_coll.shape2.tags.exists('destroy_ball')) {
             destroy();
             return;
@@ -46,7 +42,6 @@ class Ball extends Visual {
 
     override public function destroy(?_from_parent:Bool) {
         super.destroy();
-        dyn_shape.shape.data.goal.destroy();
         dyn_shape.destroy();
     }
 }

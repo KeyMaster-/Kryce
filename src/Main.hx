@@ -10,8 +10,8 @@ import phoenix.geometry.Geometry;
 import phoenix.geometry.Vertex;
 import phoenix.Batcher.PrimitiveType;
 import InputMap;
-import shapes.LineShape;
-import luxe.collision.shapes.*;
+import luxe.collision.shapes.Polygon;
+import luxe.collision.shapes.Shape;
 import luxe.collision.Collision;
 import luxe.collision.data.ShapeCollision;
 import luxe.resource.Resource.JSONResource;
@@ -35,8 +35,6 @@ class Main extends luxe.Game {
     var rotation_radius:Float = 200;
     var dots_radius:Float = 20;
     var circle_radius:Float = 20;
-
-    var line:LineShape;
 
     var phys_engine:ShapePhysics;
 
@@ -105,10 +103,6 @@ class Main extends luxe.Game {
         left_stick_pos = new Vector();
         right_stick_pos = new Vector();
 
-        line = new LineShape({
-            depth:1
-        });
-
         var circumference = make_circle_geom(rotation_radius, 5, Maths.radians(10), Maths.radians(10), {
             depth: 0,
             color:new Color(1, 1, 1, 0.5)
@@ -117,11 +111,7 @@ class Main extends luxe.Game {
 
         phys_engine = Luxe.physics.add_engine(ShapePhysics);
 
-        add_ball();
-
         add_walls();
-
-        phys_engine.statics.push(line.collider);
 
         ball_spawner = new BallSpawner(phys_engine);
         // Luxe.on(luxe.Ev.gamepaddown, function(_e:GamepadEvent){trace(_ e.button);});
@@ -140,12 +130,6 @@ class Main extends luxe.Game {
         shape = Polygon.rectangle(0, Luxe.screen.h + 2 * circle_radius, Luxe.screen.w + 4 * circle_radius, 10, false);
         shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
-    }
-
-    function add_ball() {
-        // var ball_config = user_config.asset.json.ball;
-
-        // new Ball(ball_config.start_pos.x, ball_config.start_pos.y, circle_radius, ball_config.start_vel.x, ball_config.start_vel.y, phys_engine);
     }
 
     override function onkeyup( e:KeyEvent ) {
@@ -185,14 +169,10 @@ class Main extends luxe.Game {
         stick_pos.length = trunc_abs(Maths.clamp(stick_pos.length, -rotation_radius, rotation_radius), stick_deadzone);
         stick_visual.pos.copy_from(stick_pos);
         stick_visual.pos.add(stick_base);
-
-        line.reposition(left_stick_circle.pos, right_stick_circle.pos);
     }
 
     function ondown(_e:InputEvent) {
         switch(_e.name) {
-            case 'start':
-                add_ball();
             case 'reload_config':
                 user_config.reload().then(function(res:JSONResource) {trace(res.asset.json); user_config = res;});
         }

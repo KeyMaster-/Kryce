@@ -1,0 +1,1226 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"hashna",
+				"hash_names"
+			],
+			[
+				"unifor",
+				"p· uniform_count	Int"
+			],
+			[
+				"bind_",
+				"m· bind_key	 "
+			],
+			[
+				"normalwin",
+				"normalWindowSize"
+			],
+			[
+				"normal",
+				"normalWindowSize"
+			],
+			[
+				"getWindow",
+				"m· getWindowSize	sdl.SDLSize"
+			],
+			[
+				"window",
+				"m· getWindowSize	sdl.SDLSize"
+			],
+			[
+				"view",
+				"p· viewport	luxe.Rectangle"
+			],
+			[
+				"on",
+				"m· onwindowresized	 "
+			],
+			[
+				"sanit",
+				"sanitizeRange"
+			],
+			[
+				"sani",
+				"sanitizeRange"
+			],
+			[
+				"instru",
+				"instructionTextString"
+			],
+			[
+				"instu",
+				"instructionTextString"
+			],
+			[
+				"instructionTe",
+				"instructionTextString"
+			],
+			[
+				"app",
+				"p· app_main	String"
+			],
+			[
+				"bind",
+				"m· bind_key	 "
+			],
+			[
+				"screenpo",
+				"m· screen_point_to_world	phoenix.Vector"
+			],
+			[
+				"di",
+				"m· divideScalar	phoenix.Vector"
+			],
+			[
+				"subt",
+				"m· subtract_xyz	 "
+			],
+			[
+				"sub",
+				"m· subtract_xyz	 "
+			],
+			[
+				"screen",
+				"m· screen_point_to_world	phoenix.Vector"
+			],
+			[
+				"scree",
+				"m· screen_point_to_world	phoenix.Vector"
+			],
+			[
+				"savele",
+				"m· saveCurrentLevel	 "
+			],
+			[
+				"runtime",
+				"runtimeConfig"
+			],
+			[
+				"set",
+				"m· set_xy	 "
+			],
+			[
+				"rotation",
+				"rotationQuad1"
+			],
+			[
+				"col",
+				"p· Color	Color"
+			],
+			[
+				"display",
+				"displayTex"
+			],
+			[
+				"rotat",
+				"rotationQuad1"
+			],
+			[
+				"create",
+				"create_batcher"
+			],
+			[
+				"rightbord",
+				"p· rightBorderIndicatorDuplicate	phoenix.geometry.Geometry"
+			],
+			[
+				"leftBorderIndi",
+				"leftBorderIndicatorDuplicate"
+			],
+			[
+				"re",
+				"rendering"
+			],
+			[
+				"converte",
+				"convertedRight"
+			],
+			[
+				"onSecot",
+				"onSectorDeactivate"
+			],
+			[
+				"immut",
+				"immutableFields"
+			],
+			[
+				"clear",
+				"clear_color	phoenix.Color"
+			],
+			[
+				"text",
+				"sceneFinishedText"
+			],
+			[
+				"lao",
+				"loadNewLevel	function"
+			],
+			[
+				"load",
+				"loadNewLevel	function"
+			],
+			[
+				"nonshift",
+				"nonShiftRectColor"
+			],
+			[
+				"staticBo",
+				"staticBodies"
+			],
+			[
+				"stati",
+				"staticBodies"
+			],
+			[
+				"edito",
+				"EditorGuide"
+			],
+			[
+				"touched",
+				"touchedTypes	Map<String, wrapping.CollisionSide>"
+			],
+			[
+				"internalCa",
+				"internal_callback"
+			],
+			[
+				"save",
+				"save_callback"
+			],
+			[
+				"hro",
+				"horizSapDist"
+			],
+			[
+				"wrapop",
+				"wrapPointInRange	function"
+			],
+			[
+				"wrapoint",
+				"wrapPointInRange	function"
+			],
+			[
+				"grabco",
+				"grabbedComponent"
+			],
+			[
+				"hori",
+				"horizontal"
+			],
+			[
+				"vert",
+				"vertSnapDist"
+			],
+			[
+				"hor",
+				"horizSnapDist"
+			],
+			[
+				"horiz",
+				"horizGrabDist"
+			],
+			[
+				"Ed",
+				"EditorGuide"
+			],
+			[
+				"show",
+				"showInstructions"
+			],
+			[
+				"destroy",
+				"destroyIndicators"
+			],
+			[
+				"shiftTopVerts",
+				"shiftTopVertsOnHorizontal"
+			],
+			[
+				"destro",
+				"destroyIndicators"
+			],
+			[
+				"rebuildLeve",
+				"rebuildLevelOnActivate"
+			],
+			[
+				"update",
+				"updateWrappedIndicator"
+			],
+			[
+				"instruc",
+				"instructionText2"
+			],
+			[
+				"l",
+				"lshift	Int"
+			],
+			[
+				"sceneca",
+				"resetSceneCamera"
+			],
+			[
+				"left",
+				"leftBorderIndicator	phoenix.geometry.Geometry"
+			],
+			[
+				"onm",
+				"onMouseUp	function"
+			],
+			[
+				"static",
+				"staticColor	luxe.Color"
+			],
+			[
+				"stat",
+				"staticColor	luxe.Color"
+			],
+			[
+				"right",
+				"rightBorderIndicator	phoenix.geometry.Geometry"
+			],
+			[
+				"rightbo",
+				"rightBorderIndicator	phoenix.geometry.Geometry"
+			],
+			[
+				"rightborder",
+				"rightBorderWall	wrapping.ColTypeRect"
+			],
+			[
+				"lef",
+				"leftBorderWall	wrapping.ColTypeRect"
+			],
+			[
+				"editin",
+				"editingRect"
+			],
+			[
+				"staticBodies",
+				"levelStaticBodies"
+			],
+			[
+				"Flo",
+				"FloatMath"
+			],
+			[
+				"wallJump",
+				"walljumpImpulse"
+			],
+			[
+				"toue",
+				"touchingSides	wrapping.DirectionStates"
+			],
+			[
+				"wor",
+				"worldToPixel"
+			],
+			[
+				"seconcam",
+				"secondCamera"
+			],
+			[
+				"camera",
+				"Camera"
+			],
+			[
+				"key_",
+				"key_p"
+			],
+			[
+				"rgba",
+				"RGBAtoRGB"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/sublime_flow_/flow.sublime-build",
+					""
+				],
+				[
+					"Packages/sublime_flow/flow.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/sublime_flow_/flow.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 187.0,
+		"last_filter": "hex rel",
+		"selected_items":
+		[
+			[
+				"hex rel",
+				"Hex Viewer: Reload Hex View"
+			],
+			[
+				"hexviewer",
+				"Hex Viewer: Toggle Hex View"
+			],
+			[
+				"hexview",
+				"Hex Viewer: Toggle Hex View"
+			],
+			[
+				"hex ",
+				"Hex Viewer: Reload Hex View"
+			],
+			[
+				"hex viewer",
+				"Preferences: Hex Viewer Settings – User"
+			],
+			[
+				"hex",
+				"Hex Viewer: Toggle Hex View"
+			],
+			[
+				"show",
+				"Hex Viewer: Show Hex Inspector"
+			],
+			[
+				"reset",
+				"Haxe Completion: reset"
+			],
+			[
+				"rese",
+				"Haxe Completion: reset"
+			],
+			[
+				"haxe",
+				"Haxe Completion: reset"
+			],
+			[
+				"haxe rese",
+				"Haxe Completion: reset"
+			],
+			[
+				"haxe re",
+				"Haxe Completion: reset"
+			],
+			[
+				"haxe res",
+				"Haxe Completion: reset"
+			],
+			[
+				"package",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"upgrad",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"upgrade",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"open",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"resour",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"packageres",
+				"PackageResourceViewer: Extract Package"
+			],
+			[
+				"reset ",
+				"Haxe Completion: reset"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"remove pac",
+				"Package Control: Remove Package"
+			],
+			[
+				"install pac",
+				"Package Control: Install Package"
+			],
+			[
+				"package control ",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"comp",
+				"Haxe Completion: reset"
+			],
+			[
+				"package control",
+				"Package Control: List Packages"
+			],
+			[
+				"package control list",
+				"Package Control: List Packages"
+			],
+			[
+				"packag",
+				"Package Control: Enable Package"
+			],
+			[
+				"todo ",
+				"TodoReview: Open Files"
+			],
+			[
+				"pacage control inst",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: List Packages"
+			],
+			[
+				"line ending",
+				"Line Ending to all views: Unix"
+			],
+			[
+				"package install",
+				"Package Control: Install Package"
+			],
+			[
+				"package ",
+				"Package Control: Add Repository"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"subprocess.Popen('ls').communicate()",
+			"subprocess.Popen('ls').communicate()[0].readAll()",
+			"subprocess.Popen('ls').communicate()[0]",
+			"subprocess.Popen('ls')",
+			"import subprocess",
+			"import os",
+			"os",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+	],
+	"file_history":
+	[
+		"/Users/tschmidt/dev/code/haxe/emsl/emslc/bin_out/out.glslib",
+		"/Users/tschmidt/dev/code/haxe/emsl/emsl/ast/EMSL_AST_Expr.hx",
+		"/Users/tschmidt/dev/code/haxe/emsl/emsl/ast/EMSL_AST_Type.hx",
+		"/Users/tschmidt/dev/code/haxe/emsl/emsl/backend/glsl/GLSL_ES_1_0.hx",
+		"/Users/tschmidt/dev/code/haxe/emsl/emsl/backend/glsl/GLSL_1_2_0.hx",
+		"/Users/tschmidt/dev/code/haxe/emsl/emsl/backend/glsl/GLSL_helper.hx",
+		"/Users/tschmidt/dev/code/haxe/emsl/emsl/EMSL.hx",
+		"/Users/tschmidt/dev/code/haxe/emsl/emsl/backend/glsl/GLSL_Backend.hx",
+		"/Users/tschmidt/Library/Application Support/Sublime Text 3/Packages/User/hex_viewer.sublime-settings",
+		"/Users/tschmidt/dev/code/haxe/emsl/emsl/ast/EMSL_AST.hx",
+		"/Users/tschmidt/dev/code/haxe/emsl/emslc/emslc.hxml",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/haxe_def.txt",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/editor/overlay/LevelEditorOverlay.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/Rendering.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/entities/Recorder.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/Shifting.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/components/SectorToggler.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src/scenes/MainGame.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/Game.hx",
+		"/Users/tschmidt/.luxe/modules/luxe/0.0.1/lib/moduler.wren",
+		"/Users/tschmidt/.luxe/modules/luxe/0.0.1/lib/game.wren",
+		"/Users/tschmidt/Downloads/fake-0.6/game.wren",
+		"/Users/tschmidt/dev/code/haxe/luxedev/phoenix/geometry/Geometry.hx",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/api/buffers/ArrayBuffer.hx",
+		"/Users/tschmidt/dev/code/haxe/linc_opengl/opengl/WebGL.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/bin/mac64.build/cpp/src/phoenix/geometry/Geometry.cpp",
+		"/Users/tschmidt/dev/haxelib/hxcpp/3,2,205/src/Array.cpp",
+		"/Users/tschmidt/dev/haxelib/hxcpp/3,2,205/include/Array.h",
+		"/usr/local/lib/haxe/std/Array.hx",
+		"/usr/local/lib/haxe/std/haxe/io/BytesData.hx",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/api/buffers/ArrayBufferView.hx",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/modules/opengl/GL.hx",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/api/buffers/Float32Array.hx",
+		"/Users/tschmidt/dev/code/haxe/moments/moments/Recorder.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/project.flow",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/Rendering.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/samples/basic/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/Camera.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/phoenix/Batcher.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/bin/mac64.build/cpp/src/phoenix/Batcher.cpp",
+		"/Users/tschmidt/dev/code/haxe/linc_opengl/lib/glew/src/glew.c",
+		"/Users/tschmidt/dev/code/haxe/linc_opengl/linc/linc_opengl.h",
+		"/Users/tschmidt/dev/code/haxe/linc_opengl/lib/glew/include/GL/glew.h",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/Scene.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/assets/levels/level4.plvl",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/project.flow",
+		"/Users/tschmidt/dev/code/haxe/moments/.git/config",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/bin/mac64.build/cpp/include/phoenix/Camera.h",
+		"/Users/tschmidt/dev/code/haxe/moments/.git/description",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/components/ExitIndicator.hx",
+		"/Users/tschmidt/Desktop/polar_platformer.app/Contents/Info.plist",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/bin/mac64/polar_platformer.app/Contents/Info.plist",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/GameWorld.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/todo.txt",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/components/SectorToggler.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/wrapping/WrapMath.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/editor/objects/Sector.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/LevelMgr.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/phoenix/Rectangle.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/utils/FloatMath.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/Rectangle.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/assets/levels/level2.plvl",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/scenes/LevelEditor.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/bin/mac64/.DS_Store",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/Reg.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/Core.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/luxe/Game.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/samples/config/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/samples/config/project.flow",
+		"/Users/tschmidt/dev/code/haxe/luxedev/samples/alphas/1_0_parrott/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/samples/config/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/scenes/MainGame.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/types/TypeNames.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/types/TypeCreate.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/types/Types.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/editor/objects/Exit.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/Core.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/config.json",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/assets/shaders/warp.frag",
+		"/Users/tschmidt/dev/code/haxe/rotationTest/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/tests/features/sprite/project.flow",
+		"/Users/tschmidt/dev/code/haxe/rotationTest/project.flow",
+		"/Users/tschmidt/dev/code/haxe/luxedev/tests/features/sprite/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/tests/features/transforms/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/BezierValuesCalculator/project.flow",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/BezierValuesCalculator/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/.gitignore",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/components/PlatformerController.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/components/PhysBodyComp.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/BezierValuesCalculator/build.hxml",
+		"/Users/tschmidt/dev/code/uni/theory/haxe/first_order_logic/build.hxml",
+		"/Users/tschmidt/dev/code/uni/theory/haxe/ticketNumbers/build.hxml",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/Main.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/Component.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/phoenix/Vector.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/wrapping/WrapRectPhysics.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/assets/levels/level0.plvl",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/json/format/JsonPrinter.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/json/format/JsonParser.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/json/Json.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/systems/input/Input.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/phoenix/RenderState.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/phoenix/Renderer.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/App.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/Snow.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/Recorder.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/Set.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/runtime/Runtime.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/Input.hx",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/Snow.hx",
+		"/Users/tschmidt/dev/code/haxe/snow/snow/App.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/systems/audio/Audio.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/modules/sdl/Runtime.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/modules/sdl/IO.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/systems/io/IO.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/systems/assets/Asset.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/Resources.hx",
+		"/Users/tschmidt/dev/code/haxe/luxedev/luxe/resource/Resource.hx",
+		"/Users/tschmidt/dev/code/haxe/luxe/phoenix/Batcher.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/src/components/CameraFollow.hx",
+		"/Users/tschmidt/dev/code/haxe/polarplatformer/bin/mac64.build/cpp/src/moments/Recorder.cpp",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/modules/opengl/GL.hx",
+		"/Users/tschmidt/dev/code/haxe/linc_opengl/opengl/GL.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/snow/core/native/io/IO.hx",
+		"/Users/tschmidt/dev/code/haxe/snowdev/flow/build/hook.pre.js",
+		"/Users/tschmidt/dev/code/haxe/snowdev/framework.flow",
+		"/Users/tschmidt/.flow.config.json"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/Users/tschmidt/dev/code/haxe/polarplatformer/polarplatformer/src",
+			"/Users/tschmidt/dev/code/haxe/polarplatformer/src"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			".*\\[.*\\]",
+			".**\\[.*\\]",
+			"\\w*\\[.*\\]",
+			"\\[\\d:\\d\\d\\]",
+			"\\[\\d:\\d\\d\\] \\n",
+			"\\[\\d:\\d\\d\\]\n",
+			"\\[\\d:\\d\\d\\]",
+			"\\[\\d:\\d\\d\\]\\n",
+			"\\[\\d:\\d\\d\\]",
+			"\\[.*\\]",
+			"\\[",
+			"[",
+			"\\[1:11 PM\\]",
+			"e",
+			"event",
+			"onkeydown",
+			"keydown",
+			"onkeydown",
+			"Core",
+			"AppConfig",
+			"batch(",
+			"batch",
+			"batch(",
+			"batch",
+			"locked",
+			"windowresized",
+			"right",
+			"sector.right",
+			"app",
+			"package",
+			"sceneBatcher",
+			"sceneCamera",
+			"UserConfig",
+			"\"",
+			"sampleOffset",
+			"sizeOverRadius",
+			"rebuildLevel",
+			"exitIndicator",
+			"x",
+			"cubed",
+			"floor",
+			"round",
+			",\n",
+			"WrapMath.wrapWidth",
+			"screenPointToPolar",
+			"WrapMath.wrapWidth",
+			"v",
+			"[^.]screenPointToPolar",
+			"screenPointToPolar",
+			";\n",
+			"relPos",
+			"screenPointToPolar",
+			"input",
+			"update",
+			"host",
+			"on_tick_event",
+			"input",
+			"runtimeConfig",
+			"GL",
+			"resetSceneCamera",
+			"1",
+			"//,",
+			"set_viewport§",
+			"viewera",
+			"cam",
+			"EventObject",
+			"secondCamera",
+			"false",
+			"fullRender",
+			"AnimationController",
+			"sceneCam",
+			"main",
+			"sceneBatcher",
+			"sceneCamera",
+			"mainGame",
+			"rendering",
+			"main",
+			"shifting",
+			"mainGame",
+			"curSector",
+			"onSectorActivate",
+			"curSector",
+			"levelStaticBodies",
+			"sceneBatcher",
+			"gameWorld",
+			"levelModified",
+			"sector",
+			"sceneCamera",
+			"onSectorDeactivate",
+			"onSectorActivate",
+			"ps[whichP]",
+			"fullRender",
+			"levelStaticBodies",
+			"curSector",
+			"curSector-",
+			"curSector",
+			"sceneBatcher",
+			"playerBody",
+			"CameraFollow",
+			"offset",
+			"secondCamera",
+			"mainGame",
+			"haxe_has_args",
+			"run_process",
+			"HEAD",
+			"[][",
+			"number",
+			"digitCount",
+			"vintage",
+			" \n",
+			"sort",
+			"dyn",
+			"(int)32",
+			"32",
+			"update",
+			"onLevelLoaded",
+			"init",
+			"colorsUpdated",
+			"main",
+			"sceneCamera",
+			"mainGame",
+			"maingame",
+			"levelMgr",
+			"LevelMgr",
+			"SLEEP( 500 );",
+			"push_back(",
+			"midiout->sendMessage( &message );",
+			"[0]"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			" rendering.screenPointToPolar",
+			"sectorCamera",
+			"rendering.renderData.batcher",
+			"rendering.renderData.camera",
+			"levelDataMgr",
+			"LevelDataMgr",
+			"grabDepth",
+			"getGrabDepth",
+			"collisionTypes",
+			"PolarUtil.screenPointToPolar",
+			"PolarUtil.sc",
+			"PolarUtil.screenPointToPolar",
+			"vertSnapDist",
+			"horizSnapDist",
+			"vertSnapDist_",
+			"vertGrabDist",
+			"horizGrabDist",
+			"vertGrabDist_",
+			"haxe.io.Output",
+			"out",
+			"writePixels",
+			"altersingle",
+			"contest",
+			"alterneigh",
+			"unbiasnet",
+			"process",
+			"map",
+			"learn",
+			"inxbuild",
+			"colorMap",
+			"output",
+			"nextPixel",
+			"maxCode",
+			"flush",
+			"encode",
+			"compress",
+			"resetCodeTable",
+			"clearTable",
+			"add",
+			"finish",
+			"start_File",
+			"start_output",
+			"addFrame",
+			"setFramerate",
+			"setDelay",
+			"data",
+			"sampleInterval",
+			"isSizeSet",
+			"isFirstFrame",
+			"shouldCloseStream",
+			"disposalCode",
+			"paletteSize",
+			"usedEntry",
+			"colorTab",
+			"colorDepth",
+			"indexedPixels",
+			"flippedY",
+			"pixels",
+			"currentFrame",
+			"fileStream",
+			"hasStarted",
+			"frameDelay",
+			"repeat",
+			"height",
+			"width"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 165.0
+	},
+	"output.find_results":
+	{
+		"height": 100.0
+	},
+	"output.haskell_sublime_load":
+	{
+		"height": 100.0
+	},
+	"output.hex_viewer_inspector":
+	{
+		"height": 100.0
+	},
+	"output.sftp":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 100.0
+	},
+	"pinned_build_system": "",
+	"project": "simple.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"maingame",
+				"src/scenes/MainGame.hx"
+			],
+			[
+				"gameworld",
+				"src/GameWorld.hx"
+			],
+			[
+				"todo",
+				"todo.txt"
+			],
+			[
+				"t",
+				"todo.txt"
+			],
+			[
+				"warp.frag",
+				"assets/shaders/warp.frag"
+			],
+			[
+				"main",
+				"src/Main.hx"
+			],
+			[
+				"rectgra",
+				"src/RectGraphics.hx"
+			],
+			[
+				"camera",
+				"src/components/CameraFollow.hx"
+			],
+			[
+				"config",
+				"config.json"
+			],
+			[
+				"exitin",
+				"src/components/ExitIndicator.hx"
+			],
+			[
+				"rectrgra",
+				"src/editor/objects/GrabRect.hx"
+			],
+			[
+				"rectgraph",
+				"src/RectGraphics.hx"
+			],
+			[
+				"rectrag",
+				"bin/mac64.build/cpp/src/phoenix/geometry/RectangleGeometry.cpp"
+			],
+			[
+				"leveleditor",
+				"src/scenes/LevelEditor.hx"
+			],
+			[
+				"levelmgr",
+				"src/LevelMgr.hx"
+			],
+			[
+				"leveleit",
+				"src/scenes/LevelEditor.hx"
+			],
+			[
+				"proje",
+				"project.flow"
+			],
+			[
+				"floatma",
+				"src/utils/FloatMath.hx"
+			],
+			[
+				"wrapmath",
+				"src/wrapping/WrapMath.hx"
+			],
+			[
+				"mainame",
+				"src/scenes/MainGame.hx"
+			],
+			[
+				"camerafo",
+				"src/components/CameraFollow.hx"
+			],
+			[
+				"color",
+				"src/ColorMgr.hx"
+			],
+			[
+				"tod",
+				"todo.txt"
+			],
+			[
+				"wrap.frag",
+				"assets/shaders/warp.frag"
+			],
+			[
+				"colorm",
+				"src/ColorMgr.hx"
+			],
+			[
+				"leveledito",
+				"src/scenes/LevelEditor.hx"
+			],
+			[
+				"maingam",
+				"src/scenes/MainGame.hx"
+			],
+			[
+				"edit",
+				"src/editor/objects/Editable.hx"
+			],
+			[
+				"leveledit",
+				"src/scenes/LevelEditor.hx"
+			],
+			[
+				"coltype",
+				"src/wrapping/ColTypeRect.hx"
+			],
+			[
+				"rect.hx",
+				"src/editor/objects/Rect.hx"
+			],
+			[
+				"levelde",
+				"src/scenes/LevelEditor.hx"
+			],
+			[
+				"heightguid",
+				"src/editor/objects/HeightGuide.hx"
+			],
+			[
+				"sector",
+				"src/editor/objects/Sector.hx"
+			],
+			[
+				"platfro",
+				"src/components/PlatformerController.hx"
+			],
+			[
+				"wraprectp",
+				"src/wrapping/WrapRectPhysics.hx"
+			],
+			[
+				"wraprectph",
+				"src/wrapping/WrapRectPhysics.hx"
+			],
+			[
+				"rectgrph",
+				"src/RectGraphics.hx"
+			],
+			[
+				"wraprectphy",
+				"src/wrapping/WrapRectPhysics.hx"
+			],
+			[
+				"wrapphy",
+				"src/wrapping/WrapRectPhysics.hx"
+			],
+			[
+				"main.h",
+				"src/Main.hx"
+			],
+			[
+				"pa",
+				"package utils;"
+			],
+			[
+				"reg",
+				"src/Reg.hx"
+			],
+			[
+				"platforer",
+				"src/components/PlatformerController.hx"
+			],
+			[
+				"components",
+				"src/components/AnimationController.hx"
+			],
+			[
+				"platfor",
+				"src/components/PlatformerController.hx"
+			],
+			[
+				"to",
+				"todo.txt"
+			],
+			[
+				"exit",
+				"src/editor/objects/Exit.hx"
+			],
+			[
+				"spawnpoin",
+				"src/editor/objects/SpawnPoint.hx"
+			],
+			[
+				"rect",
+				"src/editor/objects/Rect.hx"
+			],
+			[
+				"heig",
+				"src/editor/objects/HeightGuide.hx"
+			],
+			[
+				"wrpamath",
+				"src/wrapping/WrapMath.hx"
+			],
+			[
+				"levemgr",
+				"src/LevelMgr.hx"
+			],
+			[
+				"wrapmwah",
+				"src/wrapping/WrapMath.hx"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 206.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

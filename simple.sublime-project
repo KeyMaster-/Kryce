@@ -2,13 +2,16 @@
 	"folders":
 	[
 		{
-			"path": "/Users/tschmidt/dev/code/haxe/simple"
+			"path": "."
 		},
 		{
 			"path": "/Users/tschmidt/dev/code/haxe/luxe"
 		},
 		{
 			"path": "/Users/tschmidt/dev/code/haxe/snow"
+		},
+		{
+			"path": "/Users/tschmidt/dev/haxelib/nape/2,0,20"
 		}
 	]
 }
