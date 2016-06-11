@@ -4,7 +4,7 @@ import InputMap;
 import luxe.GameConfig;
 import luxe.Input;
 import luxe.resource.Resource.JSONResource;
-import tween.Delta;
+import timeline.Timelines;
 
 class Main extends luxe.Game {
 
@@ -36,15 +36,13 @@ class Main extends luxe.Game {
 
         input.on(InteractType.down, ondown);
 
-        trace(Luxe.scene);
-
         Luxe.scene = new MainGame();
 
         // Luxe.on(luxe.Ev.gamepaddown, function(_e:GamepadEvent){trace(_ e.button);});
     } //ready
 
     override public function update(dt:Float) {
-        Delta.step(dt);
+        Timelines.step(dt);
     }
 
     override function onkeyup( e:KeyEvent ) {

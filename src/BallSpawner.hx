@@ -5,11 +5,15 @@ import luxe.Vector;
 import luxe.Color;
 import luxe.options.VisualOptions;
 import luxe.utils.Maths;
-import tween.Delta;
 import luxe.collision.shapes.Polygon;
 import phoenix.Batcher.PrimitiveType;
 import phoenix.geometry.Geometry;
 import phoenix.geometry.Vertex;
+
+import timeline.Timeline;
+import timeline.Timelines;
+import timeline.PropTween;
+import timeline.Trigger;
 
 class BallSpawner extends Visual {
     var phys_engine:ShapePhysics;
@@ -19,6 +23,8 @@ class BallSpawner extends Visual {
     var spawn_radius:Float;
     var spawn_vel:Float;
     var ball_radius:Float;
+
+    var timelines:Array<Timeline>;
 
     public function new(_spawn_interval:Float, _ball_delay:Float, _spawn_radius:Float, _spawn_vel:Float, _ball_radius:Float, _input:InputMap, _phys_engine:ShapePhysics, ?_options:VisualOptions) {
         spawn_interval = _spawn_interval;
@@ -46,11 +52,11 @@ class BallSpawner extends Visual {
 
         _options.geometry = geom;
 
+        timelines = [];
+
         super(_options);
 
         phys_engine = _phys_engine;
-
-        // Actuate.timer(spawn_interval).onComplete(spawn_ball);
 
         _input.on(InputMap.InteractType.down, ondown);
 
@@ -58,57 +64,34 @@ class BallSpawner extends Visual {
     }
 
     function ongameover(_) {
-        // Actuate.stop(this);
-        // Actuate.stop(null);
+        for(timeline in timelines) {
+            Timelines.remove(timeline);
+        }
+        timelines = [];
     }
 
     function ondown(_e:InputMap.InputEvent) {
         switch(_e.name) {
             case 'spawn_single_ball':
-                tween_to_angle(new_random_angle(), spawn_interval, spawn_ball.bind(ball_delay));
+                tween_to_angle(new_random_angle(), spawn_interval, function(_) {spawn_ball(ball_delay);});
             case 'spawn_ball_series':
-
-                var end_1:Float = radians + Math.PI / 20;
-                var end_2:Float = end_1 + Math.PI / 2;
-                var end_3:Float = end_2 + Math.PI / 20;
 
                 var linear_time = 1.0;
                 var balls = 10;
 
-                Delta.tween(this).prop('radians', end_1, 0.2)
-                    .ease(tween.easing.Quad.easeIn)
-                    .tween(this).prop('radians', end_2, linear_time)
-                    .trigger('shoot_balls')
-                    .ease(tween.easing.Linear.none)
-                    .tween(this).prop('radians', end_3, 0.2)
-                    .ease(tween.easing.Quad.easeOut);
+                var tl = new Timeline();
+                tl.add(new PropTween(this, 'radians', 0, 0.2, timeline.easing.Quad.easeIn).delta(Math.PI / 20));
+                tl.add(new PropTween(this, 'radians', 0.2, 0.2 + linear_time, timeline.easing.Linear.none).delta(Math.PI / 2));
+                tl.add(new PropTween(this, 'radians', 0.2 + linear_time, 0.2 + linear_time + 0.2, timeline.easing.Quad.easeOut).delta(Math.PI / 20));
 
-
-                var ball_action = Delta.tween(null).waitForTrigger('shoot_balls');
-
-                var ball_count = 0;
-                function series_callback() {
-                    spawn_ball(0);
-                    ball_count++;
-                    if(ball_count < balls) {
-                        Luxe.timer.schedule(linear_time / balls, series_callback);
-                    }
+                for(i in 0...balls) {
+                    tl.add(new Trigger(0.2 + (i + 1) * (linear_time / balls), function(_) {
+                        spawn_ball(0);
+                    }));
                 }
 
-                ball_action.onComplete(series_callback);
-
-
-                // Actuate.tween(this, 0.2, {radians: end_1}).onComplete(function() {
-                //     Actuate.tween(this, linear_time, {radians: end_2}).onComplete(function() {
-                //         Actuate.tween(this, 0.2, {radians: end_3}).ease(Quad.easeOut).onComplete(function() {
-                //             if(radians > 2 * Math.PI) {
-                //                 radians -= 2 * Math.PI;
-                //             }
-                //         });
-                //     }).ease(luxe.tween.easing.Linear.easeNone);
-
-                //     Actuate.timer(linear_time / balls).repeat(balls).onRepeat(spawn_ball.bind(0));
-                // }).ease(Quad.easeIn);
+                Timelines.add(tl);
+                timelines.push(tl);
         }
     }
 
@@ -135,9 +118,10 @@ class BallSpawner extends Visual {
         return next_radians;
     }
 
-    function tween_to_angle(_angle:Float, _interval:Float, ?_oncomplete:Void->Void):tween.Delta.TweenAction {
-        var action = Delta.tween(this).prop('radians', _angle, _interval).ease(tween.easing.Quad.easeInOut);
-        if(_oncomplete != null) action.onComplete(_oncomplete);
-        return action;
+    function tween_to_angle(_angle:Float, _interval:Float, ?_oncomplete:Float->Void) {
+        var tl = new Timeline();
+        tl.add(new PropTween(this, 'radians', 0, _interval, timeline.easing.Quad.easeInOut).to(_angle));
+        if(_oncomplete != null) tl.add(new Trigger(_interval, _oncomplete));
+        Timelines.add(tl);
     }
 }

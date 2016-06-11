@@ -27,7 +27,15 @@ class ShapePhysics extends PhysicsEngine {
 
         var dt = Luxe.physics.step_delta * Luxe.timescale;
 
-        for(dyn in dynamics) {
+        var idx:Int = dynamics.length;
+        while(idx > 0) {
+            idx--;
+            var dyn = dynamics[idx];
+            if(dyn.destroyed) {
+                dynamics.splice(idx, 1);
+                continue;
+            }
+
             dyn.shape.position.add_xyz(dyn.vel.x * dt, dyn.vel.y * dt);
             
             var results = Collision.shapeWithShapes(dyn.shape, statics);
@@ -35,7 +43,7 @@ class ShapePhysics extends PhysicsEngine {
                 if(callbacks.exists(dyn.shape)) callbacks.get(dyn.shape)(result);
                 if(callbacks.exists(result.shape2)) callbacks.get(result.shape2)(result);
                 if(dyn.destroyed) {
-                    dynamics.remove(dyn);
+                    dynamics.splice(idx, 1);
                     break;
                 }
             }

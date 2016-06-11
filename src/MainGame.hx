@@ -47,13 +47,22 @@ class MainGame extends Scene {
         game_input.bind_gamepad_button('reset', 4); //back
         game_input.bind_gamepad_button('spawn_single_ball', 0);
         game_input.bind_gamepad_button('spawn_ball_series', 1);
+        
 
         game_input.on(InteractType.down, ondown);
         game_input.on(InteractType.change, onchange);
 
         misc_input = new InputMap();
         misc_input.bind_gamepad_button('start', 6); //start
+
         misc_input.on(InteractType.down, ondown);
+
+        #if no_gamepad
+            game_input.bind_key('spawn_ball_series', luxe.Input.Key.key_k); //:todo: for testing
+            game_input.bind_mouse_range('mouse', InputMap.ScreenAxis.X, 0, 1, true, false, false);
+            game_input.bind_mouse_range('mouse', InputMap.ScreenAxis.Y, 0, 1, true, false, false);
+            misc_input.bind_key('start', luxe.Input.Key.enter); //:todo: for testing
+        #end
 
         phys_engine = Luxe.physics.add_engine(ShapePhysics);
         add_walls();
@@ -113,12 +122,22 @@ class MainGame extends Scene {
         if(_e.name == 'left_stick') {
             weakspot.axis_change(_e.gamepad_event.axis, _e.gamepad_event.value);
         }
+        #if no_gamepad
+            if(_e.name == 'mouse') {
+                var mouse_pos = Vector.Subtract(_e.mouse_event.pos, Luxe.screen.mid);
+                Maths.clamp(mouse_pos.length, 0, rotation_radius);
+                mouse_pos.length /= rotation_radius;
+                weakspot.axis_change(0, mouse_pos.x);
+                weakspot.axis_change(1, mouse_pos.y);
+            }
+        #end
     }
 
     function ondown(_e:InputEvent) {
         switch(_e.name) {
             case 'start':
                 reset();
+                Luxe.events.fire('Game.restart');
         }
     }
 

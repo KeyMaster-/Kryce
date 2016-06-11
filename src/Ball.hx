@@ -9,6 +9,7 @@ import luxe.collision.data.ShapeCollision;
 
 class Ball extends Visual {
     public var dyn_shape:DynamicShape;
+    var listen_id:String;
 
     public function new(_x:Float, _y:Float, _r:Float, _vx:Float, _vy:Float, _engine:ShapePhysics, ?_options:VisualOptions) {
         if(_options == null) _options = {};
@@ -31,11 +32,11 @@ class Ball extends Visual {
 
         _engine.dynamics.push(dyn_shape);
 
-        Luxe.events.listen('Game.over', ongameover);
+        listen_id = Luxe.events.listen('Game.restart', game_restart);
     }
 
-    function ongameover(_) {
-        if(!destroyed) destroy();
+    function game_restart(_) {
+        destroy();
     }
 
     function onshapecollision(_coll:ShapeCollision):Void {
@@ -54,5 +55,6 @@ class Ball extends Visual {
     override public function destroy(?_from_parent:Bool) {
         super.destroy();
         dyn_shape.destroy();
+        Luxe.next(Luxe.events.unlisten.bind(listen_id)); //Delay removing the listener since otherwise we're modifying the listeners array while iterating it in events
     }
 }
