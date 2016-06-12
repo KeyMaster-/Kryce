@@ -8,8 +8,6 @@
 
 package timeline.easing;
 
-
-
 class Elastic {
 	
 	static var a = 0.1;

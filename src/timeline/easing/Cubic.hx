@@ -8,7 +8,6 @@
 
 package timeline.easing;
 	
-	
 class Cubic {
 	
 	

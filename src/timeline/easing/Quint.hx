@@ -8,7 +8,6 @@
 
 package timeline.easing;
 	
-	
 class Quint {
 	public static inline function easeIn(start:Float, delta:Float, t:Float):Float {
 		return delta * t * t * t * t * t + start;

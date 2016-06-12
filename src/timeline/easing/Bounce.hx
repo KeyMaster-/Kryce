@@ -8,7 +8,6 @@
 
 package timeline.easing;
 
-	
 class Bounce {
 
 	public static inline function easeIn(start:Float, delta:Float, t:Float):Float {

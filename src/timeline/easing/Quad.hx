@@ -7,8 +7,6 @@
 
 package timeline.easing;
 
-
-
 class Quad {
 	
 	public static inline function easeIn(start:Float, delta:Float, t:Float):Float {

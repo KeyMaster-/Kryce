@@ -11,6 +11,9 @@ import luxe.options.GeometryOptions;
 import phoenix.geometry.Geometry;
 import phoenix.geometry.Vertex;
 import phoenix.Batcher.PrimitiveType;
+import patterns.Patterns;
+
+import luxe.Visual;
 
 class MainGame extends Scene {
     var game_input:InputMap;
@@ -32,6 +35,8 @@ class MainGame extends Scene {
 
     var game_over_text:Text;
 
+    var patterns:Patterns;
+
     public function new() {
         super('MainGame');
     }
@@ -47,6 +52,7 @@ class MainGame extends Scene {
         game_input.bind_gamepad_button('reset', 4); //back
         game_input.bind_gamepad_button('spawn_single_ball', 0);
         game_input.bind_gamepad_button('spawn_ball_series', 1);
+        game_input.bind_gamepad_button('test_patterns_json', 2);
         
 
         game_input.on(InteractType.down, ondown);
@@ -81,6 +87,8 @@ class MainGame extends Scene {
         //red color: ColorHSV(5, 0.93, 0.88, 1)
         //blue color: ColorHSV(207, 0.64, 0.95, 1)
 
+        patterns = new Patterns();
+
         var circumference = make_circle_geom(rotation_radius, 5, Maths.radians(10), Maths.radians(10), {
             depth: 0,
             color:new Color(1, 1, 1, 0.5)
@@ -101,6 +109,10 @@ class MainGame extends Scene {
         Luxe.events.listen('Game.over', ongameover);
 
         super.init(null);
+    }
+
+    public function resources(_patterns_json:Dynamic) {
+        patterns.read(_patterns_json);
     }
 
     override public function reset() {
@@ -138,6 +150,13 @@ class MainGame extends Scene {
             case 'start':
                 reset();
                 Luxe.events.fire('Game.restart');
+            case 'test_patterns_json':
+                var test_entity = new Visual({
+                    pos:Luxe.screen.mid.clone()
+                });
+                var tl = patterns.apply('driveby', test_entity);
+                tl.add(new timeline.Trigger(1.2, function(_){trace('complete'); test_entity.destroy();}));
+
         }
     }
 

@@ -46,7 +46,7 @@ class FloatTween implements TimelineElement {
     }
 
     public function update(_t:Float) {
-        var normalised = (_t - start_t) / diff_t;
+        var normalised = (_t - start_t) / diff_t; //NOTE If a tween has diff_t == 0 this will produce NaN values! Easily fixed but not sure if it should be allowed / designed for
         set(tween_func(from_val, delta_val, normalised));
     }
 

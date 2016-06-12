@@ -8,7 +8,6 @@
 
 package timeline.easing;
 	
-	
 class Back {
 	
 	public static var DRIVE:Float = 1.70158;

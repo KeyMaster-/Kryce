@@ -6,8 +6,7 @@
 
 
 package timeline.easing;
-	
-	
+
 class Sine {
 	
 	
