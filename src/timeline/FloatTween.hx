@@ -51,7 +51,8 @@ class FloatTween implements TimelineElement {
     }
 
     public function init():Void {
-        if(Math.isNaN(from_val)) from_val = get(); //Get a from value if not supplied
+        if(!Math.isNaN(from_val)) set(from_val); //We're given a starting value, so set it
+        else from_val = get(); //Else we need to grab our start value
 
         if(!Math.isNaN(to_val)) delta_val = to_val - from_val; //If the to value is valid, calculate the diff
         initialised = true;

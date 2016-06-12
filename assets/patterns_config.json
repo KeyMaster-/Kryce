@@ -1,0 +1,8 @@
+{
+    "driveby":{
+        "windup":0.1,
+        "linear":0.7,
+        "winddown":0.1,
+        "shots":6
+    }
+}

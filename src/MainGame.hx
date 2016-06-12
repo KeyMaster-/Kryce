@@ -35,8 +35,6 @@ class MainGame extends Scene {
 
     var game_over_text:Text;
 
-    var patterns:Patterns;
-
     public function new() {
         super('MainGame');
     }
@@ -54,7 +52,6 @@ class MainGame extends Scene {
         game_input.bind_gamepad_button('spawn_ball_series', 1);
         game_input.bind_gamepad_button('test_patterns_json', 2);
         
-
         game_input.on(InteractType.down, ondown);
         game_input.on(InteractType.change, onchange);
 
@@ -73,21 +70,22 @@ class MainGame extends Scene {
         phys_engine = Luxe.physics.add_engine(ShapePhysics);
         add_walls();
 
+        Patterns.phys_engine = phys_engine;
+        Patterns.scene = this;
+
         weakspot = new Weakspot(Luxe.screen.mid.x, Luxe.screen.mid.y, 20, 200, 0.15, phys_engine, {
             depth:2,
             color:new ColorHSV(207, 0.64, 0.95, 1),
             scene:this
         });
 
-        ball_spawner = new BallSpawner(1.0, 0.2, 400, 600, ball_radius, game_input, phys_engine, {
+        ball_spawner = new BallSpawner({
             color: new ColorHSV(5, 0.83, 0.93, 1.0),
             scene:this
         });
 
         //red color: ColorHSV(5, 0.93, 0.88, 1)
         //blue color: ColorHSV(207, 0.64, 0.95, 1)
-
-        patterns = new Patterns();
 
         var circumference = make_circle_geom(rotation_radius, 5, Maths.radians(10), Maths.radians(10), {
             depth: 0,
@@ -111,8 +109,8 @@ class MainGame extends Scene {
         super.init(null);
     }
 
-    public function resources(_patterns_json:Dynamic) {
-        patterns.read(_patterns_json);
+    public function resources(_patterns_config_json:Dynamic) {
+        Patterns.patterns_config = _patterns_config_json;
     }
 
     override public function reset() {
@@ -124,6 +122,7 @@ class MainGame extends Scene {
     }
 
     function ongameover(_) {
+        Patterns.ongameover();
         phys_engine.paused = true;
         game_over = true;
         game_input.unlisten();
@@ -151,11 +150,8 @@ class MainGame extends Scene {
                 reset();
                 Luxe.events.fire('Game.restart');
             case 'test_patterns_json':
-                var test_entity = new Visual({
-                    pos:Luxe.screen.mid.clone()
-                });
-                var tl = patterns.apply('driveby', test_entity);
-                tl.add(new timeline.Trigger(1.2, function(_){trace('complete'); test_entity.destroy();}));
+                var tl = Patterns.arc_shots(ball_spawner);
+                // tl.add(new timeline.Trigger(0.75, function(_){trace('complete'); test_entity.destroy();}));
 
         }
     }
