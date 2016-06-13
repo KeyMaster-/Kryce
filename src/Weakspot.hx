@@ -53,7 +53,7 @@ class Weakspot extends Visual {
             relative_pos.y = _value;
         }
 
-        relative_pos.length = trunc_abs(Maths.clamp(relative_pos.length, 0, 1), deadzone);
+        relative_pos.length = Maths.clamp(relative_pos.length, 0, 1);
         pos.copy_from(relative_pos);
         pos.multiplyScalar(move_radius);
         pos.add(base_pos);

@@ -23,8 +23,7 @@
 
     build : {
       dependencies : {
-        luxe : '*',
-        Delta: '*'
+        luxe : '*'
       }
     },
 

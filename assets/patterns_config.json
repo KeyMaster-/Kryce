@@ -1,8 +1,19 @@
 {
+    "defaults":{
+        "shotspeed":500,
+        "transition_t":0.5
+    },
     "driveby":{
         "windup":0.1,
-        "linear":0.7,
+        "linear":1.0,
         "winddown":0.1,
         "shots":6
+    },
+    "arc_shots":{
+        "windup":0.1,
+        "linear":1.0,
+        "winddown":0.1,
+        "shots":6,
+        "radius":500
     }
 }

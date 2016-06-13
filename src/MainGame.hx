@@ -49,8 +49,8 @@ class MainGame extends Scene {
         // game_input.bind_gamepad_button('right_bumper', 10);
         game_input.bind_gamepad_button('reset', 4); //back
         game_input.bind_gamepad_button('spawn_single_ball', 0);
-        game_input.bind_gamepad_button('spawn_ball_series', 1);
-        game_input.bind_gamepad_button('test_patterns_json', 2);
+        game_input.bind_gamepad_button('driveby', 1);
+        game_input.bind_gamepad_button('arc_shots', 2);
         
         game_input.on(InteractType.down, ondown);
         game_input.on(InteractType.change, onchange);
@@ -72,6 +72,7 @@ class MainGame extends Scene {
 
         Patterns.phys_engine = phys_engine;
         Patterns.scene = this;
+        Patterns.init();
 
         weakspot = new Weakspot(Luxe.screen.mid.x, Luxe.screen.mid.y, 20, 200, 0.15, phys_engine, {
             depth:2,
@@ -110,7 +111,7 @@ class MainGame extends Scene {
     }
 
     public function resources(_patterns_config_json:Dynamic) {
-        Patterns.patterns_config = _patterns_config_json;
+        Patterns.config = _patterns_config_json;
     }
 
     override public function reset() {
@@ -147,12 +148,14 @@ class MainGame extends Scene {
     function ondown(_e:InputEvent) {
         switch(_e.name) {
             case 'start':
-                reset();
-                Luxe.events.fire('Game.restart');
-            case 'test_patterns_json':
-                var tl = Patterns.arc_shots(ball_spawner);
-                // tl.add(new timeline.Trigger(0.75, function(_){trace('complete'); test_entity.destroy();}));
-
+                if(game_over) {
+                    reset();
+                    Luxe.events.fire('Game.restart');
+                }
+            case 'arc_shots':
+                Patterns.arc_shots(ball_spawner);
+            case 'driveby':
+                Patterns.driveby(ball_spawner);
         }
     }
 
