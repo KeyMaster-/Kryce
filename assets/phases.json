@@ -1,0 +1,13 @@
+[
+    {
+        "start":0.0,
+        "one_shot":90,
+        "arc_shots":10
+    },
+    {
+        "start":5.0,
+        "one_shot":50,
+        "arc_shots":40,
+        "driveby":10
+    }
+]

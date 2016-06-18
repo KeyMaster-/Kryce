@@ -1,0 +1,49 @@
+package patterns;
+
+class Phases {
+
+    public static var phases:Array<Phase> = [];
+
+    public static function parse_info(_info:Dynamic) {
+        var json_phases:Array<Dynamic> = cast(_info, Array<Dynamic>);
+
+        for(json_phase in json_phases) {
+            var phase = {
+                start:cast(json_phase.start, Float),
+                probs:[],
+                names:[]
+            }
+
+            var prob_sum:Float = 0.0;
+            for(field in Reflect.fields(json_phase)) {
+                if(field == 'start') continue;
+                var prob:Float = Reflect.getProperty(json_phase, field);
+                prob_sum += prob / 100.0;
+                phase.probs.push(prob_sum);
+                phase.names.push(field);
+            }
+            phases.push(phase);
+            if(prob_sum > 1.0) {
+                trace('Phase has total probabilities > 100%!');
+            }
+            else if(prob_sum < 1.0) {
+                trace('Phase has total probabilities < 100%! May lead to infinite loops and out-of-bounds errors in get_pattern');
+            }
+        }
+    }
+
+    public static function get_rand_pattern(_phase:Phase) {
+        var rnd = Math.random();
+        var idx = 0;
+        while(rnd >= _phase.probs[idx]) {
+            idx++;
+        }
+        return _phase.names[idx];
+    }
+}
+
+typedef Phase = {
+    start:Float,
+    probs:Array<Float>,
+    names:Array<String>
+}

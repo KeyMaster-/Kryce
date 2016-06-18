@@ -12,6 +12,7 @@ import phoenix.geometry.Geometry;
 import phoenix.geometry.Vertex;
 import phoenix.Batcher.PrimitiveType;
 import patterns.Patterns;
+import patterns.Phases;
 
 import luxe.Visual;
 
@@ -48,9 +49,12 @@ class MainGame extends Scene {
         // game_input.bind_gamepad_button('left_bumper', 9);
         // game_input.bind_gamepad_button('right_bumper', 10);
         game_input.bind_gamepad_button('reset', 4); //back
-        game_input.bind_gamepad_button('spawn_single_ball', 0);
-        game_input.bind_gamepad_button('driveby', 1);
-        game_input.bind_gamepad_button('arc_shots', 2);
+
+        #if manual_testing
+            game_input.bind_gamepad_button('one_shot', 0);
+            game_input.bind_gamepad_button('driveby', 1);
+            game_input.bind_gamepad_button('arc_shots', 2);
+        #end
         
         game_input.on(InteractType.down, ondown);
         game_input.on(InteractType.change, onchange);
@@ -61,7 +65,6 @@ class MainGame extends Scene {
         misc_input.on(InteractType.down, ondown);
 
         #if no_gamepad
-            game_input.bind_key('spawn_ball_series', luxe.Input.Key.key_k); //:todo: for testing
             game_input.bind_mouse_range('mouse', InputMap.ScreenAxis.X, 0, 1, true, false, false);
             game_input.bind_mouse_range('mouse', InputMap.ScreenAxis.Y, 0, 1, true, false, false);
             misc_input.bind_key('start', luxe.Input.Key.enter); //:todo: for testing
@@ -110,8 +113,9 @@ class MainGame extends Scene {
         super.init(null);
     }
 
-    public function resources(_patterns_config_json:Dynamic) {
-        Patterns.config = _patterns_config_json;
+    public function resources(_patterns_config:Dynamic, _phases_config:Dynamic) {
+        Patterns.config = _patterns_config;
+        Phases.parse_info(_phases_config);
     }
 
     override public function reset() {
@@ -152,10 +156,14 @@ class MainGame extends Scene {
                     reset();
                     Luxe.events.fire('Game.restart');
                 }
+        #if manual_testing
             case 'arc_shots':
                 Patterns.arc_shots(ball_spawner);
             case 'driveby':
                 Patterns.driveby(ball_spawner);
+            case 'one_shot':
+                Patterns.one_shot(ball_spawner);
+        #end
         }
     }
 

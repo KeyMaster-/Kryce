@@ -4,7 +4,7 @@
     window: {
       width:960,
       height:640,
-      title:'luxe empty project',
+      title:'simple jam wip',
       fullscreen:false,
       resizable:true,
       borderless:false
@@ -12,13 +12,13 @@
   },
 
   project : {
-    name : 'empty',
+    name : 'simple',
     version : '1.0.0',
-    author : 'luxeengine',
+    author : 'keymaster',
 
     app : {
-      name : 'luxe_empty',
-      package : 'com.luxeengine.empty'
+      name : 'simple_jam',
+      package : 'games.keymaster.simple'
     },
 
     build : {
@@ -37,7 +37,7 @@
   if: {
     "mac || windows || linux" : {
       build : {
-        defines : ['project_assets']//['project_assets', 'no_gamepad']  
+        defines : ['project_assets']//, 'manual_testing'] //, 'no_gamepad']  
       }
     }
   }
