@@ -8,8 +8,11 @@ import luxe.collision.data.ShapeCollision;
 
 
 class Ball extends Visual {
+    static var max_bounces:Int = 1;
     public var dyn_shape:DynamicShape;
     var listen_id:String;
+
+    var bounce_count:Int = 0;
 
     public function new(_x:Float, _y:Float, _r:Float, _vx:Float, _vy:Float, _engine:ShapePhysics, ?_options:VisualOptions) {
         if(_options == null) _options = {};
@@ -45,11 +48,18 @@ class Ball extends Visual {
             return;
         }
 
+        if(bounce_count == max_bounces) {
+            return;
+        }
+
         dyn_shape.shape.position.add(_coll.separation);
 
         var dot_product = dyn_shape.vel.dot(_coll.unitVector);
 
-        if(dot_product < 0) dyn_shape.vel.subtract(_coll.unitVector.multiplyScalar(dot_product * 2));
+        if(dot_product < 0) {
+            dyn_shape.vel.subtract(_coll.unitVector.multiplyScalar(dot_product * 2));
+            bounce_count++;
+        }
     }
 
     override public function destroy(?_from_parent:Bool) {

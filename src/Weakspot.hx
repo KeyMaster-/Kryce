@@ -36,9 +36,13 @@ class Weakspot extends Visual {
         pos.copy_from(base_pos);
 
         shape = new Circle(_x, _y, _r);
-        shape.tags.set('destroy_ball', '');
         _phys_engine.statics.push(shape);
         _phys_engine.callbacks.set(shape, oncollision);
+    }
+
+    override public function onreset() {
+        axis_change(0, 0);
+        axis_change(1, 0);
     }
 
     function oncollision(coll:ShapeCollision) {

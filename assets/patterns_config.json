@@ -4,7 +4,7 @@
         "transition_t":0.5
     },
     "driveby":{
-        "windup":0.1,
+        "windup_time":1.0,
         "linear":0.5,
         "winddown":0.1,
         "shots":6,
@@ -29,5 +29,12 @@
         "radius":500,
         "arc_time":1.0,
         "min_angle_delta":0.1
+    },
+    "spread_shot":{
+        "radius":500,
+        "arc_time":1.0,
+        "min_angle_delta":0.2,
+        "shots":5,
+        "spread_angle_range":0.4
     }
 }

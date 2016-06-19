@@ -6,8 +6,15 @@
     },
     {
         "start":5.0,
-        "one_shot":50,
-        "arc_shots":40,
+        "one_shot":60,
+        "spread_shot":30,
+        "arc_shots":10
+    },
+    {
+        "start":15.0,
+        "one_shot":40,
+        "spread_shot":30,
+        "arc_shots":20,
         "driveby":10
     }
 ]

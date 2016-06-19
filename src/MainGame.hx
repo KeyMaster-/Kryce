@@ -54,6 +54,7 @@ class MainGame extends Scene {
             game_input.bind_gamepad_button('one_shot', 0);
             game_input.bind_gamepad_button('driveby', 1);
             game_input.bind_gamepad_button('arc_shots', 2);
+            game_input.bind_gamepad_button('spread_shot', 3);
         #end
         
         game_input.on(InteractType.down, ondown);
@@ -163,11 +164,15 @@ class MainGame extends Scene {
                 Patterns.driveby(ball_spawner);
             case 'one_shot':
                 Patterns.one_shot(ball_spawner);
+            case 'spread_shot':
+                Patterns.spread_shot(ball_spawner);
         #end
         }
     }
 
     function add_walls() {
+
+            //Outer destroying walls
         var shape = Polygon.rectangle(-10 - 2 * ball_radius, 0, 10, Luxe.screen.h + 4 * ball_radius, false);
         shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
@@ -179,6 +184,16 @@ class MainGame extends Scene {
         phys_engine.statics.push(shape);
         shape = Polygon.rectangle(0, Luxe.screen.h + 2 * ball_radius, Luxe.screen.w + 4 * ball_radius, 10, false);
         shape.tags.set('destroy_ball', '');
+        phys_engine.statics.push(shape);
+
+            //Inner "bouncing" walls
+        shape = Polygon.rectangle(-10, 0, 10, Luxe.screen.h, false);
+        phys_engine.statics.push(shape);
+        shape = Polygon.rectangle(Luxe.screen.w, 0, 10, Luxe.screen.h, false);
+        phys_engine.statics.push(shape);
+        shape = Polygon.rectangle(0, -10, Luxe.screen.w, 10, false);
+        phys_engine.statics.push(shape);
+        shape = Polygon.rectangle(0, Luxe.screen.h, Luxe.screen.w, 10, false);
         phys_engine.statics.push(shape);
     }
 
