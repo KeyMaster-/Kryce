@@ -16,9 +16,8 @@
         "start_linear_variance":0.2
     },
     "arc_shots":{
-        "windup":0.1,
         "linear":1.0,
-        "winddown":0.05,
+        "winddown":0.2,
         "shots":6,
         "radius":500,
         "arc_time":1.0,
@@ -27,12 +26,12 @@
     },
     "one_shot":{
         "radius":500,
-        "arc_time":1.0,
+        "arc_time":2.0,
         "min_angle_delta":0.1
     },
     "spread_shot":{
         "radius":500,
-        "arc_time":1.0,
+        "arc_time":2.0,
         "min_angle_delta":0.2,
         "shots":5,
         "spread_angle_range":0.4

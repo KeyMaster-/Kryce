@@ -74,7 +74,6 @@ class Patterns {
 
     public static function arc_shots(_spawner:Visual) {
         var linear:Float = config.arc_shots.linear;
-        var windup:Float = config.arc_shots.windup;
         var winddown:Float = config.arc_shots.winddown;
         var radius:Float = config.arc_shots.radius;
         var shots:Int = config.arc_shots.shots;
@@ -87,24 +86,23 @@ class Patterns {
         var transition_time = transition_to_closest_arc(tl, _spawner, radius, radius);
 
         var seq_helper = new SequenceHelper(transition_time);
-        
+
         var get_func = arc_get.bind(_spawner, Luxe.screen.mid);
         var set_func = arc_set.bind(_spawner, Luxe.screen.mid, radius, _);
 
-        var delta_angle = Luxe.utils.random.sign() * Luxe.utils.random.float(min_angle_delta, max_angle_delta) * Math.PI;
-        var delta_angle_t = arc_time * (Math.abs(delta_angle) / Math.PI);
+        var move_angle_delta:Float = get_rand_angle_delta(min_angle_delta, max_angle_delta);
+        var move_duration:Float = get_arc_duration(move_angle_delta, arc_time);
 
-        tl.add(seq_helper.func(get_func, set_func, timeline.easing.Quad.easeInOut, delta_angle_t).delta(delta_angle));
-        tl.add(seq_helper.func(get_func, set_func, timeline.easing.Quad.easeIn, windup).delta(Math.PI / 20));
-        tl.add(seq_helper.func(get_func, set_func, timeline.easing.Linear.none, linear).delta(Math.PI - Math.PI / 10));
-        tl.add(seq_helper.func(get_func, set_func, timeline.easing.Quad.easeOut, winddown).delta(Math.PI / 20));
+        tl.add(seq_helper.func(get_func, set_func, timeline.easing.Quad.easeIn, move_duration).delta(move_angle_delta));
+        tl.add(seq_helper.func(get_func, set_func, timeline.easing.Linear.none, linear).delta(Maths.sign(move_angle_delta) * (Math.PI - Math.PI / 20)));
+        tl.add(seq_helper.func(get_func, set_func, timeline.easing.Back.easeOut, winddown).delta(Maths.sign(move_angle_delta) * (Math.PI / 20)));
 
         tl.add(new Updater(function(_) {
             _spawner.radians = arc_get(_spawner, Luxe.screen.mid) + Math.PI;
         }, transition_time, seq_helper.cur_t));
 
         for(i in 0...shots) {
-            tl.add(new Trigger(transition_time + delta_angle_t + windup + i * (linear / shots), spawn_ball_at_spawner.bind(_spawner, config.defaults.shotspeed)));
+            tl.add(new Trigger(transition_time + move_duration + i * (linear / shots), spawn_ball_at_spawner.bind(_spawner, config.defaults.shotspeed)));
         }
 
         return tl;
@@ -118,7 +116,7 @@ class Patterns {
 
         var transition_time = transition_to_closest_arc(tl, _spawner, radius, radius);
 
-        var tween_end_t = arc_to(tl, _spawner, transition_time, radius, min_angle_delta, arc_time);
+        var tween_end_t = arc_to(tl, _spawner, transition_time, radius, arc_time, min_angle_delta);
         tl.add(new Trigger(tween_end_t, spawn_ball_at_spawner.bind(_spawner, config.defaults.shotspeed)));
 
         return tl;
@@ -131,12 +129,12 @@ class Patterns {
         var shots:Int = config.spread_shot.shots;
         var spread_angle_range:Float = config.spread_shot.spread_angle_range;
         spread_angle_range *= Math.PI;
-        
+
         var tl = get_timeline();
 
         var transition_time = transition_to_closest_arc(tl, _spawner, radius, radius);
 
-        var tween_end_t = arc_to(tl, _spawner, transition_time, radius, min_angle_delta, arc_time);
+        var tween_end_t = arc_to(tl, _spawner, transition_time, radius, arc_time, min_angle_delta);
 
         for(i in 0...shots) {
             tl.add(new Trigger(tween_end_t, function(_) {
@@ -193,16 +191,24 @@ class Patterns {
         return Math.atan2(_spawner.pos.y - _center.y, _spawner.pos.x - _center.x);
     }
 
-    static function arc_to(_tl:Timeline, _spawner:Visual, _start_t:Float, _radius:Float, _min_angle_delta:Float, _arc_time:Float):Float {
+    static function arc_to(_tl:Timeline, _spawner:Visual, _start_t:Float, _radius:Float, _arc_time:Float, _min_angle_delta:Float, _max_angle_delta:Float = 1.0):Float {
         var get_func = arc_get.bind(_spawner, Luxe.screen.mid);
         var set_func = arc_set.bind(_spawner, Luxe.screen.mid, _radius, _);
 
-        var angle_delta = Luxe.utils.random.sign() * Luxe.utils.random.float(_min_angle_delta, 1.0) * Math.PI; //We want some minimum movement
-        var tween_end_t = _start_t + (Math.abs(angle_delta) / Math.PI) * _arc_time;
+        var angle_delta = get_rand_angle_delta(_min_angle_delta, _max_angle_delta);
+        var tween_end_t = _start_t + get_arc_duration(angle_delta, _arc_time);
         _tl.add(new FuncTween(get_func, set_func, _start_t, tween_end_t, timeline.easing.Quad.easeInOut).delta(angle_delta));
         _tl.add(new PropTween(_spawner, 'radians', _start_t, tween_end_t, timeline.easing.Quad.easeInOut).delta(angle_delta));
 
         return tween_end_t;
+    }
+
+    static function get_rand_angle_delta(_min_angle_delta:Float, _max_angle_delta:Float = 1.0) {
+        return Luxe.utils.random.sign() * Luxe.utils.random.float(_min_angle_delta, _max_angle_delta);
+    }
+
+    static function get_arc_duration(_angle_delta:Float, _arc_time:Float) {
+         return (Math.abs(_angle_delta) / Math.PI) * _arc_time;
     }
 }
 

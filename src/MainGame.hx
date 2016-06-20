@@ -185,16 +185,6 @@ class MainGame extends Scene {
         shape = Polygon.rectangle(0, Luxe.screen.h + 2 * ball_radius, Luxe.screen.w + 4 * ball_radius, 10, false);
         shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
-
-            //Inner "bouncing" walls
-        shape = Polygon.rectangle(-10, 0, 10, Luxe.screen.h, false);
-        phys_engine.statics.push(shape);
-        shape = Polygon.rectangle(Luxe.screen.w, 0, 10, Luxe.screen.h, false);
-        phys_engine.statics.push(shape);
-        shape = Polygon.rectangle(0, -10, Luxe.screen.w, 10, false);
-        phys_engine.statics.push(shape);
-        shape = Polygon.rectangle(0, Luxe.screen.h, Luxe.screen.w, 10, false);
-        phys_engine.statics.push(shape);
     }
 
         //_radius: radius around 0,0; _line_width: total width of segments, half inside radius, half outside

@@ -20,8 +20,6 @@ class Main extends luxe.Game {
 
     override function config(config:GameConfig) {
 
-        config.window.width = 640;
-        config.window.height = 640;
         config.window.fullscreen = false;
 
         config.preload.jsons.push({id:file_path('config.json')});
