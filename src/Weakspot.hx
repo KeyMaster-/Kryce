@@ -13,7 +13,7 @@ class Weakspot extends Visual {
 
     var move_radius:Float;
 
-    var dyn_shape:DynamicShape;
+    var shape:Circle;
 
     public function new(_x:Float, _y:Float, _r:Float, _move_radius:Float, _phys_engine:ShapePhysics, ?_options:VisualOptions) {
         if(_options == null) _options = {};
@@ -21,33 +21,26 @@ class Weakspot extends Visual {
         base_pos = new Vector(_x, _y);
         relative_pos = new Vector(0, 0);
 
-        move_radius = _move_radius;
+        move_radius = _move_radius;        
 
-        dyn_shape = new DynamicShape(new Circle(_x, _y, _r), new Vector(0, 0));
-        _phys_engine.weakspot = dyn_shape;
-        _phys_engine.callbacks.set(dyn_shape.shape, oncollision);
-
-        _options.name = 'weakspot';
+        _options.name = 'Weakspot';
         _options.geometry = Luxe.draw.circle({
-            r:_r / 2,
+            r:_r,
             x:0,
             y:0
         });
-
-        if(_options.color != null) _options.color.a = 0.5;
         super(_options);
 
         pos.copy_from(base_pos);
+
+        shape = new Circle(_x, _y, _r);
+        _phys_engine.statics.push(shape);
+        _phys_engine.callbacks.set(shape, oncollision);
     }
 
     override public function onreset() {
         axis_change(0, 0);
         axis_change(1, 0);
-    }
-
-    override public function update(_dt:Float) {
-        pos.copy_from(dyn_shape.shape.position);
-
     }
 
     function oncollision(coll:ShapeCollision) {
@@ -63,8 +56,10 @@ class Weakspot extends Visual {
         }
 
         relative_pos.length = Maths.clamp(relative_pos.length, 0, 1);
-        dyn_shape.vel.copy_from(relative_pos);
-        dyn_shape.vel.length *= 400;
+        pos.copy_from(relative_pos);
+        pos.multiplyScalar(move_radius);
+        pos.add(base_pos);
+        shape.position.copy_from(pos);
     }
 
     inline function trunc_abs(_v:Float, _epsilon:Float):Float {

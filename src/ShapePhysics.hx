@@ -10,8 +10,6 @@ class ShapePhysics extends PhysicsEngine {
     public var statics:Array<Shape>;
     public var dynamics:Array<DynamicShape>;
 
-    public var weakspot:DynamicShape;
-
         //Register a callback for a certain shape. Gets called for each collision result between a dynamic and a static
         //In the shape collision, shape1 is always the dynamic involved, and shape2 always the static
     public var callbacks:Map<Shape, ShapeCollision->Void>;
@@ -29,8 +27,6 @@ class ShapePhysics extends PhysicsEngine {
 
         var dt = Luxe.physics.step_delta * Luxe.timescale;
 
-        weakspot.shape.position.add_xyz(weakspot.vel.x * dt, weakspot.vel.y * dt);
-
         var idx:Int = dynamics.length;
         while(idx > 0) {
             idx--;
@@ -43,10 +39,6 @@ class ShapePhysics extends PhysicsEngine {
             dyn.shape.position.add_xyz(dyn.vel.x * dt, dyn.vel.y * dt);
             
             var results = Collision.shapeWithShapes(dyn.shape, statics);
-
-            var weakspot_check = Collision.shapeWithShape(dyn.shape, weakspot.shape);
-            if(weakspot_check != null) results.push(weakspot_check);
-
             for(result in results) {
                 if(callbacks.exists(dyn.shape)) callbacks.get(dyn.shape)(result);
                 if(callbacks.exists(result.shape2)) callbacks.get(result.shape2)(result);
