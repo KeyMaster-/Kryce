@@ -11,19 +11,17 @@ class Weakspot extends Visual {
     var base_pos:Vector;
     var relative_pos:Vector;
 
-    var deadzone:Float;
     var move_radius:Float;
 
     var shape:Circle;
 
-    public function new(_x:Float, _y:Float, _r:Float, _move_radius:Float, _deadzone:Float, _phys_engine:ShapePhysics, ?_options:VisualOptions) {
+    public function new(_x:Float, _y:Float, _r:Float, _move_radius:Float, _phys_engine:ShapePhysics, ?_options:VisualOptions) {
         if(_options == null) _options = {};
 
         base_pos = new Vector(_x, _y);
         relative_pos = new Vector(0, 0);
 
         move_radius = _move_radius;        
-        deadzone = _deadzone;
 
         _options.name = 'Weakspot';
         _options.geometry = Luxe.draw.circle({

@@ -20,11 +20,9 @@ class MainGame extends Scene {
     var game_input:InputMap;
     var misc_input:InputMap;
 
-    var stick_deadzone:Float = 30.0;
-
-    var rotation_radius:Float = 200;
-    var dots_radius:Float = 20;
-    var ball_radius:Float = 20;
+    var rotation_radius:Float = 0.3125;
+    var dots_radius:Float = 15.625;
+    var ball_radius:Float = 15.625;
 
     var weakspot:Weakspot;
 
@@ -76,9 +74,10 @@ class MainGame extends Scene {
 
         Patterns.phys_engine = phys_engine;
         Patterns.scene = this;
+        Patterns.ball_radius = ball_radius;
         Patterns.init();
 
-        weakspot = new Weakspot(Luxe.screen.mid.x, Luxe.screen.mid.y, 20, 200, 0.15, phys_engine, {
+        weakspot = new Weakspot(Main.screen_size / 2, Main.screen_size / 2, ball_radius, rotation_radius * Main.screen_size / 2, phys_engine, {
             depth:2,
             color:new ColorHSV(207, 0.64, 0.95, 1),
             scene:this
@@ -92,18 +91,22 @@ class MainGame extends Scene {
         //red color: ColorHSV(5, 0.93, 0.88, 1)
         //blue color: ColorHSV(207, 0.64, 0.95, 1)
 
-        var circumference = make_circle_geom(rotation_radius, 5, Maths.radians(10), Maths.radians(10), {
+        var circumference = make_circle_geom(rotation_radius * Main.screen_size / 2, 0.025, Maths.radians(10), Maths.radians(10), {
             depth: 0,
             color:new Color(1, 1, 1, 0.5)
         });
-        circumference.transform.pos.copy_from(Luxe.screen.mid);
+        circumference.transform.pos.set_xy(Main.screen_size / 2, Main.screen_size / 2);
+
+        // test_scale_transform = new luxe.Transform();
+
+        // circumference.transform.parent = test_scale_transform;
 
         game_over_text = new Text({
             text:'Game Over! Press start to try again.',
-            point_size:42 * Luxe.screen.device_pixel_ratio,
+            point_size:32 * Luxe.screen.device_pixel_ratio,
             align:TextAlign.center,
             align_vertical:TextAlign.center,
-            pos:Luxe.screen.mid.clone(),
+            pos:Main.mid.clone(),
             depth:100
         });
 
@@ -157,6 +160,7 @@ class MainGame extends Scene {
                     reset();
                     Luxe.events.fire('Game.restart');
                 }
+
         #if manual_testing
             case 'arc_shots':
                 Patterns.arc_shots(ball_spawner);
@@ -187,10 +191,11 @@ class MainGame extends Scene {
         phys_engine.statics.push(shape);
     }
 
-        //_radius: radius around 0,0; _line_width: total width of segments, half inside radius, half outside
+        //_radius: radius around 0,0; _line_width: total width of segments as fraction of radius, half inside radius, half outside
         //_line_theta: arc length of segments, in radians; _gap_theta: arc length of gaps between segmtens, in radians
     function make_circle_geom(_radius:Float, _line_width:Float, _line_theta:Float, _gap_theta:Float, _options:GeometryOptions):Geometry {
         _line_width /= 2; //Line width becomes the offset from the center line, so overall we get _line_width wide segments
+        _line_width *= _radius;
 
         if(_options.batcher == null) _options.batcher = Luxe.renderer.batcher;
         _options.primitive_type = PrimitiveType.triangles;

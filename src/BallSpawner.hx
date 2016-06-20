@@ -27,7 +27,7 @@ class BallSpawner extends Visual {
             batcher:Luxe.renderer.batcher
         });
 
-        var geom_size = 60;
+        var geom_size = 45;
 
         geom.add(new Vertex(new Vector(-geom_size / 2, -geom_size / 2), _options.color));
         geom.add(new Vertex(new Vector(-geom_size / 2, geom_size / 2), _options.color));
@@ -49,7 +49,7 @@ class BallSpawner extends Visual {
     }
 
     override public function onreset() {
-        pos.set_xy(Luxe.screen.mid.x, Luxe.screen.h * 0.1);
+        pos.set_xy(Main.screen_size / 2, Main.screen_size * 0.1);
         radians = Math.PI / 2;
         phase_time = 0;
         phase_idx = 0;

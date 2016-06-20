@@ -1,6 +1,6 @@
 {
     "defaults":{
-        "shotspeed":500,
+        "shotspeed":400,
         "transition_t":0.5
     },
     "driveby":{
@@ -8,29 +8,29 @@
         "linear":0.5,
         "winddown":0.1,
         "shots":6,
-        "start_x":0.75,
-        "start_y":0.1,
-        "windup_delta":0.1,
-        "linear_delta":0.6,
-        "winddown_delta":0.1,
-        "start_linear_variance":0.2
+        "start_x":750,
+        "start_y":100,
+        "windup_delta":100,
+        "linear_delta":600,
+        "winddown_delta":100,
+        "start_linear_variance":200
     },
     "arc_shots":{
         "linear":1.0,
         "winddown":0.2,
         "shots":6,
-        "radius":500,
+        "radius":390,
         "arc_time":1.0,
         "min_angle_delta":0.1,
         "max_angle_delta":0.5
     },
     "one_shot":{
-        "radius":500,
+        "radius":390,
         "arc_time":2.0,
-        "min_angle_delta":0.1
+        "min_angle_delta":0.15
     },
     "spread_shot":{
-        "radius":500,
+        "radius":390,
         "arc_time":2.0,
         "min_angle_delta":0.2,
         "shots":5,
