@@ -19,18 +19,18 @@
         "linear":1.0,
         "winddown":0.2,
         "shots":6,
-        "radius":390,
+        "radius":450,
         "arc_time":1.0,
         "min_angle_delta":0.1,
         "max_angle_delta":0.5
     },
     "one_shot":{
-        "radius":390,
+        "radius":450,
         "arc_time":2.0,
         "min_angle_delta":0.15
     },
     "spread_shot":{
-        "radius":390,
+        "radius":450,
         "arc_time":2.0,
         "min_angle_delta":0.2,
         "shots":5,
