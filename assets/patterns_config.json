@@ -4,15 +4,15 @@
         "transition_t":0.5
     },
     "driveby":{
-        "windup_time":1.0,
+        "windup":0.1,
         "linear":0.5,
         "winddown":0.1,
         "shots":6,
         "start_x":750,
         "start_y":100,
-        "windup_delta":100,
+        "windup_delta":50,
         "linear_delta":600,
-        "winddown_delta":100,
+        "winddown_delta":50,
         "start_linear_variance":200
     },
     "arc_shots":{
@@ -34,6 +34,8 @@
         "arc_time":2.0,
         "min_angle_delta":0.2,
         "shots":5,
-        "spread_angle_range":0.4
+        "spread_angle_range":0.4,
+        "kickback_duration":0.25,
+        "kickback_delta":30
     }
 }

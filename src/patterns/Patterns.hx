@@ -39,7 +39,7 @@ class Patterns {
 
     public static function driveby(_spawner:Visual) {
         var linear:Float = config.driveby.linear;
-        var windup_time:Float = config.driveby.windup_time; // Seconds per normalized screen height, i.e. 1.0 -> takes 1 second to travel the whole screen height
+        var windup:Float = config.driveby.windup; 
         var winddown:Float = config.driveby.winddown;
         var start_x:Float = config.driveby.start_x;
         var start_y:Float = config.driveby.start_y;
@@ -51,21 +51,19 @@ class Patterns {
 
         var tl = get_timeline();
         
+        start_y += Math.random() * start_linear_variance;
+
         transition(tl, _spawner, start_x, start_y, Math.PI);
 
         var seq_helper = new SequenceHelper(config.defaults.transition_t);
 
-        windup_delta += Math.random() * start_linear_variance;
-
-        var windup_duration = (windup_delta / Main.screen_size) * windup_time;
-
-        tl.add(seq_helper.prop(_spawner.pos, 'y', timeline.easing.Quad.easeIn, windup_duration).delta(windup_delta));
+        tl.add(seq_helper.prop(_spawner.pos, 'y', timeline.easing.Quad.easeIn, windup).delta(windup_delta));
         tl.add(seq_helper.prop(_spawner.pos, 'y', timeline.easing.Linear.none, linear).delta(linear_delta));
         tl.add(seq_helper.prop(_spawner.pos, 'y', timeline.easing.Quad.easeOut, winddown).delta(winddown_delta));
 
         for(i in 0...shots) {
             var spawn_y:Float = start_y + windup_delta + i * (linear_delta) / shots;
-            tl.add(new Trigger(config.defaults.transition_t + windup_duration + i * (linear / shots), function(_) {
+            tl.add(new Trigger(config.defaults.transition_t + windup + i * (linear / shots), function(_) {
                 spawn_ball(_spawner.pos.x, spawn_y, Math.PI, config.defaults.shotspeed);
             }));
         }
@@ -128,6 +126,8 @@ class Patterns {
         var arc_time:Float = config.spread_shot.arc_time; //Seconds per pi radians (i.e. 1.0 means a PI radians turn should take 1 second)
         var min_angle_delta:Float = config.spread_shot.min_angle_delta; //Minimum fraction of pi radians to rotate around.
         var shots:Int = config.spread_shot.shots;
+        var kickback_duration:Float = config.spread_shot.kickback_duration;
+        var kickback_delta:Float = config.spread_shot.kickback_delta;
         var spread_angle_range:Float = config.spread_shot.spread_angle_range;
         spread_angle_range *= Math.PI;
 
@@ -143,6 +143,12 @@ class Patterns {
                 spawn_ball(_spawner.pos.x, _spawner.pos.y, shot_angle, config.defaults.shotspeed);
             }));
         }
+
+        var radius_get_func = radius_get.bind(_spawner, Main.mid);
+        var radius_set_func = radius_set.bind(_spawner, Main.mid, _);
+
+        tl.add(new FuncTween(radius_get_func, radius_set_func, tween_end_t, tween_end_t + kickback_duration / 4, timeline.easing.Cubic.easeOut).delta(kickback_delta));
+        tl.add(new FuncTween(radius_get_func, radius_set_func, tween_end_t + kickback_duration / 4, tween_end_t + kickback_duration, timeline.easing.Quart.easeOut).delta(-kickback_delta));
 
         return tl;
     }
@@ -210,6 +216,16 @@ class Patterns {
 
     static function get_arc_duration(_angle_delta:Float, _arc_time:Float) {
          return (Math.abs(_angle_delta) / Math.PI) * _arc_time;
+    }
+
+    static function radius_get(_spawner:Visual, _center:Vector):Float {
+        return Vector.Subtract(_spawner.pos, _center).length;
+    }
+
+    static function radius_set(_spawner:Visual, _center:Vector, _radius:Float):Void {
+        var angle = arc_get(_spawner, _center);
+        _spawner.pos.set_xy(Math.cos(angle) * _radius, Math.sin(angle) * _radius);
+        _spawner.pos.add(_center);
     }
 }
 
