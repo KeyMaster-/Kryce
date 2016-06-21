@@ -65,7 +65,6 @@ class DynamicShape {
         vel = _vel == null ? new Vector() : _vel;
     }
 
-
     public function destroy():Void {
         phys_engine.callbacks.remove(shape);
         destroyed = true;

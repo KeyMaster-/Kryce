@@ -11,9 +11,7 @@ class Ball extends Visual {
     public var dyn_shape:DynamicShape;
     var listen_id:String;
 
-    var bounce_count:Int = 0;
-
-    public function new(_x:Float, _y:Float, _r:Float, _vx:Float, _vy:Float, _engine:ShapePhysics, ?_options:VisualOptions) {
+    public function new(_x:Float, _y:Float, _r:Float, _vx:Float, _vy:Float, _phys_engine:ShapePhysics, ?_options:VisualOptions) {
         if(_options == null) _options = {};
 
         _options.name = 'Ball';
@@ -27,12 +25,12 @@ class Ball extends Visual {
         super(_options);
 
         dyn_shape = new DynamicShape(new Circle(_x, _y, _r), new Vector(_vx, _vy));
-        _engine.callbacks.set(dyn_shape.shape, onshapecollision);
+        _phys_engine.callbacks.set(dyn_shape.shape, onshapecollision);
         add(new ShapeComponent(dyn_shape));
 
         transform.pos.set_xy(_x, _y);
 
-        _engine.dynamics.push(dyn_shape);
+        _phys_engine.dynamics.push(dyn_shape);
 
         listen_id = Luxe.events.listen('Game.restart', game_restart);
     }

@@ -53,6 +53,7 @@ class MainGame extends Scene {
             game_input.bind_gamepad_button('driveby', 1);
             game_input.bind_gamepad_button('arc_shots', 2);
             game_input.bind_gamepad_button('spread_shot', 3);
+            game_input.bind_gamepad_button('laser', 9);
         #end
         
         game_input.on(InteractType.down, ondown);
@@ -85,7 +86,8 @@ class MainGame extends Scene {
 
         ball_spawner = new BallSpawner({
             color: new ColorHSV(5, 0.83, 0.93, 1.0),
-            scene:this
+            scene:this,
+            depth:4
         });
 
         //red color: ColorHSV(5, 0.93, 0.88, 1)
@@ -95,7 +97,7 @@ class MainGame extends Scene {
             depth: 0,
             color:new Color(1, 1, 1, 0.5)
         });
-        circumference.transform.pos.set_xy(Main.screen_size / 2, Main.screen_size / 2);
+        circumference.transform.pos.copy_from(Main.mid);
 
         // test_scale_transform = new luxe.Transform();
 
@@ -170,6 +172,8 @@ class MainGame extends Scene {
                 Patterns.one_shot(ball_spawner);
             case 'spread_shot':
                 Patterns.spread_shot(ball_spawner);
+            case 'laser':
+                Patterns.laser(ball_spawner);
         #end
         }
     }
@@ -177,16 +181,16 @@ class MainGame extends Scene {
     function add_walls() {
 
             //Outer destroying walls
-        var shape = Polygon.rectangle(-10 - 2 * ball_radius, 0, 10, Luxe.screen.h + 4 * ball_radius, false);
+        var shape = Polygon.rectangle(-10 - 2 * ball_radius, 0, 10, Main.screen_size + 4 * ball_radius, false);
         shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
-        shape = Polygon.rectangle(Luxe.screen.w + 2 * ball_radius, 0, 10, Luxe.screen.h + 4 * ball_radius, false);
+        shape = Polygon.rectangle(Main.screen_size + 2 * ball_radius, 0, 10, Main.screen_size + 4 * ball_radius, false);
         shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
-        shape = Polygon.rectangle(0, -10 - 2 * ball_radius, Luxe.screen.w + 4 * ball_radius, 10, false);
+        shape = Polygon.rectangle(0, -10 - 2 * ball_radius, Main.screen_size + 4 * ball_radius, 10, false);
         shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
-        shape = Polygon.rectangle(0, Luxe.screen.h + 2 * ball_radius, Luxe.screen.w + 4 * ball_radius, 10, false);
+        shape = Polygon.rectangle(0, Main.screen_size + 2 * ball_radius, Main.screen_size + 4 * ball_radius, 10, false);
         shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
     }

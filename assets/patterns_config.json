@@ -8,7 +8,7 @@
         "linear":0.5,
         "winddown":0.1,
         "shots":6,
-        "start_x":750,
+        "start_x":850,
         "start_y":100,
         "windup_delta":50,
         "linear_delta":600,
@@ -27,7 +27,7 @@
     "one_shot":{
         "radius":450,
         "arc_time":2.0,
-        "min_angle_delta":0.15
+        "min_angle_delta":0.2
     },
     "spread_shot":{
         "radius":450,
@@ -37,5 +37,19 @@
         "spread_angle_range":0.4,
         "kickback_duration":0.25,
         "kickback_delta":30
+    },
+    "laser":{
+        "radius":450,
+        "arc_time":2.0,
+        "min_angle_delta":0.2,
+        "width":15,
+        "charge_time":0.5,
+        "laser_time":0.3,
+        "cooldown_time":0.05,
+        "scale_start":2.0,
+        "alpha_start":0,
+        "alpha_end":0.6,
+        "spread_angle_range":0.1,
+        "angle_correction_time":0.1
     }
 }

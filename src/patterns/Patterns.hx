@@ -1,6 +1,7 @@
 package patterns;
 
 import Ball;
+import Laser;
 import ShapePhysics;
 import luxe.Visual;
 import luxe.Vector;
@@ -27,7 +28,8 @@ class Patterns {
         patterns = ['driveby' => driveby, 
                     'arc_shots' => arc_shots,
                     'one_shot' => one_shot,
-                    'spread_shot' => spread_shot];
+                    'spread_shot' => spread_shot,
+                    'laser' => laser];
     }
 
     public static function ongameover() {
@@ -153,6 +155,78 @@ class Patterns {
         return tl;
     }
 
+    public static function laser(_spawner:Visual) {
+        var radius:Float = config.laser.radius;
+        var arc_time:Float = config.laser.arc_time; //Seconds per pi radians (i.e. 1.0 means a PI radians turn should take 1 second)
+        var min_angle_delta:Float = config.laser.min_angle_delta; //Minimum fraction of pi radians to rotate around.
+        var width:Float = config.laser.width;
+        var charge_time:Float = config.laser.charge_time;
+        var laser_time:Float = config.laser.laser_time;
+        var cooldown_time:Float = config.laser.cooldown_time;
+        var scale_start:Float = config.laser.scale_start;
+        var alpha_start:Float = config.laser.alpha_start;
+        var alpha_end:Float = config.laser.alpha_end;
+        var angle_correction_time:Float = config.laser.angle_correction_time;
+        var spread_angle_range:Float = config.laser.spread_angle_range;
+        spread_angle_range *= Math.PI;
+
+        var tl = get_timeline();
+
+        var transition_time = transition_to_closest_arc(tl, _spawner, radius, radius);
+
+        var move_angle_delta:Float = get_rand_angle_delta(min_angle_delta);
+        var move_duration:Float = get_arc_duration(move_angle_delta, arc_time);
+
+        var laser_angle_change:Float = Luxe.utils.random.float(-spread_angle_range / 2, spread_angle_range / 2);
+
+        var get_func = arc_get.bind(_spawner, Main.mid);
+        var set_func = arc_set.bind(_spawner, Main.mid, radius, _);
+
+        tl.add(new FuncTween(get_func, set_func, transition_time, transition_time + move_duration, timeline.easing.Quad.easeInOut).delta(move_angle_delta));
+        tl.add(new PropTween(_spawner, 'radians', transition_time, transition_time + move_duration, timeline.easing.Quad.easeInOut).delta(move_angle_delta + laser_angle_change));
+
+        var laser_obj:Laser = new Laser(_spawner.pos.x, _spawner.pos.y, width, _spawner.radians, phys_engine, {
+            scene:scene,
+            depth: 3});
+
+        laser_obj.visible = false;
+
+        var tween_end_t = transition_time + move_duration;
+
+        tl.add(new Trigger(tween_end_t, function(_) {
+            laser_obj.pos.set_xy(_spawner.pos.x, _spawner.pos.y);
+            laser_obj.radians = _spawner.radians;
+            laser_obj.dyn_shape.shape.position.copy_from(laser_obj.pos);
+            laser_obj.dyn_shape.shape.rotation = laser_obj.radians * 180 / Math.PI;
+            laser_obj.visible = true;
+        }));
+
+        tl.add(new PropTween(laser_obj.scale, 'y', tween_end_t, tween_end_t + charge_time, timeline.easing.Cubic.easeOut).from(scale_start).to(1));
+        tl.add(new PropTween(laser_obj.color, 'a', tween_end_t, tween_end_t + charge_time, timeline.easing.Cubic.easeOut).from(alpha_start).to(alpha_end));
+
+        tween_end_t += charge_time;
+
+        tl.add(new Trigger(tween_end_t, function(_) {
+            laser_obj.add_to_physics();
+            laser_obj.color.a = 1;
+        }));
+
+        tween_end_t += laser_time;
+
+        tl.add(new PropTween(laser_obj.color, 'a', tween_end_t, tween_end_t + cooldown_time, timeline.easing.Cubic.easeInOut).to(0));
+
+        tween_end_t += cooldown_time;
+
+        tl.add(new Trigger(tween_end_t, function(_) {
+            laser_obj.destroy();
+        }));
+
+        var end_angle = _spawner.radians + move_angle_delta; //Angle without the laser offset, so it will point to the center as expected by other patterns
+        tl.add(new PropTween(_spawner, 'radians', tween_end_t, tween_end_t + angle_correction_time, timeline.easing.Quad.easeInOut).to(end_angle));
+        
+        return tl;
+    }
+
     static function get_timeline():Timeline {
         var tl = new Timeline();
         timelines.push(tl);
@@ -165,7 +239,9 @@ class Patterns {
     }
 
     static function spawn_ball(_x:Float, _y:Float, _radians:Float, _vel:Float) {
-        return new Ball(_x, _y, ball_radius, Math.cos(_radians) * _vel, Math.sin(_radians) * _vel, phys_engine, {scene:scene});
+        return new Ball(_x, _y, ball_radius, Math.cos(_radians) * _vel, Math.sin(_radians) * _vel, phys_engine, {
+            scene:scene,
+            depth:3});
     }
 
     static function transition(_tl:Timeline, _spawner:Visual, _x:Float, _y:Float, _radians:Float, ?_ease:timeline.FloatTween.TweenFunc, ?_time:Null<Float>) {

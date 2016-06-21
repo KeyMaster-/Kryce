@@ -7,16 +7,20 @@ class Phases {
     public static function parse_info(_info:Dynamic) {
         var json_phases:Array<Dynamic> = cast(_info, Array<Dynamic>);
 
+        var phase_time:Float = 0;
         for(json_phase in json_phases) {
+
             var phase = {
-                start:cast(json_phase.start, Float),
+                start:phase_time,
                 probs:[],
                 names:[]
             }
 
+            phase_time += json_phase.duration;
+
             var prob_sum:Float = 0.0;
             for(field in Reflect.fields(json_phase)) {
-                if(field == 'start') continue;
+                if(field == 'duration') continue;
                 var prob:Float = Reflect.getProperty(json_phase, field);
                 prob_sum += prob / 100.0;
                 phase.probs.push(prob_sum);
