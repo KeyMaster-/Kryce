@@ -1,5 +1,5 @@
-package ;
-import ShapePhysics.DynamicShape;
+package physics;
+import physics.DynamicShape;
 import luxe.Component;
 import luxe.options.ComponentOptions;
 

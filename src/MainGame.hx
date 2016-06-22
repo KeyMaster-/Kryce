@@ -1,6 +1,7 @@
 package ;
 
 import InputMap;
+import physics.ShapePhysics;
 import luxe.Scene;
 import luxe.Color;
 import luxe.Vector;
@@ -254,8 +255,12 @@ class MainGame extends Scene {
 
         var radii = [rotation_radius * Main.screen_size / 2, rotation_radius * Main.screen_size, rotation_radius * 3 * Main.screen_size / 2, Main.screen_size];
         var alphas = ColorMgr.ring_alphas;
+
+        //Use the second-to-last radius for step calculation as it's the last one visible.
+        //Using the same step count for all radii since otherwise there are small gaps between the bands
+        var steps = Luxe.utils.geometry.segments_for_smooth_circle(radii[radii.length - 2]); 
+        
         for(i in 1...radii.length) {
-            var steps = Luxe.utils.geometry.segments_for_smooth_circle(radii[i]); //Use the outer radius to calculate steps
             var theta = 2 * Math.PI / steps;
 
             var c = Math.cos(theta);

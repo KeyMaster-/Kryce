@@ -2,7 +2,7 @@ package patterns;
 
 import Ball;
 import Laser;
-import ShapePhysics;
+import physics.ShapePhysics;
 import luxe.Visual;
 import luxe.Vector;
 import luxe.Scene;

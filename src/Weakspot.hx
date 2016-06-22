@@ -1,5 +1,5 @@
 package ;
-import ShapePhysics.DynamicShape;
+import physics.ShapePhysics;
 import luxe.Vector;
 import luxe.Visual;
 import luxe.options.VisualOptions;

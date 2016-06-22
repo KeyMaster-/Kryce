@@ -1,4 +1,5 @@
-package ;
+package physics;
+import physics.DynamicShape;
 import luxe.Physics.PhysicsEngine;
 import luxe.collision.Collision;
 import luxe.collision.shapes.Shape;
@@ -36,7 +37,7 @@ class ShapePhysics extends PhysicsEngine {
                 continue;
             }
 
-            dyn.shape.position.add_xyz(dyn.vel.x * dt, dyn.vel.y * dt);
+            dyn.update(dt);
             
             var results = Collision.shapeWithShapes(dyn.shape, statics);
             for(result in results) {
@@ -48,25 +49,5 @@ class ShapePhysics extends PhysicsEngine {
                 }
             }
         }
-    }
-}
-
-class DynamicShape {
-    @:allow(ShapePhysics)
-    static var phys_engine:ShapePhysics;
-
-    public var shape:Shape;
-    public var vel:Vector;
-
-    public var destroyed:Bool = false;
-
-    public function new(_shape:Shape, ?_vel:Vector) {
-        shape = _shape;
-        vel = _vel == null ? new Vector() : _vel;
-    }
-
-    public function destroy():Void {
-        phys_engine.callbacks.remove(shape);
-        destroyed = true;
     }
 }
