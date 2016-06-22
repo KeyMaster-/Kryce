@@ -19,6 +19,7 @@ class Main extends luxe.Game {
     var user_config:JSONResource;
     var patterns_config:JSONResource;
     var phases_config:JSONResource;
+    var colors_config:JSONResource;
 
     var game:MainGame;
 
@@ -29,6 +30,7 @@ class Main extends luxe.Game {
         config.preload.jsons.push({id:file_path('config.json')});
         config.preload.jsons.push({id:file_path('assets/patterns_config.json')});
         config.preload.jsons.push({id:file_path('assets/phases.json')});
+        config.preload.jsons.push({id:file_path('assets/colors.json')});
 
         return config;
 
@@ -44,12 +46,16 @@ class Main extends luxe.Game {
         user_config = Luxe.resources.json(file_path('config.json'));
         patterns_config = Luxe.resources.json(file_path('assets/patterns_config.json'));
         phases_config = Luxe.resources.json(file_path('assets/phases.json'));
+        colors_config = Luxe.resources.json(file_path('assets/colors.json'));
 
         input = new InputMap();
         input.bind_gamepad_button('reload_config', 11); //dpad up
         input.bind_gamepad_button('reload_game_info', 14); //dpad right
 
         input.on(InteractType.down, ondown);
+        
+        ColorMgr.init();
+        ColorMgr.resources(colors_config.asset.json);
 
         game = new MainGame();
         Luxe.scene = game;
@@ -100,6 +106,12 @@ class Main extends luxe.Game {
             depth:100
         });
 
+        // Luxe.renderer.blend_equation(phoenix.Batcher.BlendEquation.subtract);
+        // Luxe.renderer.blend_mode(phoenix.Batcher.BlendMode.one, phoenix.Batcher.BlendMode.one);
+
+        // Luxe.renderer.blend_equation_separate(phoenix.Batcher.BlendEquation.subtract, phoenix.Batcher.BlendEquation.add);
+        // Luxe.renderer.blend_mode_separate(phoenix.Batcher.BlendMode.src_alpha, phoenix.Batcher.BlendMode.src_alpha, phoenix.Batcher.BlendMode.one, phoenix.Batcher.BlendMode.zero);
+
         // Luxe.on(luxe.Ev.gamepaddown, function(_e:GamepadEvent){trace(_e.button);});
     } //ready
 
@@ -123,6 +135,10 @@ class Main extends luxe.Game {
         switch(_e.name) {
             case 'reload_config':
                 user_config.reload().then(function(res:JSONResource) {trace(res.asset.json); user_config = res;});
+                colors_config.reload().then(function(res:JSONResource) {
+                    colors_config = res;
+                    ColorMgr.resources(colors_config.asset.json);
+                });
             case 'reload_game_info':
                 patterns_config.reload().then(function(res:JSONResource) {
                     patterns_config = res;

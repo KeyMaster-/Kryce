@@ -187,7 +187,8 @@ class Patterns {
 
         var laser_obj:Laser = new Laser(_spawner.pos.x, _spawner.pos.y, width, _spawner.radians, phys_engine, {
             scene:scene,
-            depth: 3});
+            depth: 3,
+            color: ColorMgr.laser});
 
         laser_obj.visible = false;
 
@@ -221,7 +222,9 @@ class Patterns {
             laser_obj.destroy();
         }));
 
-        var end_angle = _spawner.radians + move_angle_delta; //Angle without the laser offset, so it will point to the center as expected by other patterns
+        //Angle without the laser offset, so it will point to the center as expected by other patterns
+        //Uses arc_get since _spawner.radians may still not point towards the center yet. We have our transition_to_closest_arc in the timeline, but it wasn't executed yet!
+        var end_angle = arc_get(_spawner, Main.mid) + Math.PI + move_angle_delta; 
         tl.add(new PropTween(_spawner, 'radians', tween_end_t, tween_end_t + angle_correction_time, timeline.easing.Quad.easeInOut).to(end_angle));
         
         return tl;
@@ -241,7 +244,8 @@ class Patterns {
     static function spawn_ball(_x:Float, _y:Float, _radians:Float, _vel:Float) {
         return new Ball(_x, _y, ball_radius, Math.cos(_radians) * _vel, Math.sin(_radians) * _vel, phys_engine, {
             scene:scene,
-            depth:3});
+            depth:3,
+            color:ColorMgr.ball});
     }
 
     static function transition(_tl:Timeline, _spawner:Visual, _x:Float, _y:Float, _radians:Float, ?_ease:timeline.FloatTween.TweenFunc, ?_time:Null<Float>) {

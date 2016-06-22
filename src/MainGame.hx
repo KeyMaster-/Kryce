@@ -80,12 +80,12 @@ class MainGame extends Scene {
 
         weakspot = new Weakspot(Main.screen_size / 2, Main.screen_size / 2, ball_radius, rotation_radius * Main.screen_size / 2, phys_engine, {
             depth:2,
-            color:new ColorHSV(207, 0.64, 0.95, 1),
+            color:ColorMgr.player,
             scene:this
         });
 
         ball_spawner = new BallSpawner({
-            color: new ColorHSV(5, 0.83, 0.93, 1.0),
+            color:ColorMgr.spawner,
             scene:this,
             depth:4
         });
@@ -113,6 +113,20 @@ class MainGame extends Scene {
         });
 
         game_over_text.visible = false;
+
+        Luxe.draw.box({
+            x:0,
+            y:0,
+            w:Main.screen_size,
+            h:Main.screen_size,
+            depth: -1,
+            color:ColorMgr.first_ring
+        });
+
+        var mask = draw_rings_mask({
+            depth: 5
+        });
+        mask.transform.pos.copy_from(Main.mid);
 
         Luxe.events.listen('Game.over', ongameover);
 
@@ -231,4 +245,58 @@ class MainGame extends Scene {
 
         return circle;
     }
+
+        //Using the repeated rotation algorithm from this page: http://slabode.exofire.net/circle_draw.shtml
+    function draw_rings_mask(_options:GeometryOptions):Geometry {
+        if(_options.batcher == null) _options.batcher = Luxe.renderer.batcher;
+        _options.primitive_type = PrimitiveType.triangles;
+        var geom = new Geometry(_options);
+
+        var radii = [rotation_radius * Main.screen_size / 2, rotation_radius * Main.screen_size, rotation_radius * 3 * Main.screen_size / 2, Main.screen_size];
+        var alphas = ColorMgr.ring_alphas;
+        for(i in 1...radii.length) {
+            var steps = Luxe.utils.geometry.segments_for_smooth_circle(radii[i]); //Use the outer radius to calculate steps
+            var theta = 2 * Math.PI / steps;
+
+            var c = Math.cos(theta);
+            var s = Math.sin(theta);
+            var tmp:Float = 0;
+
+            var x_inner = radii[i - 1];
+            var y_inner = 0.0;
+            var x_outer = radii[i];
+            var y_outer = 0.0;
+
+            var inner = new Vector(x_inner, y_inner);
+            var outer = new Vector(x_outer, y_outer);
+
+            var color = new Color(0, 0, 0, alphas[i - 1]);
+
+            for(n in 0...steps) {
+                geom.add(new Vertex(inner, color));
+                geom.add(new Vertex(outer, color));
+
+                //rotate the outer point
+                tmp = x_outer;
+                x_outer = c * x_outer - s * y_outer;
+                y_outer = s * tmp + c * y_outer;
+
+                outer = new Vector(x_outer, y_outer);
+                geom.add(new Vertex(outer, color)); //First tri complete
+
+                geom.add(new Vertex(inner, color));
+                geom.add(new Vertex(outer, color));
+                
+                //rotate inner point
+                tmp = x_inner;
+                x_inner = c * x_inner - s * y_inner;
+                y_inner = s * tmp + c * y_inner;
+
+                inner = new Vector(x_inner, y_inner);
+                geom.add(new Vertex(inner, color)); //Second tri complete
+            } //for steps
+        } //for all radii
+
+        return geom;
+    } //draw_rings_mask
 }
