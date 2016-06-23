@@ -249,7 +249,7 @@ class Patterns {
 
         var laser_obj:Laser = new Laser(_spawner.pos.x, _spawner.pos.y, width, _spawner.radians, phys_engine, {
             scene:scene,
-            depth: 3,
+            depth: 2,
             color: ColorMgr.laser});
 
         laser_obj.visible = false;
@@ -333,7 +333,7 @@ class Patterns {
     static function make_bullet(_phys_shape:DynamicShape):Bullet {
         return new Bullet(_phys_shape, phys_engine, {
             scene:scene,
-            depth:3,
+            depth:2,
             color:ColorMgr.bullet
         });
     }

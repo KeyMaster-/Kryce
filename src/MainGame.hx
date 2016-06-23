@@ -35,6 +35,8 @@ class MainGame extends Scene {
 
     var game_over_text:Text;
 
+    var timer:Timer;
+
     public function new() {
         super('MainGame');
     }
@@ -77,7 +79,7 @@ class MainGame extends Scene {
         add_walls();
 
         weakspot = new Weakspot(Main.screen_size / 2, Main.screen_size / 2, ball_radius, rotation_radius * Main.screen_size / 2, phys_engine, {
-            depth:2,
+            depth:1,
             color:ColorMgr.player,
             scene:this
         });
@@ -85,7 +87,7 @@ class MainGame extends Scene {
         ball_spawner = new AttackSpawner({
             color:ColorMgr.spawner,
             scene:this,
-            depth:4
+            depth:3
         });
 
         Patterns.phys_engine = phys_engine;
@@ -127,13 +129,20 @@ class MainGame extends Scene {
         });
 
         var mask = draw_rings_mask({
-            depth: 5
+            depth: 4
         });
         mask.transform.pos.copy_from(Main.mid);
+
+        timer = new Timer(rotation_radius, this);
 
         Luxe.events.listen('Game.over', ongameover);
 
         super.init(null);
+    }
+
+    override public function update(_dt:Float) {
+        super.update(_dt);
+        timer.update(_dt);
     }
 
     public function resources(_patterns_config:Dynamic, _phases_config:Dynamic) {

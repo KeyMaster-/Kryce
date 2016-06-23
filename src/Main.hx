@@ -32,6 +32,8 @@ class Main extends luxe.Game {
         config.preload.jsons.push({id:file_path('assets/phases.json')});
         config.preload.jsons.push({id:file_path('assets/colors.json')});
 
+        config.preload.fonts.push({id:'assets/fonts/kontanter.fnt'});
+
         return config;
 
     } //config
