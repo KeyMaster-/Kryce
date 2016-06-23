@@ -7,6 +7,7 @@ class StraightLineBullet extends DynamicShape {
     public function new(_shape:Shape, ?_vel:Vector) {
         super(_shape);
         vel = _vel == null ? new Vector() : _vel;
+        shape.rotation = (180 / Math.PI) * vel.angle2D;
     }
 
     override public function update(_dt:Float) {

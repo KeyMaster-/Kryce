@@ -38,6 +38,17 @@
         "kickback_duration":0.25,
         "kickback_delta":30
     },
+    "circ_shots":{
+        "radius":390,
+        "arc_time":2.0,
+        "min_angle_delta":0.2,
+        "shots":5,
+        "spread_angle_range":0.4,
+        "magnitude":50,
+        "period":1.3,
+        "shot_interval":0.1,
+        "angle_correction_time":0.1
+    },
     "laser":{
         "radius":390,
         "arc_time":2.0,

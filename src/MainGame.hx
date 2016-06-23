@@ -55,6 +55,7 @@ class MainGame extends Scene {
             game_input.bind_gamepad_button('arc_shots', 2);
             game_input.bind_gamepad_button('spread_shot', 3);
             game_input.bind_gamepad_button('laser', 9);
+            game_input.bind_gamepad_button('circ_shots', 10);
         #end
         
         game_input.on(InteractType.down, ondown);
@@ -189,6 +190,8 @@ class MainGame extends Scene {
                 Patterns.spread_shot(ball_spawner);
             case 'laser':
                 Patterns.laser(ball_spawner);
+            case 'circ_shots':
+                Patterns.circ_shots(ball_spawner);
         #end
         }
     }

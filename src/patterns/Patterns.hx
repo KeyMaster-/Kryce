@@ -29,6 +29,7 @@ class Patterns {
                     'arc_shots' => arc_shots,
                     'one_shot' => one_shot,
                     'spread_shot' => spread_shot,
+                    'circ_shots' => circ_shots,
                     'laser' => laser];
     }
 
@@ -117,7 +118,7 @@ class Patterns {
 
         var transition_time = transition_to_closest_arc(tl, _spawner, radius, radius);
 
-        var tween_end_t = arc_to(tl, _spawner, transition_time, radius, arc_time, min_angle_delta);
+        var tween_end_t = arc_to(tl, _spawner, radius, transition_time, arc_time, min_angle_delta);
         tl.add(new Trigger(tween_end_t, spawn_ball_at_spawner.bind(_spawner, config.defaults.shotspeed)));
 
         return tl;
@@ -137,7 +138,7 @@ class Patterns {
 
         var transition_time = transition_to_closest_arc(tl, _spawner, radius, radius);
 
-        var tween_end_t = arc_to(tl, _spawner, transition_time, radius, arc_time, min_angle_delta);
+        var tween_end_t = arc_to(tl, _spawner, radius, transition_time, arc_time, min_angle_delta);
 
         for(i in 0...shots) {
             tl.add(new Trigger(tween_end_t, function(_) {
@@ -151,6 +152,50 @@ class Patterns {
 
         tl.add(new FuncTween(radius_get_func, radius_set_func, tween_end_t, tween_end_t + kickback_duration / 4, timeline.easing.Cubic.easeOut).delta(kickback_delta));
         tl.add(new FuncTween(radius_get_func, radius_set_func, tween_end_t + kickback_duration / 4, tween_end_t + kickback_duration, timeline.easing.Quart.easeOut).delta(-kickback_delta));
+
+        return tl;
+    }
+
+    public static function circ_shots(_spawner:Visual) {
+        var radius:Float = config.circ_shots.radius;
+        var arc_time:Float = config.circ_shots.arc_time;
+        var min_angle_delta:Float = config.circ_shots.min_angle_delta;
+        var shots:Int = config.circ_shots.shots;
+        var shot_interval:Float = config.circ_shots.shot_interval;
+        var magnitude:Float = config.circ_shots.magnitude;
+        var period:Float = config.circ_shots.period;
+        var angle_correction_time:Float = config.circ_shots.angle_correction_time;
+        var spread_angle_range:Float = config.circ_shots.spread_angle_range;
+        spread_angle_range *= Math.PI;
+
+        var tl = get_timeline();
+
+        var transition_time = transition_to_closest_arc(tl, _spawner, radius, radius);
+
+        var move_angle_delta = get_rand_angle_delta(min_angle_delta);
+        var move_duration = get_arc_duration(move_angle_delta, arc_time);
+
+        var tween_end_t = transition_time + move_duration;
+
+        var get_func = arc_get.bind(_spawner, Main.mid);
+        var set_func = arc_set.bind(_spawner, Main.mid, radius, _);
+
+        tl.add(new FuncTween(get_func, set_func, transition_time, tween_end_t, timeline.easing.Quad.easeInOut).delta(move_angle_delta));
+        tl.add(new PropTween(_spawner, 'radians', transition_time, tween_end_t, timeline.easing.Quad.easeInOut).delta(move_angle_delta - (spread_angle_range / 2))); //Tween to the start angle of the first shots
+
+        tl.add(new PropTween(_spawner, 'radians', tween_end_t, tween_end_t + shot_interval * shots, timeline.easing.Linear.none).delta(spread_angle_range));
+
+        for(i in 0...shots) {
+            tl.add(new Trigger(tween_end_t + shot_interval * i, function(_) {
+                // var shot_angle = _spawner.radians - (spread_angle_range / 2) + i * (spread_angle_range / (shots - 1));
+                // spawn_sine_shot(_spawner.pos.x, _spawner.pos.y, shot_angle, config.defaults.shotspeed, magnitude, period);
+                spawn_sine_shot(_spawner.pos.x, _spawner.pos.y, _spawner.radians, config.defaults.shotspeed, magnitude, period);
+            }));
+        }
+
+        tween_end_t += shot_interval * shots;
+
+        tl.add(new PropTween(_spawner, 'radians', tween_end_t, tween_end_t + angle_correction_time, timeline.easing.Quad.easeInOut).delta(-spread_angle_range / 2));
 
         return tl;
     }
@@ -174,16 +219,12 @@ class Patterns {
 
         var transition_time = transition_to_closest_arc(tl, _spawner, radius, radius);
 
-        var move_angle_delta:Float = get_rand_angle_delta(min_angle_delta);
-        var move_duration:Float = get_arc_duration(move_angle_delta, arc_time);
+        var move_angle_delta = get_rand_angle_delta(min_angle_delta);
+        var move_duration = get_arc_duration(move_angle_delta, arc_time);
 
-        var laser_angle_change:Float = Luxe.utils.random.float(-spread_angle_range / 2, spread_angle_range / 2);
+        var laser_angle_change = Luxe.utils.random.float(-spread_angle_range / 2, spread_angle_range / 2);
 
-        var get_func = arc_get.bind(_spawner, Main.mid);
-        var set_func = arc_set.bind(_spawner, Main.mid, radius, _);
-
-        tl.add(new FuncTween(get_func, set_func, transition_time, transition_time + move_duration, timeline.easing.Quad.easeInOut).delta(move_angle_delta));
-        tl.add(new PropTween(_spawner, 'radians', transition_time, transition_time + move_duration, timeline.easing.Quad.easeInOut).delta(move_angle_delta + laser_angle_change));
+        arc_to_specified(tl, _spawner, radius, move_angle_delta, transition_time, move_duration);
 
         var laser_obj:Laser = new Laser(_spawner.pos.x, _spawner.pos.y, width, _spawner.radians, phys_engine, {
             scene:scene,
@@ -242,7 +283,19 @@ class Patterns {
     }
 
     static function spawn_ball(_x:Float, _y:Float, _radians:Float, _vel:Float) {
-        return new Ball(_x, _y, ball_radius, Math.cos(_radians) * _vel, Math.sin(_radians) * _vel, phys_engine, {
+        var shape = Ball.get_collision_shape(_x, _y);
+        var phys_shape = new physics.StraightLineBullet(shape, new Vector(Math.cos(_radians) * _vel, Math.sin(_radians) * _vel));
+
+        return new Ball(phys_shape, phys_engine, {
+            scene:scene,
+            depth:3,
+            color:ColorMgr.ball});
+    }
+
+    static function spawn_sine_shot(_x:Float, _y:Float, _radians:Float, _vel:Float, _magnitude:Float, _period:Float) {
+        var shape = Ball.get_collision_shape(_x, _y);
+        var phys_shape = new physics.SineWaveBullet(shape, new Vector(Math.cos(_radians) * _vel, Math.sin(_radians) * _vel), _magnitude, _period);
+        return new Ball(phys_shape, phys_engine, {
             scene:scene,
             depth:3,
             color:ColorMgr.ball});
@@ -278,15 +331,21 @@ class Patterns {
         return Math.atan2(_spawner.pos.y - _center.y, _spawner.pos.x - _center.x);
     }
 
-    static function arc_to(_tl:Timeline, _spawner:Visual, _start_t:Float, _radius:Float, _arc_time:Float, _min_angle_delta:Float, _max_angle_delta:Float = 1.0):Float {
+    static function arc_to(_tl:Timeline, _spawner:Visual, _radius:Float, _start_t:Float, _arc_time:Float, _min_angle_delta:Float, _max_angle_delta:Float = 1.0):Float {
+        var angle_delta = get_rand_angle_delta(_min_angle_delta, _max_angle_delta);
+        var duration = get_arc_duration(angle_delta, _arc_time);
+
+        return arc_to_specified(_tl, _spawner, _radius, angle_delta, _start_t, duration);
+    }
+
+    static function arc_to_specified(_tl:Timeline, _spawner:Visual, _radius:Float, _angle_delta:Float, _start_t:Float, _duration:Float):Float {
+        var tween_end_t = _start_t + _duration;
+
         var get_func = arc_get.bind(_spawner, Main.mid);
         var set_func = arc_set.bind(_spawner, Main.mid, _radius, _);
 
-        var angle_delta = get_rand_angle_delta(_min_angle_delta, _max_angle_delta);
-        var tween_end_t = _start_t + get_arc_duration(angle_delta, _arc_time);
-        _tl.add(new FuncTween(get_func, set_func, _start_t, tween_end_t, timeline.easing.Quad.easeInOut).delta(angle_delta));
-        _tl.add(new PropTween(_spawner, 'radians', _start_t, tween_end_t, timeline.easing.Quad.easeInOut).delta(angle_delta));
-
+        _tl.add(new FuncTween(get_func, set_func, _start_t, tween_end_t, timeline.easing.Quad.easeInOut).delta(_angle_delta));
+        _tl.add(new PropTween(_spawner, 'radians', _start_t, tween_end_t, timeline.easing.Quad.easeInOut).delta(_angle_delta));
         return tween_end_t;
     }
 
