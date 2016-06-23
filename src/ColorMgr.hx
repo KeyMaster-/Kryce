@@ -2,7 +2,7 @@ package ;
 import luxe.Color;
 
 class ColorMgr {
-    public static var ball:Color;
+    public static var bullet:Color;
     public static var laser:Color;
     public static var player:Color;
     public static var first_ring:Color;
@@ -11,7 +11,7 @@ class ColorMgr {
     public static var spawner:Color;
 
     public static function init() {
-        ball = new Color();
+        bullet = new Color();
         laser = new Color();
         player = new Color();
         first_ring = new Color();
@@ -20,7 +20,7 @@ class ColorMgr {
     }
 
     public static function resources(_colors_json:Dynamic):Void {
-        ball.rgb(Std.parseInt('0x' + _colors_json.ball));
+        bullet.rgb(Std.parseInt('0x' + _colors_json.bullet));
         laser.rgb(Std.parseInt('0x' + _colors_json.laser));
         player.rgb(Std.parseInt('0x' + _colors_json.player));
         first_ring.rgb(Std.parseInt('0x' + _colors_json.first_ring));

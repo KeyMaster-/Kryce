@@ -29,7 +29,7 @@ class MainGame extends Scene {
 
     var phys_engine:ShapePhysics;
 
-    var ball_spawner:BallSpawner;
+    var ball_spawner:AttackSpawner;
 
     var game_over:Bool = false;
 
@@ -56,6 +56,7 @@ class MainGame extends Scene {
             game_input.bind_gamepad_button('spread_shot', 3);
             game_input.bind_gamepad_button('laser', 9);
             game_input.bind_gamepad_button('circ_shots', 10);
+            game_input.bind_gamepad_button('one_hunter', 13);
         #end
         
         game_input.on(InteractType.down, ondown);
@@ -75,22 +76,22 @@ class MainGame extends Scene {
         phys_engine = Luxe.physics.add_engine(ShapePhysics);
         add_walls();
 
-        Patterns.phys_engine = phys_engine;
-        Patterns.scene = this;
-        Patterns.ball_radius = ball_radius;
-        Patterns.init();
-
         weakspot = new Weakspot(Main.screen_size / 2, Main.screen_size / 2, ball_radius, rotation_radius * Main.screen_size / 2, phys_engine, {
             depth:2,
             color:ColorMgr.player,
             scene:this
         });
 
-        ball_spawner = new BallSpawner({
+        ball_spawner = new AttackSpawner({
             color:ColorMgr.spawner,
             scene:this,
             depth:4
         });
+
+        Patterns.phys_engine = phys_engine;
+        Patterns.scene = this;
+        Patterns.weakspot = weakspot;
+        Patterns.init();
 
         //red color: ColorHSV(5, 0.93, 0.88, 1)
         //blue color: ColorHSV(207, 0.64, 0.95, 1)
@@ -186,6 +187,8 @@ class MainGame extends Scene {
                 Patterns.driveby(ball_spawner);
             case 'one_shot':
                 Patterns.one_shot(ball_spawner);
+            case 'one_hunter':
+                Patterns.one_hunter(ball_spawner);
             case 'spread_shot':
                 Patterns.spread_shot(ball_spawner);
             case 'laser':

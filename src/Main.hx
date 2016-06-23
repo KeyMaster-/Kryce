@@ -106,12 +106,6 @@ class Main extends luxe.Game {
             depth:100
         });
 
-        // Luxe.renderer.blend_equation(phoenix.Batcher.BlendEquation.subtract);
-        // Luxe.renderer.blend_mode(phoenix.Batcher.BlendMode.one, phoenix.Batcher.BlendMode.one);
-
-        // Luxe.renderer.blend_equation_separate(phoenix.Batcher.BlendEquation.subtract, phoenix.Batcher.BlendEquation.add);
-        // Luxe.renderer.blend_mode_separate(phoenix.Batcher.BlendMode.src_alpha, phoenix.Batcher.BlendMode.src_alpha, phoenix.Batcher.BlendMode.one, phoenix.Batcher.BlendMode.zero);
-
         // Luxe.on(luxe.Ev.gamepaddown, function(_e:GamepadEvent){trace(_e.button);});
     } //ready
 
@@ -121,6 +115,26 @@ class Main extends luxe.Game {
 
     override public function update(dt:Float) {
         Timelines.step(dt);
+
+        // var hsv_bg = ColorMgr.first_ring.toColorHSV();
+        // hsv_bg.h += 360 * dt / 5;
+        // ColorMgr.first_ring.fromColorHSV(hsv_bg);
+
+        // var hsv_bullet = ColorMgr.bullet.toColorHSV();
+        // hsv_bullet.h += 360 * dt / 5;
+        // ColorMgr.bullet.fromColorHSV(hsv_bullet);
+
+        // var hsv_laser = ColorMgr.laser.toColorHSV();
+        // hsv_laser.h += 360 * dt / 5;
+        // ColorMgr.laser.fromColorHSV(hsv_laser);
+
+        // var hsv_spawner = ColorMgr.spawner.toColorHSV();
+        // hsv_spawner.h += 360 * dt / 5;
+        // ColorMgr.spawner.fromColorHSV(hsv_spawner);
+
+        // var hsv_player = ColorMgr.player.toColorHSV();
+        // hsv_player.h += 360 * dt / 5;
+        // ColorMgr.player.fromColorHSV(hsv_player);
     }
 
     override public function onkeyup( e:KeyEvent ) {

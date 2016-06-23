@@ -12,31 +12,39 @@
     },
     {
         "duration":10.0,
-        "one_shot":50,
+        "one_shot":40,
         "spread_shot":35,
-        "laser":15
+        "laser":25
     },
     {
         "duration":10.0,
         "one_shot":25,
-        "arc_shots":35,
+        "arc_shots":25,
         "driveby":20,
-        "laser":20
+        "laser":30
     },
     {
         "duration":10.0,
         "arc_shots":30,
-        "circ_shots":30,
-        "spread_shot":30,
+        "circ_shots":40,
+        "spread_shot":20,
         "laser":10
+    },
+    {
+        "duration":10.0,
+        "one_shot":30,
+        "one_hunter":30,
+        "circ_shots":20,
+        "spread_shot":20
     },
     {
         "duration":10.0,
         "one_shot":20,
         "spread_shot":20,
         "arc_shots":10,
-        "driveby":20,
+        "driveby":10,
         "circ_shots":20,
-        "laser":10
+        "laser":10,
+        "one_hunter":10
     }
 ]

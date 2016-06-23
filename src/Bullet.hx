@@ -15,8 +15,7 @@ import phoenix.Batcher.PrimitiveType;
 import luxe.collision.shapes.Polygon;
 import physics.SineWaveBullet;
 
-class Ball extends Visual {
-    // public var phys_shape:StraightLineBullet;
+class Bullet extends Visual {
     public var phys_shape:DynamicShape;
     var listen_id:String;
 
@@ -26,13 +25,8 @@ class Ball extends Visual {
     public function new(_phys_shape:DynamicShape, _phys_engine:ShapePhysics, ?_options:VisualOptions) {
         if(_options == null) _options = {};
 
-        _options.name = 'Ball';
+        _options.name = 'Bullet';
         _options.name_unique = true;
-        // _options.geometry = Luxe.draw.circle({
-        //     x:0,
-        //     y:0,
-        //     r:_r
-        // });
 
         if(_options.batcher == null) _options.batcher = Luxe.renderer.batcher;
 
@@ -47,9 +41,6 @@ class Ball extends Visual {
 
         super(_options);
 
-        // phys_shape = new StraightLineBullet(new Circle(_x, _y, _r), new Vector(_vx, _vy));
-        // phys_shape = new StraightLineBullet(shape, vel);
-        // phys_shape = new SineWaveBullet(shape, vel, 50, 2);
         phys_shape = _phys_shape;
 
         _phys_engine.callbacks.set(phys_shape.shape, onshapecollision);

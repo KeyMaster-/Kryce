@@ -29,10 +29,16 @@
         "arc_time":2.0,
         "min_angle_delta":0.3
     },
-    "spread_shot":{
+    "one_hunter":{
         "radius":390,
         "arc_time":2.0,
         "min_angle_delta":0.3,
+        "aim_time":0.2
+    },
+    "spread_shot":{
+        "radius":390,
+        "arc_time":2.0,
+        "min_angle_delta":0.4,
         "shots":5,
         "spread_angle_range":0.4,
         "kickback_duration":0.25,

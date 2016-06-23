@@ -1,8 +1,10 @@
 package patterns;
 
-import Ball;
+import Bullet;
 import Laser;
+import Weakspot;
 import physics.ShapePhysics;
+import physics.DynamicShape;
 import luxe.Visual;
 import luxe.Vector;
 import luxe.Scene;
@@ -22,12 +24,13 @@ class Patterns {
 
     public static var phys_engine:ShapePhysics;
     public static var scene:Scene;
-    public static var ball_radius:Float;
+    public static var weakspot:Weakspot;
 
     public static function init() {
         patterns = ['driveby' => driveby, 
                     'arc_shots' => arc_shots,
                     'one_shot' => one_shot,
+                    'one_hunter' => one_hunter,
                     'spread_shot' => spread_shot,
                     'circ_shots' => circ_shots,
                     'laser' => laser];
@@ -67,7 +70,7 @@ class Patterns {
         for(i in 0...shots) {
             var spawn_y:Float = start_y + windup_delta + i * (linear_delta) / shots;
             tl.add(new Trigger(config.defaults.transition_t + windup + i * (linear / shots), function(_) {
-                spawn_ball(_spawner.pos.x, spawn_y, Math.PI, config.defaults.shotspeed);
+                spawn_bullet(_spawner.pos.x, spawn_y, Math.PI, config.defaults.shotspeed);
             }));
         }
 
@@ -104,7 +107,7 @@ class Patterns {
         }, transition_time, seq_helper.cur_t));
 
         for(i in 0...shots) {
-            tl.add(new Trigger(transition_time + move_duration + i * (linear / shots), spawn_ball_at_spawner.bind(_spawner, config.defaults.shotspeed)));
+            tl.add(new Trigger(transition_time + move_duration + i * (linear / shots), spawn_bullet_at_spawner.bind(_spawner, config.defaults.shotspeed)));
         }
 
         return tl;
@@ -119,7 +122,25 @@ class Patterns {
         var transition_time = transition_to_closest_arc(tl, _spawner, radius, radius);
 
         var tween_end_t = arc_to(tl, _spawner, radius, transition_time, arc_time, min_angle_delta);
-        tl.add(new Trigger(tween_end_t, spawn_ball_at_spawner.bind(_spawner, config.defaults.shotspeed)));
+        tl.add(new Trigger(tween_end_t, spawn_bullet_at_spawner.bind(_spawner, config.defaults.shotspeed)));
+
+        return tl;
+    }
+
+    public static function one_hunter(_spawner:Visual) {
+        var radius:Float = config.one_hunter.radius;
+        var arc_time:Float = config.one_hunter.arc_time;
+        var min_angle_delta:Float = config.one_hunter.min_angle_delta;
+        var aim_time:Float = config.one_hunter.aim_time;
+
+        var tl = get_timeline();
+
+        var transition_time = transition_to_closest_arc(tl, _spawner, radius, radius);
+
+        var tween_end_t = arc_to(tl, _spawner, radius, transition_time, arc_time, min_angle_delta);
+        tl.add(new Trigger(tween_end_t, function(_) {
+            spawn_hunter(_spawner.pos.x, _spawner.pos.y, config.defaults.shotspeed, aim_time);
+        }));
 
         return tl;
     }
@@ -143,7 +164,7 @@ class Patterns {
         for(i in 0...shots) {
             tl.add(new Trigger(tween_end_t, function(_) {
                 var shot_angle = _spawner.radians - (spread_angle_range / 2) + i * (spread_angle_range / (shots - 1)); //shots - 1 can lead do div by 0 when shots = 1, but this is not supposed to only shoot once anyway (that's one_shot)
-                spawn_ball(_spawner.pos.x, _spawner.pos.y, shot_angle, config.defaults.shotspeed);
+                spawn_bullet(_spawner.pos.x, _spawner.pos.y, shot_angle, config.defaults.shotspeed);
             }));
         }
 
@@ -243,30 +264,35 @@ class Patterns {
             laser_obj.visible = true;
         }));
 
-        tl.add(new PropTween(laser_obj.scale, 'y', tween_end_t, tween_end_t + charge_time, timeline.easing.Cubic.easeOut).from(scale_start).to(1));
-        tl.add(new PropTween(laser_obj.color, 'a', tween_end_t, tween_end_t + charge_time, timeline.easing.Cubic.easeOut).from(alpha_start).to(alpha_end));
+        //Angle without the laser offset, so it will point to the center as expected by other patterns
+        //Uses arc_get since _spawner.radians may still not point towards the center yet. We have our transition_to_closest_arc in the timeline, but it wasn't executed yet!
+        var end_angle = arc_get(_spawner, Main.mid) + Math.PI + move_angle_delta; 
+        tl.add(new PropTween(_spawner, 'radians', tween_end_t, tween_end_t + angle_correction_time, timeline.easing.Quad.easeInOut).to(end_angle));
+
+        //The spawner is done now and can move on, he laser will tween and activate independently
+
+        var laser_tl = get_timeline();
+        laser_tl.add(new PropTween(laser_obj.scale, 'y', tween_end_t, tween_end_t + charge_time, timeline.easing.Cubic.easeOut).from(scale_start).to(1));
+        laser_tl.add(new PropTween(laser_obj.scale, 'x', tween_end_t, tween_end_t + charge_time, timeline.easing.Cubic.easeOut).from(0).to(Main.screen_size));
+        laser_tl.add(new PropTween(laser_obj.color, 'a', tween_end_t, tween_end_t + charge_time, timeline.easing.Cubic.easeOut).from(alpha_start).to(alpha_end));
 
         tween_end_t += charge_time;
 
-        tl.add(new Trigger(tween_end_t, function(_) {
+        laser_tl.add(new Trigger(tween_end_t, function(_) {
             laser_obj.add_to_physics();
             laser_obj.color.a = 1;
         }));
 
         tween_end_t += laser_time;
 
-        tl.add(new PropTween(laser_obj.color, 'a', tween_end_t, tween_end_t + cooldown_time, timeline.easing.Cubic.easeInOut).to(0));
+        laser_tl.add(new PropTween(laser_obj.color, 'a', tween_end_t, tween_end_t + cooldown_time, timeline.easing.Cubic.easeInOut).to(0));
 
         tween_end_t += cooldown_time;
 
-        tl.add(new Trigger(tween_end_t, function(_) {
+        laser_tl.add(new Trigger(tween_end_t, function(_) {
             laser_obj.destroy();
         }));
 
-        //Angle without the laser offset, so it will point to the center as expected by other patterns
-        //Uses arc_get since _spawner.radians may still not point towards the center yet. We have our transition_to_closest_arc in the timeline, but it wasn't executed yet!
-        var end_angle = arc_get(_spawner, Main.mid) + Math.PI + move_angle_delta; 
-        tl.add(new PropTween(_spawner, 'radians', tween_end_t, tween_end_t + angle_correction_time, timeline.easing.Quad.easeInOut).to(end_angle));
         
         return tl;
     }
@@ -278,27 +304,38 @@ class Patterns {
         return tl;
     }
 
-    static function spawn_ball_at_spawner(_spawner:Visual, _shotspeed:Float, _t:Float) { //t parameter just here so binding is easier
-        spawn_ball(_spawner.pos.x, _spawner.pos.y, _spawner.radians, _shotspeed);
+    static function spawn_bullet_at_spawner(_spawner:Visual, _shotspeed:Float, _t:Float) { //t parameter just here so binding is easier
+        spawn_bullet(_spawner.pos.x, _spawner.pos.y, _spawner.radians, _shotspeed);
     }
 
-    static function spawn_ball(_x:Float, _y:Float, _radians:Float, _vel:Float) {
-        var shape = Ball.get_collision_shape(_x, _y);
-        var phys_shape = new physics.StraightLineBullet(shape, new Vector(Math.cos(_radians) * _vel, Math.sin(_radians) * _vel));
+    static function spawn_bullet(_x:Float, _y:Float, _radians:Float, _speed:Float) {
+        var shape = Bullet.get_collision_shape(_x, _y);
+        var phys_shape = new physics.StraightLineBullet(shape, new Vector(Math.cos(_radians) * _speed, Math.sin(_radians) * _speed));
 
-        return new Ball(phys_shape, phys_engine, {
-            scene:scene,
-            depth:3,
-            color:ColorMgr.ball});
+        return make_bullet(phys_shape);
+    }
+
+    static function spawn_hunter(_x:Float, _y:Float, _speed:Float, _tween_time:Float) {
+        var shape = Bullet.get_collision_shape(_x, _y);
+        var mid_diff = Main.mid.clone();
+        mid_diff.subtract_xyz(_x, _y);
+        var phys_shape = new physics.HunterBullet(shape, weakspot, _speed, mid_diff.length, _tween_time);
+
+        return make_bullet(phys_shape);
     }
 
     static function spawn_sine_shot(_x:Float, _y:Float, _radians:Float, _vel:Float, _magnitude:Float, _period:Float) {
-        var shape = Ball.get_collision_shape(_x, _y);
+        var shape = Bullet.get_collision_shape(_x, _y);
         var phys_shape = new physics.SineWaveBullet(shape, new Vector(Math.cos(_radians) * _vel, Math.sin(_radians) * _vel), _magnitude, _period);
-        return new Ball(phys_shape, phys_engine, {
+        return make_bullet(phys_shape);
+    }
+
+    static function make_bullet(_phys_shape:DynamicShape):Bullet {
+        return new Bullet(_phys_shape, phys_engine, {
             scene:scene,
             depth:3,
-            color:ColorMgr.ball});
+            color:ColorMgr.bullet
+        });
     }
 
     static function transition(_tl:Timeline, _spawner:Visual, _x:Float, _y:Float, _radians:Float, ?_ease:timeline.FloatTween.TweenFunc, ?_time:Null<Float>) {

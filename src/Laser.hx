@@ -25,10 +25,12 @@ class Laser extends Visual {
             batcher:Luxe.renderer.batcher
         });
 
-        geom.add(new Vertex(new Vector(0, -_width / 2), _options.color));
-        geom.add(new Vertex(new Vector(0, _width / 2), _options.color));
-        geom.add(new Vertex(new Vector(Main.screen_size * 2, -_width / 2), _options.color)); //screen_size * 2 so we cover diagonals (2 > sqrt(2))
-        geom.add(new Vertex(new Vector(Main.screen_size * 2, _width / 2), _options.color));
+        var sqrt_2 = Math.sqrt(2);
+            //Using sqrt(2) for x values so that even if this was spawned in the center, th laser would cover the whole diagonal
+        geom.add(new Vertex(new Vector(-sqrt_2, -_width / 2), _options.color));
+        geom.add(new Vertex(new Vector(-sqrt_2, _width / 2), _options.color));
+        geom.add(new Vertex(new Vector(sqrt_2, -_width / 2), _options.color));
+        geom.add(new Vertex(new Vector(sqrt_2, _width / 2), _options.color));
 
         _options.geometry = geom;
 

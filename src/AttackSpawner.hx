@@ -12,7 +12,7 @@ import phoenix.geometry.Vertex;
 import patterns.Patterns;
 import patterns.Phases;
 
-class BallSpawner extends Visual {
+class AttackSpawner extends Visual {
     var cur_timer:snow.api.Timer;
 
     var phase_time:Float = 0.0;
@@ -20,7 +20,7 @@ class BallSpawner extends Visual {
     public function new(?_options:VisualOptions) {
 
         if(_options == null) _options = {};
-        _options.name = 'BallSpawner';
+        _options.name = 'AttackSpawner';
 
         var geom = new Geometry({
             primitive_type:PrimitiveType.triangle_strip,
