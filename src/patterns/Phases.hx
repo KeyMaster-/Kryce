@@ -27,11 +27,14 @@ class Phases {
                 phase.names.push(field);
             }
             phases.push(phase);
-            if(prob_sum > 1.0) {
+            if(prob_sum - 1.0 > 0.0001) {
                 trace('Phase has total probabilities > 100%!');
+                trace(phase);
             }
-            else if(prob_sum < 1.0) {
+            else if(1.0 - prob_sum > 0.0001) {
                 trace('Phase has total probabilities < 100%! May lead to infinite loops and out-of-bounds errors in get_pattern');
+                trace(phase);
+                trace(1 - prob_sum);
             }
         }
     }

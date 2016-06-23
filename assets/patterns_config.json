@@ -27,12 +27,12 @@
     "one_shot":{
         "radius":390,
         "arc_time":2.0,
-        "min_angle_delta":0.2
+        "min_angle_delta":0.3
     },
     "spread_shot":{
         "radius":390,
         "arc_time":2.0,
-        "min_angle_delta":0.2,
+        "min_angle_delta":0.3,
         "shots":5,
         "spread_angle_range":0.4,
         "kickback_duration":0.25,
@@ -41,11 +41,11 @@
     "circ_shots":{
         "radius":390,
         "arc_time":2.0,
-        "min_angle_delta":0.2,
+        "min_angle_delta":0.4,
         "shots":5,
         "spread_angle_range":0.4,
         "magnitude":50,
-        "period":1.3,
+        "period":1.5,
         "shot_interval":0.1,
         "angle_correction_time":0.1
     },

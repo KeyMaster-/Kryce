@@ -12,14 +12,14 @@
     },
     {
         "duration":10.0,
-        "one_shot":45,
-        "arc_shots":30,
-        "laser":25
+        "one_shot":50,
+        "spread_shot":35,
+        "laser":15
     },
     {
         "duration":10.0,
         "one_shot":25,
-        "spread_shot":35,
+        "arc_shots":35,
         "driveby":20,
         "laser":20
     },
@@ -27,7 +27,7 @@
         "duration":10.0,
         "arc_shots":30,
         "circ_shots":30,
-        "driveby":30,
+        "spread_shot":30,
         "laser":10
     },
     {
