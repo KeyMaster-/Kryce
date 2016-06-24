@@ -3,20 +3,21 @@ package patterns;
 class Phases {
 
     public static var phases:Array<Phase> = [];
+    public static var total_duration:Float;
 
     public static function parse_info(_info:Dynamic) {
         var json_phases:Array<Dynamic> = cast(_info, Array<Dynamic>);
 
-        var phase_time:Float = 0;
+        total_duration = 0;
         for(json_phase in json_phases) {
 
             var phase = {
-                start:phase_time,
+                start:total_duration,
                 probs:[],
                 names:[]
             }
 
-            phase_time += json_phase.duration;
+            total_duration += json_phase.duration;
 
             var prob_sum:Float = 0.0;
             for(field in Reflect.fields(json_phase)) {

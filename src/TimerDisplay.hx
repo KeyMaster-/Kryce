@@ -4,9 +4,7 @@ import luxe.Vector;
 import luxe.Text;
 import luxe.Color;
 
-class Timer {
-    public var cur_t:Float = 0.0;
-
+class TimerDisplay {
     var seconds_left:Text;
     var seconds_right:Text;
     var decimals_left:Text;
@@ -84,9 +82,8 @@ class Timer {
         });
     }
 
-    public function update(_dt:Float) {
-        cur_t += _dt;
-        var seconds = Math.floor(cur_t);
+    public function update(_time:Float) {
+        var seconds = Math.floor(_time);
         var seconds_tens = Math.floor(seconds / 10);
         var seconds_ones = seconds - seconds_tens * 10;
 
@@ -94,7 +91,7 @@ class Timer {
         seconds_right.text = Std.string(seconds_ones);
 
         // seconds_text.text = Std.string(seconds);
-        var decimals = cur_t - seconds;
+        var decimals = _time - seconds;
         decimals = Math.floor(decimals * 100); //2 decimal points
 
         var decimals_tens = Math.floor(decimals / 10);

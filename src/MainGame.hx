@@ -22,20 +22,21 @@ class MainGame extends Scene {
     var misc_input:InputMap;
 
     var rotation_radius:Float = 0.3125;
-    var dots_radius:Float = 15.625;
     var ball_radius:Float = 15.625;
 
     var weakspot:Weakspot;
 
     var phys_engine:ShapePhysics;
 
-    var ball_spawner:AttackSpawner;
+    var attack_spawners:Array<AttackSpawner>;
 
     var game_over:Bool = false;
 
     var game_over_text:Text;
 
-    var timer:Timer;
+    var game_time:Float;
+
+    var timer_display:TimerDisplay;
 
     public function new() {
         super('MainGame');
@@ -59,6 +60,7 @@ class MainGame extends Scene {
             game_input.bind_gamepad_button('laser', 9);
             game_input.bind_gamepad_button('circ_shots', 10);
             game_input.bind_gamepad_button('one_hunter', 13);
+            game_input.bind_gamepad_button('advance_time', 12);
         #end
         
         game_input.on(InteractType.down, ondown);
@@ -84,11 +86,7 @@ class MainGame extends Scene {
             scene:this
         });
 
-        ball_spawner = new AttackSpawner({
-            color:ColorMgr.spawner,
-            scene:this,
-            depth:3
-        });
+        attack_spawners = [create_spawner()];
 
         Patterns.phys_engine = phys_engine;
         Patterns.scene = this;
@@ -131,7 +129,7 @@ class MainGame extends Scene {
         });
         mask.transform.pos.copy_from(Main.mid);
 
-        timer = new Timer(rotation_radius, this);
+        timer_display = new TimerDisplay(rotation_radius, this);
 
         Luxe.events.listen('Game.over', ongameover);
 
@@ -142,13 +140,18 @@ class MainGame extends Scene {
         if(game_over) return;
 
         super.update(_dt);
-        timer.update(_dt);
+        game_time += _dt;
+        timer_display.update(game_time);
+
+        if(game_time > attack_spawners.length * Phases.total_duration) {
+            attack_spawners.push(create_spawner());
+        }
     }
 
     public function resources(_user_config:Dynamic, _patterns_config:Dynamic, _phases_config:Dynamic) {
         Patterns.config = _patterns_config;
         Phases.parse_info(_phases_config);
-        timer.resources(_user_config.timer);
+        timer_display.resources(_user_config.timer);
     }
 
     override public function reset() {
@@ -157,7 +160,17 @@ class MainGame extends Scene {
         phys_engine.paused = false;
         game_input.listen();
         game_over_text.visible = false;
-        timer.cur_t = 0;
+        game_time = 0;
+        timer_display.update(game_time);
+
+        if(attack_spawners.length > 1) {
+            var idx = attack_spawners.length;
+            while(idx > 1) {
+                idx--;
+                attack_spawners[idx].destroy();
+                attack_spawners.splice(idx, 1);
+            }
+        }
     }
 
     function ongameover(_) {
@@ -166,6 +179,14 @@ class MainGame extends Scene {
         game_over = true;
         game_input.unlisten();
         game_over_text.visible = true;
+    }
+
+    function create_spawner():AttackSpawner {
+        return new AttackSpawner({
+            color:ColorMgr.spawner,
+            scene:this,
+            depth:3
+        });
     }
 
     function onchange(_e:InputEvent) {
@@ -193,19 +214,21 @@ class MainGame extends Scene {
 
         #if manual_testing
             case 'arc_shots':
-                Patterns.arc_shots(ball_spawner);
+                Patterns.arc_shots(attack_spawners[0]);
             case 'driveby':
-                Patterns.driveby(ball_spawner);
+                Patterns.driveby(attack_spawners[0]);
             case 'one_shot':
-                Patterns.one_shot(ball_spawner);
+                Patterns.one_shot(attack_spawners[0]);
             case 'one_hunter':
-                Patterns.one_hunter(ball_spawner);
+                Patterns.one_hunter(attack_spawners[0]);
             case 'spread_shot':
-                Patterns.spread_shot(ball_spawner);
+                Patterns.spread_shot(attack_spawners[0]);
             case 'laser':
-                Patterns.laser(ball_spawner);
+                Patterns.laser(attack_spawners[0]);
             case 'circ_shots':
-                Patterns.circ_shots(ball_spawner);
+                Patterns.circ_shots(attack_spawners[0]);
+            case 'advance_time':
+                game_time += 10;
         #end
         }
     }

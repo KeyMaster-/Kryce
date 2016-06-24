@@ -11,8 +11,13 @@ import phoenix.geometry.Geometry;
 import phoenix.geometry.Vertex;
 import patterns.Patterns;
 import patterns.Phases;
+import timeline.Timeline;
+import timeline.Timelines;
+import timeline.PropTween;
 
 class AttackSpawner extends Visual {
+    static var geom_size:Float = 45;
+
     var cur_timer:snow.api.Timer;
 
     var phase_time:Float = 0.0;
@@ -21,13 +26,12 @@ class AttackSpawner extends Visual {
 
         if(_options == null) _options = {};
         _options.name = 'AttackSpawner';
+        _options.name_unique = true;
 
         var geom = new Geometry({
             primitive_type:PrimitiveType.triangle_strip,
             batcher:Luxe.renderer.batcher
         });
-
-        var geom_size = 45;
 
         geom.add(new Vertex(new Vector(-geom_size / 2, -geom_size / 2), _options.color));
         geom.add(new Vertex(new Vector(-geom_size / 2, geom_size / 2), _options.color));
@@ -49,10 +53,18 @@ class AttackSpawner extends Visual {
     }
 
     override public function onreset() {
-        pos.set_xy(Main.screen_size / 2, Main.screen_size * 0.1);
-        radians = Math.PI / 2;
         phase_time = 0;
         phase_idx = 0;
+
+        radians = Math.PI / 2;
+        pos.x = Main.mid.x;
+        pos.y = -geom_size;
+        color.a = 0;
+
+        var tl = new Timeline();
+        tl.add(new PropTween(this.pos, 'y', 0, 1, timeline.easing.Quad.easeInOut).to(Main.screen_size * 0.1));
+        tl.add(new PropTween(this.color, 'a', 0, 1, timeline.easing.Quad.easeInOut).to(1));
+        Timelines.add(tl);
 
         #if !manual_testing 
             cur_timer = Luxe.timer.schedule(1, new_pattern);

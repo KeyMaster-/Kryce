@@ -33,9 +33,9 @@
     {
         "duration":10.0,
         "one_shot":30,
-        "one_hunter":30,
-        "circ_shots":20,
-        "spread_shot":20
+        "one_hunter":25,
+        "circ_shots":15,
+        "spread_shot":30
     },
     {
         "duration":10.0,
