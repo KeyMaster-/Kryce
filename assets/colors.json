@@ -2,7 +2,7 @@
     "bullet":"22cccd",
     "laser":"22cccd",
     "player":"9fe135",
-    "first_ring":"cc0000",
+    "background":"cc0000",
     "ring_alphas":[0.175, 0.325, 0.525],
     "spawner":"31fd93"
 }

@@ -32,7 +32,8 @@ class Main extends luxe.Game {
         config.preload.jsons.push({id:file_path('assets/phases.json')});
         config.preload.jsons.push({id:file_path('assets/colors.json')});
 
-        config.preload.fonts.push({id:'assets/fonts/kontanter.fnt'});
+        config.preload.fonts.push({id:'assets/fonts/kelsonsans_regular/kelsonsans_regular.fnt'});
+        config.preload.fonts.push({id:'assets/fonts/kelsonsans_bold/kelsonsans_bold.fnt'});
 
         return config;
 
@@ -112,7 +113,7 @@ class Main extends luxe.Game {
     } //ready
 
     function oninit(_) {
-        game.resources(patterns_config.asset.json, phases_config.asset.json);
+        game.resources(user_config.asset.json, patterns_config.asset.json, phases_config.asset.json);
     }
 
     override public function update(dt:Float) {
@@ -150,7 +151,10 @@ class Main extends luxe.Game {
     function ondown(_e:InputEvent) {
         switch(_e.name) {
             case 'reload_config':
-                user_config.reload().then(function(res:JSONResource) {trace(res.asset.json); user_config = res;});
+                user_config.reload().then(function(res:JSONResource) {
+                    user_config = res;
+                    game.resources(user_config.asset.json, patterns_config.asset.json, phases_config.asset.json);
+                });
                 colors_config.reload().then(function(res:JSONResource) {
                     colors_config = res;
                     ColorMgr.resources(colors_config.asset.json);
@@ -160,7 +164,7 @@ class Main extends luxe.Game {
                     patterns_config = res;
                     phases_config.reload().then(function(res:JSONResource) {
                         phases_config = res;
-                        game.resources(patterns_config.asset.json, phases_config.asset.json);
+                        game.resources(user_config.asset.json, patterns_config.asset.json, phases_config.asset.json);
                     });
                 });
         }

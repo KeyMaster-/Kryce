@@ -1,1 +1,10 @@
-{}
+{
+    "timer":{
+        "seconds":{
+            "x_offset":0
+        },
+        "decimals":{
+            "x_offset":0
+        }
+    }
+}

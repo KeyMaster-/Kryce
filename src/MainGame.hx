@@ -108,12 +108,16 @@ class MainGame extends Scene {
 
         // circumference.transform.parent = test_scale_transform;
 
+        var font = Luxe.resources.font('assets/fonts/kelsonsans_regular/kelsonsans_regular.fnt');
+
         game_over_text = new Text({
+            font:font,
+            sdf:true,
             text:'Game Over! Press start to try again.',
             point_size:32 * Luxe.screen.device_pixel_ratio,
             align:TextAlign.center,
             align_vertical:TextAlign.center,
-            pos:Main.mid.clone(),
+            pos:new Vector(Main.screen_size / 2, Main.screen_size * 0.2),
             depth:100
         });
 
@@ -125,7 +129,7 @@ class MainGame extends Scene {
             w:Main.screen_size,
             h:Main.screen_size,
             depth: -1,
-            color:ColorMgr.first_ring
+            color:ColorMgr.background
         });
 
         var mask = draw_rings_mask({
@@ -141,13 +145,16 @@ class MainGame extends Scene {
     }
 
     override public function update(_dt:Float) {
+        if(game_over) return;
+
         super.update(_dt);
         timer.update(_dt);
     }
 
-    public function resources(_patterns_config:Dynamic, _phases_config:Dynamic) {
+    public function resources(_user_config:Dynamic, _patterns_config:Dynamic, _phases_config:Dynamic) {
         Patterns.config = _patterns_config;
         Phases.parse_info(_phases_config);
+        timer.resources(_user_config.timer);
     }
 
     override public function reset() {
@@ -156,6 +163,7 @@ class MainGame extends Scene {
         phys_engine.paused = false;
         game_input.listen();
         game_over_text.visible = false;
+        timer.cur_t = 0;
     }
 
     function ongameover(_) {
