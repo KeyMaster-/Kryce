@@ -36,9 +36,11 @@ class Weakspot extends Visual {
         shape = new Circle(_x, _y, _r);
         _phys_engine.statics.push(shape);
         _phys_engine.callbacks.set(shape, oncollision);
+
+        Luxe.events.listen('Game.restart', game_restart);
     }
 
-    override public function onreset() {
+    function game_restart(_) {
         axis_change(0, 0);
         axis_change(1, 0);
     }
@@ -48,7 +50,7 @@ class Weakspot extends Visual {
     }
 
     public function axis_change(_axis:Int, _value:Float) {
-        if(_axis == 0) {
+        if(_axis % 2 == 0) {
             relative_pos.x = _value;
         }
         else {

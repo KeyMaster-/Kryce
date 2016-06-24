@@ -6,5 +6,31 @@
         "decimals":{
             "x_offset":0
         }
+    },
+    "menu_overlay": {
+        "title":{
+            "x":500,
+            "y":100
+        },
+        "credits":{
+            "x":500,
+            "y":250
+        },
+        "instructions1":{
+            "x":170,
+            "y":660
+        },
+        "instructions2":{
+            "x":225,
+            "y":710
+        },
+        "instructions3":{
+            "x":305,
+            "y":760
+        },
+        "instructions4":{
+            "x":500,
+            "y":880
+        }
     }
 }

@@ -12,16 +12,16 @@
     },
     {
         "duration":10.0,
-        "one_shot":40,
-        "spread_shot":35,
-        "laser":25
+        "one_shot":25,
+        "spread_shot":30,
+        "laser":45
     },
     {
         "duration":10.0,
         "one_shot":25,
-        "arc_shots":25,
-        "driveby":20,
-        "laser":30
+        "arc_shots":30,
+        "driveby":25,
+        "laser":20
     },
     {
         "duration":10.0,

@@ -108,8 +108,6 @@ class Main extends luxe.Game {
             color:new luxe.Color(0, 0, 0, 1),
             depth:100
         });
-
-        // Luxe.on(luxe.Ev.gamepaddown, function(_e:GamepadEvent){trace(_e.button);});
     } //ready
 
     function oninit(_) {

@@ -42,7 +42,8 @@ class AttackSpawner extends Visual {
 
         super(_options);
 
-        Luxe.events.listen('Game.over', ongameover);
+        Luxe.events.listen('Game.over', game_over);
+        Luxe.events.listen('Game.restart', game_restart);
     }
 
     override public function update(_dt:Float) {
@@ -52,7 +53,13 @@ class AttackSpawner extends Visual {
         }
     }
 
-    override public function onreset() {
+    function game_over(_) {
+        #if !manual_testing
+            cur_timer.stop();
+        #end
+    }
+
+    function game_restart(_) {
         phase_time = 0;
         phase_idx = 0;
 
@@ -68,12 +75,6 @@ class AttackSpawner extends Visual {
 
         #if !manual_testing 
             cur_timer = Luxe.timer.schedule(1, new_pattern);
-        #end
-    }
-
-    function ongameover(_) {
-        #if !manual_testing
-            cur_timer.stop();
         #end
     }
 

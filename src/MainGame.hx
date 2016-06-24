@@ -30,13 +30,17 @@ class MainGame extends Scene {
 
     var attack_spawners:Array<AttackSpawner>;
 
-    var game_over:Bool = false;
+    var game_running:Bool = false;
 
     var game_over_text:Text;
 
     var game_time:Float;
 
     var timer_display:TimerDisplay;
+
+    var selected_stick:String = 'left_stick';
+
+    var menu_overlay:MenuOverlay;
 
     public function new() {
         super('MainGame');
@@ -50,7 +54,7 @@ class MainGame extends Scene {
         game_input.bind_gamepad_range('right_stick', 3, -1, 1, true, false, false);
         // game_input.bind_gamepad_button('left_bumper', 9);
         // game_input.bind_gamepad_button('right_bumper', 10);
-        game_input.bind_gamepad_button('reset', 4); //back
+        game_input.bind_gamepad_button('swap_stick', 4); //back
 
         #if manual_testing
             game_input.bind_gamepad_button('one_shot', 0);
@@ -86,34 +90,12 @@ class MainGame extends Scene {
             scene:this
         });
 
-        attack_spawners = [create_spawner()];
-
         Patterns.phys_engine = phys_engine;
         Patterns.scene = this;
         Patterns.weakspot = weakspot;
         Patterns.init();
 
-        //red color: ColorHSV(5, 0.93, 0.88, 1)
-        //blue color: ColorHSV(207, 0.64, 0.95, 1)
-
-        // test_scale_transform = new luxe.Transform();
-
-        // circumference.transform.parent = test_scale_transform;
-
-        var font = Luxe.resources.font('assets/fonts/kelsonsans_regular/kelsonsans_regular.fnt');
-
-        game_over_text = new Text({
-            font:font,
-            sdf:true,
-            text:'Game Over! Press start to try again.',
-            point_size:32 * Luxe.screen.device_pixel_ratio,
-            align:TextAlign.center,
-            align_vertical:TextAlign.center,
-            pos:new Vector(Main.screen_size / 2, Main.screen_size * 0.2),
-            depth:100
-        });
-
-        game_over_text.visible = false;
+        make_overlays();
 
         Luxe.draw.box({
             x:0,
@@ -136,8 +118,25 @@ class MainGame extends Scene {
         super.init(null);
     }
 
+    function make_overlays() {
+        var font = Luxe.resources.font('assets/fonts/kelsonsans_regular/kelsonsans_regular.fnt');
+        game_over_text = new Text({
+            font:font,
+            sdf:true,
+            text:'Game Over! Press start to try again.',
+            point_size:32 * Luxe.screen.device_pixel_ratio,
+            align:TextAlign.center,
+            align_vertical:TextAlign.center,
+            pos:new Vector(Main.screen_size / 2, Main.screen_size * 0.2),
+            depth:100
+        });
+        game_over_text.visible = false;
+
+        menu_overlay = new MenuOverlay();
+    }
+
     override public function update(_dt:Float) {
-        if(game_over) return;
+        if(!game_running) return;
 
         super.update(_dt);
         game_time += _dt;
@@ -152,16 +151,14 @@ class MainGame extends Scene {
         Patterns.config = _patterns_config;
         Phases.parse_info(_phases_config);
         timer_display.resources(_user_config.timer);
+        menu_overlay.resources(_user_config.menu_overlay);
     }
 
-    override public function reset() {
-        super.reset();
-        game_over = false;
+    public function game_start() {
+        game_running = true;
         phys_engine.paused = false;
         game_input.listen();
-        game_over_text.visible = false;
         game_time = 0;
-        timer_display.update(game_time);
 
         if(attack_spawners.length > 1) {
             var idx = attack_spawners.length;
@@ -171,12 +168,14 @@ class MainGame extends Scene {
                 attack_spawners.splice(idx, 1);
             }
         }
+
+        Luxe.events.fire('Game.restart');
     }
 
     function ongameover(_) {
         Patterns.ongameover();
         phys_engine.paused = true;
-        game_over = true;
+        game_running = false;
         game_input.unlisten();
         game_over_text.visible = true;
     }
@@ -190,7 +189,7 @@ class MainGame extends Scene {
     }
 
     function onchange(_e:InputEvent) {
-        if(_e.name == 'left_stick') {
+        if(_e.name == selected_stick) {
             weakspot.axis_change(_e.gamepad_event.axis, _e.gamepad_event.value);
         }
         #if no_gamepad
@@ -207,9 +206,22 @@ class MainGame extends Scene {
     function ondown(_e:InputEvent) {
         switch(_e.name) {
             case 'start':
-                if(game_over) {
-                    reset();
-                    Luxe.events.fire('Game.restart');
+                if(!game_running) {
+                    if(menu_overlay.visible) { //from main menu
+                        menu_overlay.visible = false;
+                        attack_spawners = [create_spawner()];
+                    }
+                    else { //from game over
+                        game_over_text.visible = false;
+                    }
+                    game_start();
+                }
+            case 'swap_stick':
+                if(selected_stick == 'left_stick') {
+                    selected_stick = 'right_stick';
+                }
+                else {
+                    selected_stick = 'left_stick';
                 }
 
         #if manual_testing
