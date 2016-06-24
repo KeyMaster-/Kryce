@@ -1,6 +1,7 @@
 package patterns;
 
-import Bullet;
+import bullets.NormalBullet;
+import bullets.HunterBullet;
 import Laser;
 import Weakspot;
 import physics.ShapePhysics;
@@ -70,7 +71,7 @@ class Patterns {
         for(i in 0...shots) {
             var spawn_y:Float = start_y + windup_delta + i * (linear_delta) / shots;
             tl.add(new Trigger(config.defaults.transition_t + windup + i * (linear / shots), function(_) {
-                spawn_bullet(_spawner.pos.x, spawn_y, Math.PI, config.defaults.shotspeed);
+                spawn_normal_bullet(_spawner.pos.x, spawn_y, Math.PI, config.defaults.shotspeed);
             }));
         }
 
@@ -107,7 +108,7 @@ class Patterns {
         }, transition_time, seq_helper.cur_t));
 
         for(i in 0...shots) {
-            tl.add(new Trigger(transition_time + move_duration + i * (linear / shots), spawn_bullet_at_spawner.bind(_spawner, config.defaults.shotspeed)));
+            tl.add(new Trigger(transition_time + move_duration + i * (linear / shots), spawn_normal_bullet_at_spawner.bind(_spawner, config.defaults.shotspeed)));
         }
 
         return tl;
@@ -122,7 +123,7 @@ class Patterns {
         var transition_time = transition_to_closest_arc(tl, _spawner, radius, radius);
 
         var tween_end_t = arc_to(tl, _spawner, radius, transition_time, arc_time, min_angle_delta);
-        tl.add(new Trigger(tween_end_t, spawn_bullet_at_spawner.bind(_spawner, config.defaults.shotspeed)));
+        tl.add(new Trigger(tween_end_t, spawn_normal_bullet_at_spawner.bind(_spawner, config.defaults.shotspeed)));
 
         return tl;
     }
@@ -164,7 +165,7 @@ class Patterns {
         for(i in 0...shots) {
             tl.add(new Trigger(tween_end_t, function(_) {
                 var shot_angle = _spawner.radians - (spread_angle_range / 2) + i * (spread_angle_range / (shots - 1)); //shots - 1 can lead do div by 0 when shots = 1, but this is not supposed to only shoot once anyway (that's one_shot)
-                spawn_bullet(_spawner.pos.x, _spawner.pos.y, shot_angle, config.defaults.shotspeed);
+                spawn_normal_bullet(_spawner.pos.x, _spawner.pos.y, shot_angle, config.defaults.shotspeed);
             }));
         }
 
@@ -304,34 +305,38 @@ class Patterns {
         return tl;
     }
 
-    static function spawn_bullet_at_spawner(_spawner:Visual, _shotspeed:Float, _t:Float) { //t parameter just here so binding is easier
-        spawn_bullet(_spawner.pos.x, _spawner.pos.y, _spawner.radians, _shotspeed);
+    static function spawn_normal_bullet_at_spawner(_spawner:Visual, _shotspeed:Float, _t:Float) { //t parameter just here so binding is easier
+        spawn_normal_bullet(_spawner.pos.x, _spawner.pos.y, _spawner.radians, _shotspeed);
     }
 
-    static function spawn_bullet(_x:Float, _y:Float, _radians:Float, _speed:Float) {
-        var shape = Bullet.get_collision_shape(_x, _y);
-        var phys_shape = new physics.StraightLineBullet(shape, new Vector(Math.cos(_radians) * _speed, Math.sin(_radians) * _speed));
+    static function spawn_normal_bullet(_x:Float, _y:Float, _radians:Float, _speed:Float) {
+        var shape = NormalBullet.get_collision_shape(_x, _y);
+        var phys_shape = new physics.StraightLineDynamic(shape, new Vector(Math.cos(_radians) * _speed, Math.sin(_radians) * _speed));
 
         return make_bullet(phys_shape);
     }
 
     static function spawn_hunter(_x:Float, _y:Float, _speed:Float, _tween_time:Float) {
-        var shape = Bullet.get_collision_shape(_x, _y);
+        var shape = HunterBullet.get_collision_shape(_x, _y);
         var mid_diff = Main.mid.clone();
         mid_diff.subtract_xyz(_x, _y);
-        var phys_shape = new physics.HunterBullet(shape, weakspot, _speed, mid_diff.length, _tween_time);
+        var phys_shape = new physics.HunterDynamic(shape, weakspot, _speed, mid_diff.length, _tween_time);
 
-        return make_bullet(phys_shape);
+        return new HunterBullet(phys_shape, phys_engine, {
+            scene:scene,
+            depth:2,
+            color:ColorMgr.bullet
+        });
     }
 
     static function spawn_sine_shot(_x:Float, _y:Float, _radians:Float, _vel:Float, _magnitude:Float, _period:Float) {
-        var shape = Bullet.get_collision_shape(_x, _y);
-        var phys_shape = new physics.SineWaveBullet(shape, new Vector(Math.cos(_radians) * _vel, Math.sin(_radians) * _vel), _magnitude, _period);
+        var shape = NormalBullet.get_collision_shape(_x, _y);
+        var phys_shape = new physics.SineWaveDynamic(shape, new Vector(Math.cos(_radians) * _vel, Math.sin(_radians) * _vel), _magnitude, _period);
         return make_bullet(phys_shape);
     }
 
-    static function make_bullet(_phys_shape:DynamicShape):Bullet {
-        return new Bullet(_phys_shape, phys_engine, {
+    static function make_bullet(_phys_shape:DynamicShape):NormalBullet {
+        return new NormalBullet(_phys_shape, phys_engine, {
             scene:scene,
             depth:2,
             color:ColorMgr.bullet

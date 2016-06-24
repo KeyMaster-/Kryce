@@ -98,12 +98,6 @@ class MainGame extends Scene {
         //red color: ColorHSV(5, 0.93, 0.88, 1)
         //blue color: ColorHSV(207, 0.64, 0.95, 1)
 
-        var circumference = make_circle_geom(rotation_radius * Main.screen_size / 2, 0.025, Maths.radians(10), Maths.radians(10), {
-            depth: 0,
-            color:new Color(1, 1, 1, 0.5)
-        });
-        circumference.transform.pos.copy_from(Main.mid);
-
         // test_scale_transform = new luxe.Transform();
 
         // circumference.transform.parent = test_scale_transform;
@@ -231,43 +225,6 @@ class MainGame extends Scene {
         shape = Polygon.rectangle(0, Main.screen_size + 2 * ball_radius, Main.screen_size + 4 * ball_radius, 10, false);
         shape.tags.set('destroy_ball', '');
         phys_engine.statics.push(shape);
-    }
-
-        //_radius: radius around 0,0; _line_width: total width of segments as fraction of radius, half inside radius, half outside
-        //_line_theta: arc length of segments, in radians; _gap_theta: arc length of gaps between segmtens, in radians
-    function make_circle_geom(_radius:Float, _line_width:Float, _line_theta:Float, _gap_theta:Float, _options:GeometryOptions):Geometry {
-        _line_width /= 2; //Line width becomes the offset from the center line, so overall we get _line_width wide segments
-        _line_width *= _radius;
-
-        if(_options.batcher == null) _options.batcher = Luxe.renderer.batcher;
-        _options.primitive_type = PrimitiveType.triangles;
-
-        var circle = new Geometry(_options);
-
-        var angle = 0.0;
-        var angle_end = 0.0;
-
-        while(2 * Math.PI - angle > 0.0005) {
-            angle_end = angle + _line_theta;
-            var start_unit = new Vector(Math.cos(angle), Math.sin(angle));
-            var end_unit = new Vector(Math.cos(angle_end), Math.sin(angle_end));
-
-            var inner_start = start_unit.clone().multiplyScalar(_radius - _line_width);
-            var outer_start = start_unit.multiplyScalar(_radius + _line_width);
-            var inner_end = end_unit.clone().multiplyScalar(_radius - _line_width);
-            var outer_end = end_unit.multiplyScalar(_radius + _line_width);
-
-            circle.add(new Vertex(inner_start, _options.color));
-            circle.add(new Vertex(outer_start, _options.color));
-            circle.add(new Vertex(inner_end, _options.color));
-            circle.add(new Vertex(outer_start, _options.color));
-            circle.add(new Vertex(outer_end, _options.color));
-            circle.add(new Vertex(inner_end, _options.color));
-
-            angle = angle_end + _gap_theta;
-        }
-
-        return circle;
     }
 
         //Using the repeated rotation algorithm from this page: http://slabode.exofire.net/circle_draw.shtml

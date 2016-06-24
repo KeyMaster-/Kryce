@@ -2,7 +2,7 @@ package physics;
 import luxe.Vector;
 import luxe.collision.shapes.Shape;
 
-class StraightLineBullet extends DynamicShape {
+class StraightLineDynamic extends DynamicShape {
     public var vel:Vector;
     public function new(_shape:Shape, ?_vel:Vector) {
         super(_shape);

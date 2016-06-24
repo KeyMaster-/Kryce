@@ -7,7 +7,7 @@ import timeline.Timelines;
 import timeline.PropTween;
 import timeline.Trigger;
 
-class HunterBullet extends DynamicShape {
+class HunterDynamic extends DynamicShape {
     public var speed:Float;
     public var radius:Float;
     public var aim_time:Float;

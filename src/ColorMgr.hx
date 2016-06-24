@@ -3,6 +3,7 @@ import luxe.Color;
 
 class ColorMgr {
     public static var bullet:Color;
+    public static var hunter_second:Color;
     public static var laser:Color;
     public static var player:Color;
     public static var background:Color;
@@ -11,6 +12,7 @@ class ColorMgr {
 
     public static function init() {
         bullet = new Color();
+        hunter_second = new Color();
         laser = new Color();
         player = new Color();
         background = new Color();
@@ -20,6 +22,7 @@ class ColorMgr {
 
     public static function resources(_colors_json:Dynamic):Void {
         bullet.rgb(Std.parseInt('0x' + _colors_json.bullet));
+        hunter_second.rgb(Std.parseInt('0x' + _colors_json.hunter_second));
         laser.rgb(Std.parseInt('0x' + _colors_json.laser));
         player.rgb(Std.parseInt('0x' + _colors_json.player));
         background.rgb(Std.parseInt('0x' + _colors_json.background));

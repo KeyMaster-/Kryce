@@ -2,7 +2,7 @@ package physics;
 import luxe.Vector;
 import luxe.collision.shapes.Shape;
 
-class SineWaveBullet extends DynamicShape {
+class SineWaveDynamic extends DynamicShape {
     public var vel:Vector;
     public var magnitude:Float;
     public var period:Float;

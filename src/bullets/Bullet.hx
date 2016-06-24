@@ -1,6 +1,5 @@
-package ;
+package bullets;
 import physics.ShapePhysics;
-import physics.StraightLineBullet;
 import physics.DynamicShape;
 import physics.ShapeComponent;
 import luxe.Visual;
@@ -13,7 +12,6 @@ import phoenix.geometry.Geometry;
 import phoenix.geometry.Vertex;
 import phoenix.Batcher.PrimitiveType;
 import luxe.collision.shapes.Polygon;
-import physics.SineWaveBullet;
 
 class Bullet extends Visual {
     public var phys_shape:DynamicShape;
@@ -23,21 +21,7 @@ class Bullet extends Visual {
     static var height:Float = 24;
 
     public function new(_phys_shape:DynamicShape, _phys_engine:ShapePhysics, ?_options:VisualOptions) {
-        if(_options == null) _options = {};
-
-        _options.name = 'Bullet';
         _options.name_unique = true;
-
-        if(_options.batcher == null) _options.batcher = Luxe.renderer.batcher;
-
-        _options.geometry = new Geometry({
-            batcher:_options.batcher,
-            primitive_type:PrimitiveType.triangle_strip
-        });
-
-        _options.geometry.add(new Vertex(new Vector(length / 2, 0), _options.color));
-        _options.geometry.add(new Vertex(new Vector(-length / 2, height / 2), _options.color));
-        _options.geometry.add(new Vertex(new Vector(-length / 2, -height / 2), _options.color));
 
         super(_options);
 
@@ -51,11 +35,11 @@ class Bullet extends Visual {
         listen_id = Luxe.events.listen('Game.restart', game_restart);
     }
 
-    public static function get_collision_shape(_x:Float = 0, _y:Float = 0):Shape {
-        return new Polygon(_x, _y, [
-            new Vector(length / 2, 0),
-            new Vector(-length / 2, height / 2),
-            new Vector(-length / 2, -height / 2)]);
+    function default_options(_options:VisualOptions):VisualOptions {
+        if(_options == null) _options = {};
+        _options.name_unique = true;
+        if(_options.batcher == null) _options.batcher = Luxe.renderer.batcher;
+        return _options;
     }
 
     function game_restart(_) {
