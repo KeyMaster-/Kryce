@@ -28,6 +28,8 @@ class Patterns {
     public static var scene:Scene;
     public static var weakspot:Weakspot;
 
+    public static var muted:Bool = false;
+
     static var single_bullet_snd:AudioResource;
     static var laser_snd:AudioResource;
     static var spread_shot_snd:AudioResource;
@@ -280,7 +282,7 @@ class Patterns {
             laser_obj.dyn_shape.shape.position.copy_from(laser_obj.pos);
             laser_obj.dyn_shape.shape.rotation = laser_obj.radians * 180 / Math.PI;
             laser_obj.visible = true;
-            Luxe.audio.play(laser_snd.source, 0.5);
+            if(!muted) Luxe.audio.play(laser_snd.source, 0.5);
         }));
 
         //Angle without the laser offset, so it will point to the center as expected by other patterns
@@ -335,8 +337,9 @@ class Patterns {
     }
 
     static function play_randomised(res:AudioResource, _) {
+        if(muted) return;
         var handle = Luxe.audio.play(res.source, 0.5);
-        Luxe.audio.pitch(handle, 1 + Luxe.utils.random.float(-0.2, 0.2));
+        Luxe.audio.pitch(handle, 1 + Luxe.utils.random.float(-0.1, 0.1));
     }
 
     static function spawn_hunter(_x:Float, _y:Float, _speed:Float, _tween_time:Float) {

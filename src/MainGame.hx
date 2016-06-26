@@ -71,6 +71,8 @@ class MainGame extends Scene {
         misc_input = new InputMap();
         misc_input.bind_gamepad_button('start', 6); //start
         misc_input.bind_gamepad_button('back', 4); //back
+        misc_input.bind_gamepad_button('mute', 3); //y/triangle
+        misc_input.bind_gamepad_button('quit', 1); //y/triangle
 
         misc_input.on(InteractType.down, ondown);
 
@@ -222,6 +224,14 @@ class MainGame extends Scene {
                     //Otherwise, go back to menu
                     game_over_overlay.set_visible(false);
                     menu_overlay.set_visible(true);
+                }
+
+            case 'mute':
+                Patterns.muted = !Patterns.muted;
+
+            case 'quit':
+                if(!game_running) {
+                    Luxe.shutdown();
                 }
                 
 

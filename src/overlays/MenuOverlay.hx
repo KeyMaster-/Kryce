@@ -93,7 +93,7 @@ class MenuOverlay extends Overlay {
         texts.push(new Text({
             font:regular,
             sdf:true,
-            text:'press [back|select] to switch analog stick',
+            text:'[back|select] to switch analog stick\n[Y|Triangle] to mute sound\n[B/Circle to quit]',
             point_size:16 * Luxe.screen.device_pixel_ratio,
             align:TextAlign.center,
             align_vertical:TextAlign.top,

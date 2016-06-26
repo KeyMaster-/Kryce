@@ -17,28 +17,28 @@
             "y":180
         },
         "credits2":{
-            "x":500,
+            "x":450,
             "y":960
         },
         "credits3":{
-            "x":500,
+            "x":550,
             "y":990
         },
         "instructions1":{
             "x":490,
-            "y":685
+            "y":665
         },
         "instructions2":{
             "x":450,
-            "y":730
+            "y":710
         },
         "instructions3":{
             "x":550,
-            "y":775
+            "y":755
         },
         "instructions4":{
             "x":500,
-            "y":870
+            "y":820
         },
         "tween_in_time":0.5,
         "tween_out_time":0.5
