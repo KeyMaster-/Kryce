@@ -10,6 +10,7 @@ import luxe.Visual;
 import luxe.Vector;
 import luxe.Scene;
 import luxe.utils.Maths;
+import luxe.resource.Resource;
 import timeline.Timeline;
 import timeline.Timelines;
 import timeline.PropTween;
@@ -27,6 +28,10 @@ class Patterns {
     public static var scene:Scene;
     public static var weakspot:Weakspot;
 
+    static var single_bullet_snd:AudioResource;
+    static var laser_snd:AudioResource;
+    static var spread_shot_snd:AudioResource;
+
     public static function init() {
         patterns = ['driveby' => driveby, 
                     'arc_shots' => arc_shots,
@@ -35,6 +40,11 @@ class Patterns {
                     'spread_shot' => spread_shot,
                     'circ_shots' => circ_shots,
                     'laser' => laser];
+
+        single_bullet_snd = Luxe.resources.audio('assets/sounds/single_bullet.wav');
+        laser_snd = Luxe.resources.audio('assets/sounds/laser.wav');
+        spread_shot_snd = Luxe.resources.audio('assets/sounds/spread_shot.wav');
+
     }
 
     public static function ongameover() {
@@ -72,6 +82,7 @@ class Patterns {
             var spawn_y:Float = start_y + windup_delta + i * (linear_delta) / shots;
             tl.add(new Trigger(config.defaults.transition_t + windup + i * (linear / shots), function(_) {
                 spawn_normal_bullet(_spawner.pos.x, spawn_y, Math.PI, config.defaults.shotspeed);
+                play_randomised(single_bullet_snd, _);
             }));
         }
 
@@ -109,6 +120,8 @@ class Patterns {
 
         for(i in 0...shots) {
             tl.add(new Trigger(transition_time + move_duration + i * (linear / shots), spawn_normal_bullet_at_spawner.bind(_spawner, config.defaults.shotspeed)));
+            tl.add(new Trigger(transition_time + move_duration + i * (linear / shots), play_randomised.bind(single_bullet_snd)));
+
         }
 
         return tl;
@@ -124,6 +137,7 @@ class Patterns {
 
         var tween_end_t = arc_to(tl, _spawner, radius, transition_time, arc_time, min_angle_delta);
         tl.add(new Trigger(tween_end_t, spawn_normal_bullet_at_spawner.bind(_spawner, config.defaults.shotspeed)));
+        tl.add(new Trigger(tween_end_t, play_randomised.bind(single_bullet_snd)));
 
         return tl;
     }
@@ -141,6 +155,7 @@ class Patterns {
         var tween_end_t = arc_to(tl, _spawner, radius, transition_time, arc_time, min_angle_delta);
         tl.add(new Trigger(tween_end_t, function(_) {
             spawn_hunter(_spawner.pos.x, _spawner.pos.y, config.defaults.shotspeed, aim_time);
+            play_randomised(single_bullet_snd, _);
         }));
 
         return tl;
@@ -168,6 +183,7 @@ class Patterns {
                 spawn_normal_bullet(_spawner.pos.x, _spawner.pos.y, shot_angle, config.defaults.shotspeed);
             }));
         }
+        tl.add(new Trigger(tween_end_t, play_randomised.bind(spread_shot_snd)));
 
         var radius_get_func = radius_get.bind(_spawner, Main.mid);
         var radius_set_func = radius_set.bind(_spawner, Main.mid, _);
@@ -212,6 +228,7 @@ class Patterns {
                 // var shot_angle = _spawner.radians - (spread_angle_range / 2) + i * (spread_angle_range / (shots - 1));
                 // spawn_sine_shot(_spawner.pos.x, _spawner.pos.y, shot_angle, config.defaults.shotspeed, magnitude, period);
                 spawn_sine_shot(_spawner.pos.x, _spawner.pos.y, _spawner.radians, config.defaults.shotspeed, magnitude, period);
+                play_randomised(single_bullet_snd, _);
             }));
         }
 
@@ -263,6 +280,7 @@ class Patterns {
             laser_obj.dyn_shape.shape.position.copy_from(laser_obj.pos);
             laser_obj.dyn_shape.shape.rotation = laser_obj.radians * 180 / Math.PI;
             laser_obj.visible = true;
+            Luxe.audio.play(laser_snd.source, 0.5);
         }));
 
         //Angle without the laser offset, so it will point to the center as expected by other patterns
@@ -314,6 +332,11 @@ class Patterns {
         var phys_shape = new physics.StraightLineDynamic(shape, new Vector(Math.cos(_radians) * _speed, Math.sin(_radians) * _speed));
 
         return make_bullet(phys_shape);
+    }
+
+    static function play_randomised(res:AudioResource, _) {
+        var handle = Luxe.audio.play(res.source, 0.5);
+        Luxe.audio.pitch(handle, 1 + Luxe.utils.random.float(-0.2, 0.2));
     }
 
     static function spawn_hunter(_x:Float, _y:Float, _speed:Float, _tween_time:Float) {

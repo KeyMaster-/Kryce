@@ -10,27 +10,53 @@
     "menu_overlay": {
         "title":{
             "x":500,
-            "y":100
+            "y":38
         },
         "credits":{
             "x":500,
-            "y":250
+            "y":180
+        },
+        "credits2":{
+            "x":500,
+            "y":960
+        },
+        "credits3":{
+            "x":500,
+            "y":990
         },
         "instructions1":{
-            "x":170,
-            "y":660
+            "x":490,
+            "y":685
         },
         "instructions2":{
-            "x":225,
-            "y":710
+            "x":450,
+            "y":730
         },
         "instructions3":{
-            "x":305,
-            "y":760
+            "x":550,
+            "y":775
         },
         "instructions4":{
             "x":500,
-            "y":880
-        }
+            "y":870
+        },
+        "tween_in_time":0.5,
+        "tween_out_time":0.5
+    },
+    "game_over_overlay": {
+        "game_over":{
+            "x":500,
+            "y":38
+        },
+        "restart":{
+            "x":500,
+            "y":180
+        },
+        "back":{
+            "x":500,
+            "y":230
+        },
+        "tween_in_time":0.5,
+        "tween_out_time":0.5
     }
 }

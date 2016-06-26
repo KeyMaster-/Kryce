@@ -37,7 +37,7 @@
   if: {
     "mac || windows || linux" : {
       build : {
-        defines : ['project_assets']//, 'manual_testing'] //, 'no_gamepad']  
+        defines : ['project_assets', 'manual_testing'] //, 'no_gamepad']  
       }
     }
   }

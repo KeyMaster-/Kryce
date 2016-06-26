@@ -5,5 +5,7 @@
     "player":"9fe135",
     "background":"cc0000",
     "ring_alphas":[0.175, 0.325, 0.525],
-    "spawner":"31fd93"
+    "spawner":"31fd93",
+    "menu_instructions_light":"ffffff",
+    "menu_instructions_dark":"d9d9d9"
 }

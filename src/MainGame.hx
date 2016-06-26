@@ -14,8 +14,8 @@ import phoenix.geometry.Vertex;
 import phoenix.Batcher.PrimitiveType;
 import patterns.Patterns;
 import patterns.Phases;
-
-import luxe.Visual;
+import overlays.MenuOverlay;
+import overlays.GameOverOverlay;
 
 class MainGame extends Scene {
     var game_input:InputMap;
@@ -28,11 +28,9 @@ class MainGame extends Scene {
 
     var phys_engine:ShapePhysics;
 
-    var attack_spawners:Array<AttackSpawner>;
+    var attack_spawners:Array<AttackSpawner> = [];
 
     var game_running:Bool = false;
-
-    var game_over_text:Text;
 
     var game_time:Float;
 
@@ -41,6 +39,7 @@ class MainGame extends Scene {
     var selected_stick:String = 'left_stick';
 
     var menu_overlay:MenuOverlay;
+    var game_over_overlay:GameOverOverlay;
 
     public function new() {
         super('MainGame');
@@ -54,8 +53,7 @@ class MainGame extends Scene {
         game_input.bind_gamepad_range('right_stick', 3, -1, 1, true, false, false);
         // game_input.bind_gamepad_button('left_bumper', 9);
         // game_input.bind_gamepad_button('right_bumper', 10);
-        game_input.bind_gamepad_button('swap_stick', 4); //back
-
+        
         #if manual_testing
             game_input.bind_gamepad_button('one_shot', 0);
             game_input.bind_gamepad_button('driveby', 1);
@@ -72,6 +70,7 @@ class MainGame extends Scene {
 
         misc_input = new InputMap();
         misc_input.bind_gamepad_button('start', 6); //start
+        misc_input.bind_gamepad_button('back', 4); //back
 
         misc_input.on(InteractType.down, ondown);
 
@@ -119,18 +118,8 @@ class MainGame extends Scene {
     }
 
     function make_overlays() {
-        var font = Luxe.resources.font('assets/fonts/kelsonsans_regular/kelsonsans_regular.fnt');
-        game_over_text = new Text({
-            font:font,
-            sdf:true,
-            text:'Game Over! Press start to try again.',
-            point_size:32 * Luxe.screen.device_pixel_ratio,
-            align:TextAlign.center,
-            align_vertical:TextAlign.center,
-            pos:new Vector(Main.screen_size / 2, Main.screen_size * 0.2),
-            depth:100
-        });
-        game_over_text.visible = false;
+        game_over_overlay = new GameOverOverlay();
+        game_over_overlay.set_visible(false, false);
 
         menu_overlay = new MenuOverlay();
     }
@@ -152,6 +141,7 @@ class MainGame extends Scene {
         Phases.parse_info(_phases_config);
         timer_display.resources(_user_config.timer);
         menu_overlay.resources(_user_config.menu_overlay);
+        game_over_overlay.resources(_user_config.game_over_overlay);
     }
 
     public function game_start() {
@@ -168,6 +158,9 @@ class MainGame extends Scene {
                 attack_spawners.splice(idx, 1);
             }
         }
+        else if(attack_spawners.length == 0) {
+            attack_spawners.push(create_spawner());
+        }
 
         Luxe.events.fire('Game.restart');
     }
@@ -177,7 +170,7 @@ class MainGame extends Scene {
         phys_engine.paused = true;
         game_running = false;
         game_input.unlisten();
-        game_over_text.visible = true;
+        game_over_overlay.set_visible(true);
     }
 
     function create_spawner():AttackSpawner {
@@ -208,21 +201,29 @@ class MainGame extends Scene {
             case 'start':
                 if(!game_running) {
                     if(menu_overlay.visible) { //from main menu
-                        menu_overlay.visible = false;
-                        attack_spawners = [create_spawner()];
+                        menu_overlay.set_visible(false);
                     }
                     else { //from game over
-                        game_over_text.visible = false;
+                        game_over_overlay.set_visible(false);
                     }
                     game_start();
                 }
-            case 'swap_stick':
-                if(selected_stick == 'left_stick') {
-                    selected_stick = 'right_stick';
+            case 'back':
+                if(menu_overlay.visible) {
+                    //In the main menu, swap analog stick
+                    if(selected_stick == 'left_stick') {
+                        selected_stick = 'right_stick';
+                    }
+                    else {
+                        selected_stick = 'left_stick';
+                    }
                 }
-                else {
-                    selected_stick = 'left_stick';
+                else if(game_over_overlay.visible) {
+                    //Otherwise, go back to menu
+                    game_over_overlay.set_visible(false);
+                    menu_overlay.set_visible(true);
                 }
+                
 
         #if manual_testing
             case 'arc_shots':

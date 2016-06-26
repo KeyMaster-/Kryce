@@ -35,6 +35,10 @@ class Main extends luxe.Game {
         config.preload.fonts.push({id:'assets/fonts/kelsonsans_regular/kelsonsans_regular.fnt'});
         config.preload.fonts.push({id:'assets/fonts/kelsonsans_bold/kelsonsans_bold.fnt'});
 
+        config.preload.sounds.push({id:'assets/sounds/laser.wav', is_stream:false});
+        config.preload.sounds.push({id:'assets/sounds/single_bullet.wav', is_stream:false});
+        config.preload.sounds.push({id:'assets/sounds/spread_shot.wav', is_stream:false});
+
         return config;
 
     } //config
