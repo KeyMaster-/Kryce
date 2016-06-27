@@ -13,7 +13,7 @@ class MenuOverlay extends Overlay {
         texts.push(new Text({
             font:bold,
             sdf:true,
-            text:'GAME THING',
+            text:'KRYCE',
             point_size:70 * Luxe.screen.device_pixel_ratio,
             align:TextAlign.center,
             align_vertical:TextAlign.top,
@@ -34,7 +34,7 @@ class MenuOverlay extends Overlay {
         texts.push(new Text({
             font:regular,
             sdf:true,
-            text:'made with the Luxe game engine (luxeengine.com)',
+            text:'made with the Luxe game engine {luxeengine.com}',
             point_size:14 * Luxe.screen.device_pixel_ratio,
             align:TextAlign.center,
             align_vertical:TextAlign.bottom,
@@ -93,7 +93,7 @@ class MenuOverlay extends Overlay {
         texts.push(new Text({
             font:regular,
             sdf:true,
-            text:'[back|select] to switch analog stick\n[Y|Triangle] to mute sound\n[B/Circle to quit]',
+            text:'[back|select] to switch analog stick\n[Y|Triangle] to mute sound\n[B/Circle] to quit',
             point_size:16 * Luxe.screen.device_pixel_ratio,
             align:TextAlign.center,
             align_vertical:TextAlign.top,

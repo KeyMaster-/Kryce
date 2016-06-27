@@ -4,7 +4,7 @@
     window: {
       width:960,
       height:640,
-      title:'simple jam wip',
+      title:'Kryce',
       fullscreen:false,
       resizable:true,
       borderless:false
@@ -12,13 +12,14 @@
   },
 
   project : {
-    name : 'simple',
+    name : 'kryce',
     version : '1.0.0',
     author : 'keymaster',
 
     app : {
-      name : 'simple_jam',
-      package : 'games.keymaster.simple'
+      name : 'kryce',
+      package : 'games.keymaster.kryce',
+      icon: 'icons/ => kryce'
     },
 
     build : {
