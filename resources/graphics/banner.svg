@@ -10,13 +10,16 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1024"
-   height="1024"
-   viewBox="0 0 1024 1024"
+   width="3911"
+   height="1280"
+   viewBox="0 0 1024 0"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="icon.svg">
+   sodipodi:docname="banner.svg"
+   inkscape:export-filename="/Users/tschmidt/dev/code/haxe/simple/banner.png"
+   inkscape:export-xdpi="29.453499"
+   inkscape:export-ydpi="29.453499">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -24,13 +27,13 @@
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="0.0"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.52035416"
-     inkscape:cx="476.01359"
-     inkscape:cy="400.60509"
+     inkscape:zoom="0.18444684"
+     inkscape:cx="1661.4804"
+     inkscape:cy="809.69476"
      inkscape:document-units="px"
-     inkscape:current-layer="layer7"
+     inkscape:current-layer="svg2"
      showgrid="false"
      units="px"
      showguides="false"
@@ -42,7 +45,9 @@
      inkscape:window-y="1"
      inkscape:window-maximized="1"
      inkscape:snap-object-midpoints="true"
-     inkscape:snap-center="false">
+     inkscape:snap-center="true"
+     showborder="true"
+     inkscape:showpageshadow="false">
     <sodipodi:guide
        position="511.99924,584.10445"
        orientation="1,0"
@@ -99,6 +104,22 @@
        position="511.99924,31.959089"
        orientation="0,1"
        id="guide4321" />
+    <sodipodi:guide
+       position="1155.5,1279.75"
+       orientation="1,0"
+       id="guide4277" />
+    <sodipodi:guide
+       position="2435.5,1280.8984"
+       orientation="1,0"
+       id="guide4279" />
+    <sodipodi:guide
+       position="1285.0925,1280.0097"
+       orientation="0,1"
+       id="guide4617" />
+    <sodipodi:guide
+       position="2075.8014,0"
+       orientation="0,1"
+       id="guide4619" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -108,16 +129,23 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
+  <ellipse
+     style="opacity:1;fill:#620000;fill-opacity:1"
+     id="path4621"
+     cx="1795.5"
+     cy="639.99518"
+     rx="640"
+     ry="640.00482" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-28.362114)"
-     style="opacity:1">
+     transform="translate(0,127.6379)"
+     style="display:none;opacity:1">
     <image
        y="28.362114"
        x="0"
@@ -126,61 +154,16 @@
        preserveAspectRatio="none"
        height="1024"
        width="1024"
-       style="" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer5"
-     inkscape:label="bg">
-    <rect
-       style="opacity:1;fill:#620000;fill-opacity:1"
-       id="rect4332"
-       width="1024"
-       height="1024"
-       x="0"
-       y="-4.7363301e-08" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer4"
-     inkscape:label="ring 2">
-    <ellipse
-       style="opacity:1;fill:#8c0000;fill-opacity:1"
-       id="path4326"
-       cx="511.87567"
-       cy="512.02448"
-       rx="480.11176"
-       ry="480.01648" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer3"
-     inkscape:label="ring 1">
-    <ellipse
-       style="opacity:1;fill:#aa0000;fill-opacity:1"
-       id="path4324"
-       cx="512.013"
-       cy="512.0061"
-       rx="319.99368"
-       ry="319.99091" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer2"
-     inkscape:label="center">
-    <ellipse
-       style="opacity:1;fill:#ce0000;fill-opacity:1"
-       id="path4282"
-       cx="511.97223"
-       cy="512.00055"
-       rx="159.99232"
-       ry="159.99704" />
+       style="fill:#620000;fill-opacity:1"
+       inkscape:export-xdpi="29.453499"
+       inkscape:export-ydpi="29.453499" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer7"
      inkscape:label="title"
-     style="display:none">
+     style="display:inline"
+     transform="translate(0,156)">
     <flowRoot
        xml:space="preserve"
        id="flowRoot3377"
@@ -191,11 +174,32 @@
            height="319.99408"
            x="192.01932"
            y="352.00354" /></flowRegion><flowPara
-         id="flowPara3383" /></flowRoot>    <flowRoot
+         id="flowPara3383" /></flowRoot>    <ellipse
+       style="display:inline;opacity:1;fill:#8c0000;fill-opacity:1"
+       id="path4326"
+       cx="1795.6117"
+       cy="483.98352"
+       rx="480.11176"
+       ry="480.01648" />
+    <ellipse
+       style="display:inline;opacity:1;fill:#aa0000;fill-opacity:1"
+       id="path4324"
+       cx="1795.7489"
+       cy="483.96515"
+       rx="319.99368"
+       ry="319.99091" />
+    <ellipse
+       style="display:inline;opacity:1;fill:#ce0000;fill-opacity:1"
+       id="path4282"
+       cx="1795.7081"
+       cy="483.95959"
+       rx="159.99232"
+       ry="159.99704" />
+    <flowRoot
        xml:space="preserve"
        id="flowRoot3385"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:312.5px;line-height:100%;font-family:'Kelson Sans';-inkscape-font-specification:'Kelson Sans, Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(-1.9861116,166.64136)"><flowRegion
+       transform="translate(1281.7499,138.60041)"><flowRegion
          id="flowRegion3387"><rect
            id="rect3389"
            width="960.22345"
@@ -207,4 +211,10 @@
          id="flowPara4195">Kryce</flowPara><flowPara
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:312.5px;line-height:100%;font-family:'Kelson Sans';-inkscape-font-specification:'Kelson Sans, Bold';text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#22cccd;fill-opacity:1"
          id="flowPara4193" /></flowRoot>  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="center"
+     transform="translate(0,156)"
+     style="display:inline" />
 </svg>

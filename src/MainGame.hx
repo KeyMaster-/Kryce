@@ -14,6 +14,7 @@ import phoenix.geometry.Vertex;
 import phoenix.Batcher.PrimitiveType;
 import patterns.Patterns;
 import patterns.Phases;
+import overlays.Overlay;
 import overlays.MenuOverlay;
 import overlays.GameOverOverlay;
 
@@ -38,7 +39,7 @@ class MainGame extends Scene {
 
     var selected_stick:String = 'left_stick';
 
-    var menu_overlay:MenuOverlay;
+    var menu_overlay:Overlay;
     var game_over_overlay:GameOverOverlay;
 
     public function new() {
@@ -123,7 +124,9 @@ class MainGame extends Scene {
         game_over_overlay = new GameOverOverlay();
         game_over_overlay.set_visible(false, false);
 
-        menu_overlay = new MenuOverlay();
+        #if !just_title menu_overlay = new MenuOverlay(); #end
+        #if just_title menu_overlay = new overlays.JustTitleOverlay(); #end
+
     }
 
     override public function update(_dt:Float) {

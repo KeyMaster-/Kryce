@@ -41,8 +41,8 @@ class Weakspot extends Visual {
     }
 
     function game_restart(_) {
-        axis_change(0, 0);
-        axis_change(1, 0);
+        // axis_change(0, 0);
+        // axis_change(1, 0);
     }
 
     function oncollision(coll:ShapeCollision) {
