@@ -10,7 +10,7 @@ class TimerDisplay {
     var decimals_left:Text;
     var decimals_right:Text;
 
-    var point_size:Int = 60;
+    var point_size:Int = 120;
 
     var rotation_radius:Float;
 
@@ -34,7 +34,7 @@ class TimerDisplay {
             color : color,
             align : TextAlign.right,
             align_vertical : luxe.Text.TextAlign.center,
-            point_size : point_size * Luxe.screen.device_pixel_ratio,
+            point_size : point_size,
             depth:0,
             scene:_scene
         });
@@ -48,7 +48,7 @@ class TimerDisplay {
             color : color,
             align : TextAlign.left,
             align_vertical : luxe.Text.TextAlign.center,
-            point_size : point_size * Luxe.screen.device_pixel_ratio,
+            point_size : point_size,
             depth:0,
             scene:_scene
         });
@@ -62,7 +62,7 @@ class TimerDisplay {
             color : color,
             align : TextAlign.right,
             align_vertical : luxe.Text.TextAlign.center,
-            point_size : point_size * Luxe.screen.device_pixel_ratio,
+            point_size : point_size,
             depth:0,
             scene:_scene
         });
@@ -76,7 +76,7 @@ class TimerDisplay {
             color : color,
             align : TextAlign.left,
             align_vertical : luxe.Text.TextAlign.center,
-            point_size : point_size * Luxe.screen.device_pixel_ratio,
+            point_size : point_size,
             depth:0,
             scene:_scene
         });

@@ -13,7 +13,7 @@ class JustTitleOverlay extends Overlay {
             font:bold,
             sdf:true,
             text:'KRYCE',
-            point_size:70 * Luxe.screen.device_pixel_ratio,
+            point_size:140,
             align:TextAlign.center,
             align_vertical:TextAlign.center,
             color:ColorMgr.bullet.clone(),

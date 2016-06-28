@@ -12,7 +12,7 @@ class GameOverOverlay extends Overlay {
             font:bold,
             sdf:true,
             text:'GAME OVER',
-            point_size:70 * Luxe.screen.device_pixel_ratio,
+            point_size:140,
             align:TextAlign.center,
             align_vertical:TextAlign.top,
             color:ColorMgr.bullet.clone(),
@@ -23,7 +23,7 @@ class GameOverOverlay extends Overlay {
             font:regular,
             sdf:true,
             text:'Press [start] to try again',
-            point_size:20 * Luxe.screen.device_pixel_ratio,
+            point_size:40,
             align:TextAlign.center,
             align_vertical:TextAlign.top,
             depth:5
@@ -33,7 +33,7 @@ class GameOverOverlay extends Overlay {
             font:regular,
             sdf:true,
             text:'Press [back|select] to return to title page',
-            point_size:20 * Luxe.screen.device_pixel_ratio,
+            point_size:40,
             align:TextAlign.center,
             align_vertical:TextAlign.top,
             depth:5
