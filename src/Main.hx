@@ -14,7 +14,7 @@ class Main extends luxe.Game {
     public static var screen_size:Int = 1000;
     public static var mid:Vector;
 
-    var input:InputMap;
+    #if config_reloading var input:InputMap; #end
 
     var user_config:JSONResource;
     var patterns_config:JSONResource;
@@ -55,11 +55,13 @@ class Main extends luxe.Game {
         phases_config = Luxe.resources.json(file_path('assets/phases.json'));
         colors_config = Luxe.resources.json(file_path('assets/colors.json'));
 
-        input = new InputMap();
-        input.bind_gamepad_button('reload_config', 11); //dpad up
-        input.bind_gamepad_button('reload_game_info', 14); //dpad right
+        #if config_reloading
+            input = new InputMap();
+            input.bind_gamepad_button('reload_config', 11); //dpad up
+            input.bind_gamepad_button('reload_game_info', 14); //dpad right
 
-        input.on(InteractType.down, ondown);
+            input.on(InteractType.down, ondown);
+        #end
         
         ColorMgr.init();
         ColorMgr.resources(colors_config.asset.json);
@@ -150,9 +152,11 @@ class Main extends luxe.Game {
 
     } //onkeyup
 
+    #if config_reloading
     function ondown(_e:InputEvent) {
         switch(_e.name) {
             case 'reload_config':
+                trace('colors/user reload');
                 user_config.reload().then(function(res:JSONResource) {
                     user_config = res;
                     game.resources(user_config.asset.json, patterns_config.asset.json, phases_config.asset.json);
@@ -162,6 +166,7 @@ class Main extends luxe.Game {
                     ColorMgr.resources(colors_config.asset.json);
                 });
             case 'reload_game_info':
+                trace('patterns/phases reload');
                 patterns_config.reload().then(function(res:JSONResource) {
                     patterns_config = res;
                     phases_config.reload().then(function(res:JSONResource) {
@@ -171,4 +176,5 @@ class Main extends luxe.Game {
                 });
         }
     }
+    #end
 } //Main

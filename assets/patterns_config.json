@@ -60,7 +60,7 @@
         "arc_time":2.0,
         "min_angle_delta":0.2,
         "width":15,
-        "charge_time":0.5,
+        "charge_time":0.7,
         "laser_time":0.3,
         "cooldown_time":0.05,
         "scale_start":2.0,

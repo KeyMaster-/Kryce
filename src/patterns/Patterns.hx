@@ -282,7 +282,7 @@ class Patterns {
             laser_obj.dyn_shape.shape.position.copy_from(laser_obj.pos);
             laser_obj.dyn_shape.shape.rotation = laser_obj.radians * 180 / Math.PI;
             laser_obj.visible = true;
-            if(!muted) Luxe.audio.play(laser_snd.source, 0.5);
+            if(!muted) Luxe.audio.play(laser_snd.source, 0.65);
         }));
 
         //Angle without the laser offset, so it will point to the center as expected by other patterns

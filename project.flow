@@ -13,7 +13,7 @@
 
   project : {
     name : 'kryce',
-    version : '1.0.0',
+    version : '1.0.1',
     author : 'keymaster',
 
     app : {
@@ -38,7 +38,7 @@
   if: {
     "mac || windows || linux" : {
       build : {
-        defines : []//['project_assets']//, 'manual_testing'] //, 'no_gamepad']  
+        defines : []//['config_reloading']//, 'project_assets']//, 'manual_testing'] //, 'no_gamepad']  
       }
     }
   }
