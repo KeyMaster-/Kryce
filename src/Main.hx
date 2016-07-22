@@ -26,6 +26,7 @@ class Main extends luxe.Game {
     override function config(config:GameConfig) {
 
         config.window.fullscreen = false;
+        config.window.title = 'Kryce';
 
         config.preload.jsons.push({id:file_path('config.json')});
         config.preload.jsons.push({id:file_path('assets/patterns_config.json')});
